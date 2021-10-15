@@ -20,6 +20,11 @@ function setup()
     node_bob = new Node(2, 12, 500, 500); 
     node_bill.add_connection(node_bob);
     node_bob.add_connection(node_bill);
+
+    edge_jerry = new Edge(node_bill, node_bob);
+    my_graph = new Graph(20, 3, false, 10)
+    my_graph.create();
+    
 }
 
 {
@@ -42,10 +47,10 @@ function draw()
     background(255, 255, 255);
     fill(255,0,0);
     
-    node_bill.draw();
-    node_bob.draw();
-    node_bill.mouse_listener();
-    node_bob.mouse_listener();
+    my_graph.draw();
+
+    text(displayWidth + " " + displayHeight, 100, 100);
+    
 
     mouseReset();
     translate(width/2, height/2);

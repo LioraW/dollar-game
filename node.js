@@ -65,11 +65,6 @@ class Node{
     // draw function which animates the node
     draw()
     {
-        for(var i = 0; i < this.connections.length; i++)
-        {
-            line(this.x, this.y, this.connections[i].get_x(), this.connections[i].get_y())
-        }
-
         ellipseMode(RADIUS);
         fill(255,255,255);
         ellipse(this.x, this.y, 20, 20);

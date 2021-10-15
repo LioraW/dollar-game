@@ -25,4 +25,4 @@ function mouseReset()
 }
 function touchStarted() {
     getAudioContext().resume();
-  }
+}
