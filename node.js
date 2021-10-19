@@ -9,6 +9,11 @@ class Node{
         this.y = y;
         this.connections = [];
     }
+    // returns the id of this node
+    get_id()
+    {
+        return this.id;
+    }
     // get the x coordinate of a node
     get_x()
     {
@@ -51,6 +56,16 @@ class Node{
     {
         this.connections.push(node);
     }
+    // returns the number of connections
+    get_total_con()
+    {
+        return this.connections.length;
+    }
+    // returns one of the nodes connections from a given index
+    get_con(i)
+    {
+        return this.connections[i];
+    }
     // checks is the mouse has been pressed over the node
     mouse_listener()
     {
@@ -75,5 +90,6 @@ class Node{
         textAlign(CENTER,CENTER);
         fill(0,0,0);
         text(this.dollar, this.x, this.y);
+        text(this.id + ':' + this.connections.length, this.x+20, this.y-20);
     }
 }

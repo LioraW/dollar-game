@@ -22,8 +22,9 @@ function setup()
     node_bob.add_connection(node_bill);
 
     edge_jerry = new Edge(node_bill, node_bob);
-    my_graph = new Graph(20, 3, false, 10)
-    my_graph.create();
+    my_graph = new Graph(20, 2, false, 10)
+    my_graph.populate_nodes();
+    my_graph.populate_edges();
     
 }
 
