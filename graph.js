@@ -11,6 +11,15 @@ class Graph
         this.edges = [];    // array for all edges
         this.x_coord = [];  // array of x_coords
         this.y_coord = [];  // array of y_coords
+        this.lastMove = -1;
+    }
+    get_last_move()
+    {
+        return this.lastMove;
+    }
+    set_last_move(id)
+    {
+        this.lastMove = id;
     }
     are_brothers(node1, node2)
     {
@@ -75,18 +84,16 @@ class Graph
     populate_nodes() // genus = #edges - #nodes + 1 =< total_money =>> absolutely solvable 
     {
         // this creates a node node_size times
-        for(var i = 0; i < this.node_size; i++)
-        {
+        for (var i = 0; i < this.node_size; i++) {
             var ready = true;   // node is ready to be created
-            var x =  random(250, 1286) + 1; // randomly generating the x and y for each node
+            var x = random(250, 1286) + 1; // randomly generating the x and y for each node
             var y = random(200, 664) + 1;
             // we want to make sure that none of the nodes get to close
             // so this loops through all the previous nodes and makes sure
             // the curren node being created is not "too_close" to another
             // node. if it is break the loop and restart the creation of 
             // this node at line 21.
-            for(var j = 0; j < this.nodes.length; j++)
-            {
+            for (var j = 0; j < this.nodes.length; j++) {
                 // check if to close to prev node
                 if(this.too_close(x, y, this.nodes[j].get_x(), this.nodes[j].get_y(), 70))
                 {
@@ -97,24 +104,47 @@ class Graph
                 }
             }
             // if ready is still true then create the node
-            if(ready){
-                this.nodes.push(new Node(i, (int)(random(-this.money_range,this.money_range)), x, y));
-            } 
+            if (ready) {
+                this.nodes.push(new Node(i, (int)(random(-this.money_range, this.money_range)), x, y));
+            }
+        }
+    }
+    // checks is the mouse has been pressed over the node
+    mouse_listener()
+    {
+        if(mouse_downed)
+        {
+            for (var i = 0; i < this.nodes.length; i++)
+            {
+                this.nodes[i].unMarkAsLastMove(); //unmark everyone as last move
+                this.nodes[i].mouse_listener(); //call mouse listener for everyone
+
+                if (this.nodes[i].isLastMove)
+                {
+                    this.lastMove = this.nodes[i].get_id(); //keep last move
+                }
+            }
+
+            // reset the mouse_downed and mouse_upped functions
+            mouseReset();
         }
     }
     // the draw function. literally just loops through the edges and activates there draw functions
     // same for the nodes
     draw()
     {
-        for(var i = 0; i < this.edges.length; i++)
+        for(let i = 0; i < this.edges.length; i++)
         {
             this.edges[i].draw();
         }
-        for(var i = 0; i < this.nodes.length; i++)
+        for(let i = 0; i < this.nodes.length; i++)
         {
             this.nodes[i].draw();
-            this.nodes[i].mouse_listener();
         }
+        //this function now loops through the nodes internally
+        this.mouse_listener();
+
+        text('last move:' + this.lastMove, 100, 200);
     }
 
 }
