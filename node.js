@@ -77,6 +77,14 @@ class Node{
             this.give()
         }
     }
+    hover()
+    {
+        if(mouseX > this.x-20 && mouseX < this.x+20 && mouseY > this.y-20 && mouseY < this.y+20)
+        {
+            return true;
+        }
+        return false;
+    }
     // draw function which animates the node
     draw()
     {

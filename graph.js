@@ -23,6 +23,17 @@ class Graph
         }
         return false;
     }
+    too_close(node1, node2, radius){
+        return node1.get_x() > node2.get_x() - radius && node1.get_x() < node2.get_x() + radius 
+        && node1.get_y() > node2.get_y() - radius && node1.get_y() < node2.get_y() + radius;
+    }
+    too_close(x, y, x1, y1, radius){
+        return x > x1 - radius && x < x1 + radius && y > y1 - radius && y < y1 + radius;
+    }
+    too_far(node1, node2, limit)
+    {
+        return sqrt(sq(node1.get_x() - node2.get_x()) + sq(node1.get_y() - node2.get_y())) > limit;
+    }
     // creates the edges
     populate_edges()
     {
@@ -49,7 +60,8 @@ class Graph
                     attempt++;
 
                 } while(this.nodes[rand_index].get_total_con() >= this.edges_max || i === rand_index 
-                || this.are_brothers(this.nodes[i], this.nodes[rand_index]));
+                || this.are_brothers(this.nodes[i], this.nodes[rand_index]) 
+                || this.too_far(this.nodes[i], this.nodes[rand_index], 400));
                 
                 if (ready_con)
                 {
@@ -76,7 +88,7 @@ class Graph
             for(var j = 0; j < this.nodes.length; j++)
             {
                 // check if to close to prev node
-                if(too_close(x, y, this.nodes[j].get_x(), this.nodes[j].get_y(), 70))
+                if(this.too_close(x, y, this.nodes[j].get_x(), this.nodes[j].get_y(), 70))
                 {
                     i--;
                     ready = false; // not ready for creation if yes
