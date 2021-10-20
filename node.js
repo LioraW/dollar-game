@@ -8,6 +8,7 @@ class Node{
         this.x = x;
         this.y = y;
         this.connections = [];
+        this.isLastMove = false;
     }
     // returns the id of this node
     get_id()
@@ -34,15 +35,23 @@ class Node{
     {
         this.dollar = dollar;
     }
+    markAsLastMove()
+    {
+        this.isLastMove = true;
+    }
+    unMarkAsLastMove()
+    {
+        this.isLastMove = false;
+    }
     // add a specified value to the current dollar amount
     add_value(dollar)
     {
         this.dollar += dollar;
     }
-    // the act of give a dollar to all of the nodes connections
+    // The act of give a dollar to all of the nodes connections
     give()
     {
-        // looping through each connection
+        // Looping through each connection
         for(var i = 0; i < this.connections.length; i++)
         {
             // adding 1 to the connected nodes dollar amount
@@ -72,9 +81,11 @@ class Node{
         if(mouse_downed && mouseX > this.x-20 && mouseX < this.x+20 && mouseY > this.y-20 && mouseY < this.y+20)
         {
             // reset the mouse_downed and mouse_upped functions
-            mouseReset();
+            //mouseReset();
             // then give a dollar to connections
-            this.give()
+            this.give();
+
+            this.markAsLastMove();
         }
     }
     // draw function which animates the node
