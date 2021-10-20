@@ -16,10 +16,7 @@ function setup()
     //background_music.loop()
 
 
-    //edge_jerry = new Edge(node_bill, node_bob);
     game = new Game(20, 2, false, 10)
-    //my_graph.populate_nodes();
-    //my_graph.populate_edges();
 }
 
 {

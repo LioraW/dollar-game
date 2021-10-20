@@ -8,6 +8,7 @@ class Node{
         this.x = x;
         this.y = y;
         this.connections = [];
+        this.edges = [];
         this.isLastMove = false;
     }
     // returns the id of this node
@@ -65,6 +66,11 @@ class Node{
     {
         this.connections.push(node);
     }
+    // adding a new edge
+    add_edge(edge)
+    {
+        this.edges.push(edge);
+    }
     // returns the number of connections
     get_total_con()
     {
@@ -88,13 +94,25 @@ class Node{
             this.markAsLastMove();
         }
     }
+    // returns true if the current node is being hovered over and false otherwise
     hover()
     {
         if(mouseX > this.x-20 && mouseX < this.x+20 && mouseY > this.y-20 && mouseY < this.y+20)
         {
+
             return true;
         }
         return false;
+    }
+    highlight()
+    {
+        if(this.hover())
+        {
+            for(var i = 0; i < this.edges.length; i++)
+            {
+                this.edges[i].glow()
+            }
+        }
     }
     // draw function which animates the node
     draw()
