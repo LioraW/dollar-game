@@ -50,15 +50,15 @@ class Node{
         this.dollar += dollar;
     }
     // The act of give a dollar to all of the nodes connections
-    give()
+    give(amount)
     {
         // Looping through each connection
         for(var i = 0; i < this.connections.length; i++)
         {
             // adding 1 to the connected nodes dollar amount
-            this.connections[i].add_value(1);
+            this.connections[i].add_value(amount);
             // taking 1 dollar for the nodes self
-            this.dollar--;
+            this.dollar-=amount;
         }
     }
     // adding a new connections
@@ -89,7 +89,7 @@ class Node{
             // reset the mouse_downed and mouse_upped functions
             //mouseReset();
             // then give a dollar to connections
-            this.give();
+            this.give(1);
 
             this.markAsLastMove();
         }
