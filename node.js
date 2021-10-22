@@ -61,6 +61,14 @@ class Node{
             this.dollar--;
         }
     }
+    get_con(index)
+    {
+        return this.connections[index];
+    }
+    get_edge(index)
+    {
+        return this.edges[index];
+    }
     // adding a new connections
     add_connection(node)
     {
@@ -71,10 +79,31 @@ class Node{
     {
         this.edges.push(edge);
     }
+    remove_connection(id)
+    {
+        for(var i = 0; i < this.connections.length; i++)
+        {
+            if(this.connections[i].get_id() === id)
+            {
+                this.connections.splice(i, 1);
+                return i;
+            }
+        }
+        return -1;
+    }
+    remove_edge(index)
+    {
+        //this.edges[index].destroy();
+        this.edges.splice(index, 1);
+    }
     // returns the number of connections
     get_total_con()
     {
         return this.connections.length;
+    }
+    get_total_edges()
+    {
+        return this.edges.length;
     }
     // returns one of the nodes connections from a given index
     get_con(i)

@@ -49,9 +49,27 @@ class Graph
     {
         return sqrt(sq(node1.get_x() - node2.get_x()) + sq(node1.get_y() - node2.get_y())) > limit;
     }
+    
+    // desides which set the nodes should be assigned
+    set_assign(node1, node2, sets)
+    {
+        if(!sets.length){
+            return 0
+        }
+        for(var i = 0; i < sets.length; i++)
+        {
+            if (sets[i].has(node1) || sets[i].has(node2))
+            {
+                return i;
+            }
+        }
+        return sets.length;
+    }
     // creates the edges
     populate_edges()
     {
+        var sets = [];
+        var set_i = -1;
         // loop through nodes
         for(var i = 0; i < this.nodes.length; i++)
         {
@@ -92,8 +110,129 @@ class Graph
                 // if after all that the node is ready then create a new edge with ends being both nodes
                 if (ready_con)
                 {
+                    // befor we connect we need to add these two nodes to a set. 
+                    // if one of them is already in a the array of existing sets then
+                    // add both of them into the set (one is obviously already in so it gets ignored)
+                    
+                    // this finds the appropriate index of the set that the two nodes should be added to
+                    var temp_i = this.set_assign(this.nodes[i].get_id(), this.nodes[rand_index].get_id(), sets)
+                    // if the returned index is an index which has not been made yet then create it
+                    if(temp_i > sets.length - 1) 
+                    {
+                        sets[temp_i] = new Set();
+                    }
+                    // then add both nodes into the set
+                    sets[temp_i].add(this.nodes[i].get_id());
+                    sets[temp_i].add(this.nodes[rand_index].get_id());
+                    // then check for any intersetctions in the sets and if there are any combine those sets
+                    sets = compress_sets(sets);
+
                     this.edges.push(new Edge(this.nodes[i], this.nodes[rand_index]))
                 } 
+            }
+        }
+        // any single nodes (nodes with no connections)
+        for(var i = 0; i < this.nodes.length; i++)
+        {
+            // checks if a node has less than one connection
+            if(this.nodes[i].get_total_con() < 1)
+            {
+                sets[sets.length] = new Set();
+                sets[sets.length - 1].add(this.nodes[i].get_id())
+            }
+        }
+        // now we'll work on combining the mutualing exclusive branches
+        while(sets.length > 1)
+        {
+            // setting 2 random indexes 
+            var random_i = -1;
+            var random_j = -1;
+
+            // we create a 2D array where each array is just a set converted to an array
+            // the reason for this is so that we can traverse the sets' information
+            var arrays = [];
+            for(var i = 0; i < sets.length; i++){
+                arrays[i] = Array.from(sets[i]);
+            }
+            
+            // in the case where you have a 2 edge max for each node. this creates special circumstances
+            // there for this algorithm is set to deal with that.
+            if(this.edges_max <= 2)
+            {
+                // will traverse all the nodes in serch for a node that has only
+                // one connection (available space).
+                for(var i = 0; i < arrays[0].length; i++)
+                {
+                    // taverse first set
+                    if (this.nodes[arrays[0][i]].get_total_edges() < 2)
+                    {
+                        // if one is found record the index
+                        random_i = arrays[0][i];
+                        break;
+                    } 
+                }
+                // same algorithm but this time we are trying to find an available 
+                // node in the second set
+                for(var i = 0; i < arrays[1].length; i++)
+                {
+                    if (this.nodes[arrays[1][i]].get_total_edges() < 2)
+                    {
+                        // if one is found record the index
+                        random_j = arrays[1][i];
+                        break;
+                    } 
+                }
+            }
+            // this is also a continuation of the above but this itself can handle all other
+            // edge max limits. 
+            // if the random indexes are still -1 then that means we have not found suitable
+            // nodes to link the two graphs.
+            if(random_i === -1)
+            {
+                // first choose a random node from the list
+                random_i = (int)(random(arrays[0]))
+                // this is where the 'surgery' takes place. 
+                // if the node already has too many connections we must delete one of its
+                // connections thus making it suitable for connection
+                if(this.nodes[random_i].get_total_con() >= this.edges_max)
+                {
+                    this.nodes[random_i].get_edge(this.edges_max - 1).set_destroy(true);
+                    var borther_i = this.nodes[random_i].get_con(this.edges_max - 1).get_id();
+                    var brother_e = this.nodes[borther_i].remove_connection(this.nodes[random_i].get_id());
+                    this.nodes[borther_i].remove_edge(brother_e);
+                    this.nodes[random_i].remove_connection(this.nodes[borther_i].get_id());
+                    this.nodes[random_i].remove_edge(this.edges_max - 1);
+                }
+            }
+            // same thing is happening here but for the second random node for the other set
+            if(random_j === -1)
+            {
+                random_j = (int)(random(arrays[1]))
+                if(this.nodes[random_j].get_total_con() >= this.edges_max)
+                {
+                    this.nodes[random_j].get_edge(this.edges_max - 1).set_destroy(true);
+                    var borther_j = this.nodes[random_j].get_con(this.edges_max - 1).get_id();
+                    var brother_e = this.nodes[borther_j].remove_connection(this.nodes[random_j].get_id());
+                    this.nodes[borther_j].remove_edge(brother_e);
+                    this.nodes[random_j].remove_connection(this.nodes[borther_j].get_id());
+                    this.nodes[random_j].remove_edge(this.edges_max - 1);
+                }
+            }
+            // once we have 2 suitable nodes we create a new edge connecting them
+            // so now the 2 seperated graphs are linked together
+            this.edges.push(new Edge(this.nodes[random_i], this.nodes[random_j]))
+            // we must also add the index of the second node to the set of the first
+            sets[0].add(random_j);
+            // then compress the sets again
+            sets = compress_sets(sets);
+        }
+        for(var i = 0; i < this.edges.length; i++)
+        {
+            // the edges were only marked for destruction. here we actually destroy them
+            // if their destroy attribute is 'true'
+            if(this.edges[i].get_destroy())
+            {
+                this.edges.splice(i,1);
             }
         }
     }

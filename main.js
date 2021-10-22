@@ -16,7 +16,7 @@ function setup()
     //background_music.loop()
 
 
-    game = new Game(20, 2, false, 10)
+    game = new Game(20, 3, false, 10)
 }
 
 {
@@ -42,7 +42,6 @@ function draw()
     game.draw();
 
     text(displayWidth + " " + displayHeight, 100, 100);
-    
 
     mouseReset();
     translate(width/2, height/2);
