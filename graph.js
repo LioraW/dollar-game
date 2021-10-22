@@ -9,9 +9,8 @@ class Graph
         this.balance = 0;   // overall graph balance
         this.nodes = [];    // array for all nodes
         this.edges = [];    // array for all edges
-        this.x_coord = [];  // array of x_coords
-        this.y_coord = [];  // array of y_coords
         this.lastMove = -1;
+        this.solved = true;
     }
     // returns the last move
     get_last_move()
@@ -22,6 +21,31 @@ class Graph
     set_last_move(id)
     {
         this.lastMove = id;
+    }
+    // returns the balance of the graph
+    get_ballance()
+    {
+        return this.balance;
+    }
+    // returns genus
+    get_genus()
+    {
+        return this.edges.length - this.nodes.length + 1;
+    }
+    is_solvable()
+    {
+        return this.get_genus() <= this.get_ballance();
+    }
+    is_solved()
+    {
+        for(var i = 0; i < this.nodes.length; i++)
+        {
+            if(this.nodes[i].get_value() < 0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
     // returns true if 2 node are related
     are_brothers(node1, node2)
@@ -90,13 +114,9 @@ class Graph
                     if(attempt >= this.nodes.length)
                     {
                         ready_con = false;
-                        // print('exhaust');
                         break;
                     }
                     rand_index = (int)(random(this.nodes.length));
-                    // print(i + "th node going for " + j + "th con at " + rand_index + " (which has " + this.nodes[rand_index].get_total_con() + " cons) with lim" + cond);
-                    // print('brother: ',  this.are_brothers(this.nodes[i], this.nodes[rand_index]));
-                    // print('self:', i === rand_index);
                     attempt++;
 
                 } while(this.nodes[rand_index].get_total_con() >= this.edges_max || i === rand_index 
@@ -239,30 +259,35 @@ class Graph
     // creates the nodes. this should only be called on initial map creation and map reset
     populate_nodes() // genus = #edges - #nodes + 1 =< total_money =>> absolutely solvable 
     {
-        // this creates a node node_size times
-        for (var i = 0; i < this.node_size; i++) {
-            var ready = true;   // node is ready to be created
-            var x = random(250, 1286) + 1; // randomly generating the x and y for each node
-            var y = random(200, 664) + 1;
-            // we want to make sure that none of the nodes get to close
-            // so this loops through all the previous nodes and makes sure
-            // the curren node being created is not "too_close" to another
-            // node. if it is break the loop and restart the creation of 
-            // this node at line 21.
-            for (var j = 0; j < this.nodes.length; j++) {
-                // check if to close to prev node
-                if(this.too_close(x, y, this.nodes[j].get_x(), this.nodes[j].get_y(), 70))
-                {
-                    i--;
-                    ready = false; // not ready for creation if yes
-                    print("yo"); // just text to tell me when this happens
-                    break;
+        while(this.solved)
+        {
+            // this creates a node node_size times
+            for (var i = 0; i < this.node_size; i++) {
+                var ready = true;   // node is ready to be created
+                var x = random(250, 1286) + 1; // randomly generating the x and y for each node
+                var y = random(200, 664) + 1;
+                // we want to make sure that none of the nodes get to close
+                // so this loops through all the previous nodes and makes sure
+                // the curren node being created is not "too_close" to another
+                // node. if it is break the loop and restart the creation of 
+                // this node at line 21.
+                for (var j = 0; j < this.nodes.length; j++) {
+                    // check if to close to prev node
+                    if(this.too_close(x, y, this.nodes[j].get_x(), this.nodes[j].get_y(), 100))
+                    {
+                        i--;
+                        ready = false; // not ready for creation if yes
+                        print("yo"); // just text to tell me when this happens
+                        break;
+                    }
+                }
+                // if ready is still true then create the node
+                if (ready) {
+                    this.nodes.push(new Node(i, (int)(random(-this.money_range, this.money_range)), x, y));
+                    this.balance += this.nodes[i].get_value();
                 }
             }
-            // if ready is still true then create the node
-            if (ready) {
-                this.nodes.push(new Node(i, (int)(random(-this.money_range, this.money_range)), x, y));
-            }
+            this.solved = this.is_solved();
         }
     }
     // checks is the mouse has been pressed over the node
@@ -270,6 +295,7 @@ class Graph
     {
         if(mouse_downed)
         {
+            this.solved = this.is_solved();
             for (var i = 0; i < this.nodes.length; i++)
             {
                 this.nodes[i].unMarkAsLastMove(); //unmark everyone as last move
@@ -289,6 +315,10 @@ class Graph
     // same for the nodes
     draw()
     {
+        text(this.get_genus(), 100, 500);
+        text(this.get_ballance(), 100, 520);
+        text(this.solved, 100, 540);
+
         for(let i = 0; i < this.edges.length; i++)
         {
             this.edges[i].draw();

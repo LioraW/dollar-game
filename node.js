@@ -133,6 +133,7 @@ class Node{
         }
         return false;
     }
+    // highlights the edges of this node when the node is being hovered over
     highlight()
     {
         if(this.hover())
