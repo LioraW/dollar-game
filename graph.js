@@ -175,36 +175,29 @@ class Graph
                 arrays[i] = Array.from(sets[i]);
             }
             
-            // in the case where you have a 2 edge max for each node. this creates special circumstances
-            // there for this algorithm is set to deal with that.
-            if(this.edges_max <= 2)
+            // will traverse all the nodes in serch for a node that has only
+            // one connection (available space).
+            for(var i = 0; i < arrays[0].length; i++)
             {
-                // will traverse all the nodes in serch for a node that has only
-                // one connection (available space).
-                for(var i = 0; i < arrays[0].length; i++)
+                // taverse first set
+                if (this.nodes[arrays[0][i]].get_total_edges() < 2)
                 {
-                    // taverse first set
-                    if (this.nodes[arrays[0][i]].get_total_edges() < 2)
-                    {
-                        // if one is found record the index
-                        random_i = arrays[0][i];
-                        break;
-                    } 
-                }
-                // same algorithm but this time we are trying to find an available 
-                // node in the second set
-                for(var i = 0; i < arrays[1].length; i++)
-                {
-                    if (this.nodes[arrays[1][i]].get_total_edges() < 2)
-                    {
-                        // if one is found record the index
-                        random_j = arrays[1][i];
-                        break;
-                    } 
-                }
+                    // if one is found record the index
+                    random_i = arrays[0][i];
+                    break;
+                } 
             }
-            // this is also a continuation of the above but this itself can handle all other
-            // edge max limits. 
+            // same algorithm but this time we are trying to find an available 
+            // node in the second set
+            for(var i = 0; i < arrays[1].length; i++)
+            {
+                if (this.nodes[arrays[1][i]].get_total_edges() < 2)
+                {
+                    // if one is found record the index
+                    random_j = arrays[1][i];
+                    break;
+                } 
+            }
             // if the random indexes are still -1 then that means we have not found suitable
             // nodes to link the two graphs.
             if(random_i === -1)
@@ -238,13 +231,13 @@ class Graph
                     this.nodes[random_j].remove_edge(this.edges_max - 1);
                 }
             }
-            // once we have 2 suitable nodes we create a new edge connecting them
-            // so now the 2 seperated graphs are linked together
-            this.edges.push(new Edge(this.nodes[random_i], this.nodes[random_j]))
-            // we must also add the index of the second node to the set of the first
-            sets[0].add(random_j);
-            // then compress the sets again
-            sets = compress_sets(sets);
+                // once we have 2 suitable nodes we create a new edge connecting them
+                // so now the 2 seperated graphs are linked together
+                this.edges.push(new Edge(this.nodes[random_i], this.nodes[random_j]))
+                // we must also add the index of the second node to the set of the first
+                sets[0].add(random_j);
+                // then compress the sets again
+                sets = compress_sets(sets);
         }
         for(var i = 0; i < this.edges.length; i++)
         {
@@ -259,36 +252,33 @@ class Graph
     // creates the nodes. this should only be called on initial map creation and map reset
     populate_nodes() // genus = #edges - #nodes + 1 =< total_money =>> absolutely solvable 
     {
-        while(this.solved)
-        {
-            // this creates a node node_size times
-            for (var i = 0; i < this.node_size; i++) {
-                var ready = true;   // node is ready to be created
-                var x = random(250, 1286) + 1; // randomly generating the x and y for each node
-                var y = random(200, 664) + 1;
-                // we want to make sure that none of the nodes get to close
-                // so this loops through all the previous nodes and makes sure
-                // the curren node being created is not "too_close" to another
-                // node. if it is break the loop and restart the creation of 
-                // this node at line 21.
-                for (var j = 0; j < this.nodes.length; j++) {
-                    // check if to close to prev node
-                    if(this.too_close(x, y, this.nodes[j].get_x(), this.nodes[j].get_y(), 100))
-                    {
-                        i--;
-                        ready = false; // not ready for creation if yes
-                        print("yo"); // just text to tell me when this happens
-                        break;
-                    }
-                }
-                // if ready is still true then create the node
-                if (ready) {
-                    this.nodes.push(new Node(i, (int)(random(-this.money_range, this.money_range)), x, y));
-                    this.balance += this.nodes[i].get_value();
+        // this creates a node node_size times
+        for (var i = 0; i < this.node_size; i++) {
+            var ready = true;   // node is ready to be created
+            var x = random(250, 1286) + 1; // randomly generating the x and y for each node
+            var y = random(200, 664) + 1;
+            // we want to make sure that none of the nodes get to close
+            // so this loops through all the previous nodes and makes sure
+            // the curren node being created is not "too_close" to another
+            // node. if it is break the loop and restart the creation of 
+            // this node at line 21.
+            for (var j = 0; j < this.nodes.length; j++) {
+                // check if to close to prev node
+                if(this.too_close(x, y, this.nodes[j].get_x(), this.nodes[j].get_y(), 100))
+                {
+                    i--;
+                    ready = false; // not ready for creation if yes
+                    print("yo"); // just text to tell me when this happens
+                    break;
                 }
             }
-            this.solved = this.is_solved();
+            // if ready is still true then create the node
+            if (ready) {
+                this.nodes.push(new Node(i, (int)(random(-this.money_range, this.money_range)), x, y));
+                this.balance += this.nodes[i].get_value();
+            }
         }
+        this.solved = this.is_solved();
     }
     // checks is the mouse has been pressed over the node
     mouse_listener()
