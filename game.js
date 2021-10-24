@@ -8,7 +8,6 @@ class Game
 
         //Extra data
         this.starting_state = this.get_starting_state();
-        this.gameWon = false;
 
         //Buttons with anonymous functions passed in
         this.undoButton = new Button("undo", 100, 300, 60, 30,

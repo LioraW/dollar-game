@@ -23,7 +23,7 @@ class Graph
         this.lastMove = id;
     }
     // returns the balance of the graph
-    get_ballance()
+    get_balance()
     {
         return this.balance;
     }
@@ -34,7 +34,7 @@ class Graph
     }
     is_solvable()
     {
-        return this.get_genus() <= this.get_ballance();
+        return this.get_genus() <= this.get_balance();
     }
     is_solved()
     {
@@ -300,7 +300,7 @@ class Graph
     draw()
     {
         text(this.get_genus(), 100, 500);
-        text(this.get_ballance(), 100, 520);
+        text(this.get_balance(), 100, 520);
         text(this.solved, 100, 540);
 
         for(let i = 0; i < this.edges.length; i++)
