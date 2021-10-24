@@ -45,7 +45,9 @@ class Game
             rect(displayWidth/3, displayHeight/3, 300, 100, 7); //outline
             textAlign(CENTER,CENTER);
             fill(0,0,0);
+            textSize(30);
             text("You won!!", displayWidth/3 + 150, displayHeight/3 + 50)
+            textSize(12); //reset size
         }
 
     }
