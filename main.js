@@ -16,8 +16,7 @@ function setup()
     //background_music.loop()
 
 
-    game = new Game(20, 2, false, 10);
-    console.log(game.get_starting_state())
+    game = new Game(20, 3, false, 10);
 
 }
 
