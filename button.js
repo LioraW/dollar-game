@@ -7,7 +7,10 @@ class Button
         this.width = width;
         this.height = height;
         this.onClick = onClick;
-    }
+    } 
+
+
+    
     // checks is the mouse has been pressed over the button
     mouse_listener()
     {
