@@ -4,6 +4,8 @@ class Game
         this.graph = new Graph(node_size, edges_max, provable, money_range)
         this.graph.populate_nodes();
         this.graph.populate_edges();
+        this.graph.rebalance();
+        this.graph.make_solvable();
 
         //Extra data
         this.starting_state = this.get_starting_state();

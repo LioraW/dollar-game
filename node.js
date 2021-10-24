@@ -36,10 +36,17 @@ class Node{
     {
         this.dollar = dollar;
     }
+    // flips the sign of the dollar value
+    flip_value()
+    {
+        this.dollar *= -1;
+    }
+    // marks this node as the current latest move
     markAsLastMove()
     {
         this.isLastMove = true;
     }
+    // marks this node as not the current latest move
     unMarkAsLastMove()
     {
         this.isLastMove = false;
@@ -61,10 +68,12 @@ class Node{
             this.dollar-=amount;
         }
     }
+    // returns a connected node with specified index
     get_con(index)
     {
         return this.connections[index];
     }
+    // returns specified edge by index
     get_edge(index)
     {
         return this.edges[index];
@@ -79,6 +88,7 @@ class Node{
     {
         this.edges.push(edge);
     }
+    // removing a connected node by specified that nodes id
     remove_connection(id)
     {
         for(var i = 0; i < this.connections.length; i++)
@@ -91,6 +101,7 @@ class Node{
         }
         return -1;
     }
+    // removes a specified edge by specifying that edges index
     remove_edge(index)
     {
         //this.edges[index].destroy();
@@ -101,6 +112,7 @@ class Node{
     {
         return this.connections.length;
     }
+    // returns the total number of edges
     get_total_edges()
     {
         return this.edges.length;
