@@ -1,6 +1,7 @@
 class Game
 {
     constructor(node_size, edges_max, provable, money_range) {
+        //create graph
         this.graph = new Graph(node_size, edges_max, provable, money_range)
         this.graph.populate_nodes();
         this.graph.populate_edges();
@@ -13,7 +14,7 @@ class Game
         this.undoButton = new Button("undo", 100, 300, 60, 30,
             () => { this.undo(); } );
         this.restartButton = new Button ("restart", 100, 400, 60, 30,
-            () => {this.reset_game_state(); } );
+            () => { this.reset_game_state(); } );
     }
 
     //button functions
