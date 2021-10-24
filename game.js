@@ -40,6 +40,14 @@ class Game
         this.restartButton.draw();
         this.graph.draw();
 
+        if (this.graph.is_solved()) {
+            fill(173, 216, 230);
+            rect(displayWidth/3, displayHeight/3, 300, 100, 7); //outline
+            textAlign(CENTER,CENTER);
+            fill(0,0,0);
+            text("You won!!", displayWidth/3 + 150, displayHeight/3 + 50)
+        }
+
     }
 
 }
