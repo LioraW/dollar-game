@@ -254,7 +254,7 @@ class Graph
             var y = random(200, 664) + 1;
             // we want to make sure that none of the nodes get to close
             // so this loops through all the previous nodes and makes sure
-            // the curren node being created is not "too_close" to another
+            // the current node being created is not "too_close" to another
             // node. if it is break the loop and restart the creation of 
             // this node at line 21.
             for (var j = 0; j < this.nodes.length; j++) {
@@ -263,7 +263,6 @@ class Graph
                 {
                     i--;
                     ready = false; // not ready for creation if yes
-                    print("yo"); // just text to tell me when this happens
                     break;
                 }
             }
@@ -285,12 +284,11 @@ class Graph
                 this.nodes[i].unMarkAsLastMove(); //unmark everyone as last move
                 this.nodes[i].mouse_listener(); //call mouse listener for everyone
 
-                if (this.nodes[i].isLastMove)
+                if (this.nodes[i].isLastMove) //node mouse listener raises "last move" flag
                 {
                     this.lastMove = this.nodes[i].get_id(); //keep last move
                 }
             }
-            this.solved = this.is_solved();
             // reset the mouse_downed and mouse_upped functions
             mouseReset();
         }
@@ -301,7 +299,7 @@ class Graph
     {
         text(this.get_genus(), 100, 500);
         text(this.get_balance(), 100, 520);
-        text(this.solved, 100, 540);
+        text(this.is_solved(), 100, 540);
 
         for(let i = 0; i < this.edges.length; i++)
         {
