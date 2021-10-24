@@ -16,7 +16,8 @@ function setup()
     //background_music.loop()
 
 
-    game = new Game(5, 3, false, 10)
+    game = new Game(5, 3, false, 10);
+
 }
 
 {
