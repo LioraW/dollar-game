@@ -90,19 +90,14 @@ class Node{
             //mouseReset();
             // then give a dollar to connections
             this.give(1);
-
             this.markAsLastMove();
         }
     }
     // returns true if the current node is being hovered over and false otherwise
     hover()
     {
-        if(mouseX > this.x-20 && mouseX < this.x+20 && mouseY > this.y-20 && mouseY < this.y+20)
-        {
+        return mouseX > this.x - 20 && mouseX < this.x + 20 && mouseY > this.y - 20 && mouseY < this.y + 20;
 
-            return true;
-        }
-        return false;
     }
     highlight()
     {

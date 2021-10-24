@@ -1,6 +1,6 @@
 class Button
 {
-    constructor(text,x, y, width, height, onClick) {
+    constructor(text, x, y, width, height, onClick) {
         this.text = text;
         this.x = x;
         this.y = y;
