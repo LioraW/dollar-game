@@ -25,17 +25,19 @@ class Button
 
         }
     }
-    draw()
-    {
-        this.mouse_listener();
+    draw_button(){
         fill(255,255,255);
         rect(this.x, this.y, this.width, this.height, 7); //outline
-        fill(158);
+        fill(127,197,250);
         rect(this.x, this.y, this.width, this.height, 7); //shade
         textAlign(CENTER,CENTER);
         fill(0,0,0);
         text(this.text, this.x+(this.width/2), this.y+(this.height/2));
-
+    }
+    draw()
+    {
+        this.mouse_listener();
+        this.draw_button();
     }
 }
 
