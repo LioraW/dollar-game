@@ -10,6 +10,7 @@ class Node{
         this.connections = [];
         this.edges = [];
         this.isLastMove = false;
+        this.sent_dollar = [];
     }
     // returns the id of this node
     get_id()
@@ -117,11 +118,6 @@ class Node{
     {
         return this.edges.length;
     }
-    // returns one of the nodes connections from a given index
-    get_con(i)
-    {
-        return this.connections[i];
-    }
     // checks is the mouse has been pressed over the node
     mouse_listener()
     {
@@ -130,6 +126,7 @@ class Node{
             // reset the mouse_downed and mouse_upped functions
             //mouseReset();
             // then give a dollar to connections
+            this.load_dollars();
             this.give(1);
             this.markAsLastMove();
         }
@@ -138,7 +135,11 @@ class Node{
     hover()
     {
         return mouseX > this.x - 20 && mouseX < this.x + 20 && mouseY > this.y - 20 && mouseY < this.y + 20;
-
+    }
+    // returns true if a set of ordered pairs is touching the node
+    touch(x, y)
+    {
+        return x > this.x - 20 && x < this.x + 20 && y > this.y - 20 && y < this.y + 20;
     }
     // highlights the edges of this node when the node is being hovered over
     highlight()
@@ -151,9 +152,53 @@ class Node{
             }
         }
     }
+    // sets up animation for the dollar being sent to the other nodes
+    load_dollars()
+    {
+        for(var i = 0; i < this.connections.length; i++)
+        {
+            this.sent_dollar.push(new Dollar(7,this.x, this.y, this.edges[i].get_rise(this.id), this.edges[i].get_run(this.id), this.connections[i]))
+        }
+    }
+    // this deletes all the dollars in the sent_dollar array
+    delete_dollars()
+    {
+        while(this.sent_dollar.length > 0)
+        {
+            this.sent_dollar.splice(0,1);
+        }
+    }
+    // actaully runs the dollar animation
+    send_dollars()
+    {
+        var dead_count = 0;
+        var all_dead = false;
+        for(var i = 0; i < this.sent_dollar.length; i++)
+        {
+            if(!this.sent_dollar[i].check_goal())
+            {
+                this.sent_dollar[i].draw();
+                this.sent_dollar[i].move_x(3);
+                this.sent_dollar[i].move_y(3);
+            }else
+            {
+                dead_count += 1;
+            }
+            if(dead_count >= this.sent_dollar.length)
+            {
+                all_dead = true;
+                break;
+            }
+        }
+        if(all_dead)
+        {
+            this.delete_dollars();
+        }
+    }
     // draw function which animates the node
     draw()
     {
+        this.send_dollars()
         ellipseMode(RADIUS);
         fill(255,255,255);
         ellipse(this.x, this.y, 20, 20);
