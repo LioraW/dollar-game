@@ -23,7 +23,7 @@ class Graph
         this.lastMove = id;
     }
     // returns the balance of the graph
-    get_ballance()
+    get_balance()
     {
         return this.balance;
     }
@@ -35,19 +35,14 @@ class Graph
     // returns true is the graph is guaranteed 100% solvabe
     is_solvable()
     {
-        return this.get_genus() <= this.get_ballance();
+        return this.get_genus() <= this.get_balance();
     }
     // returns true if the graph is already solved
     is_solved()
     {
-        for(var i = 0; i < this.nodes.length; i++)
-        {
-            if(this.nodes[i].get_value() < 0)
-            {
-                return false;
-            }
-        }
-        return true;
+        let solved = true;
+        this.nodes.forEach((node) => { if ( node.get_value() < 0 ) { solved = false; } } );
+        return solved;
     }
     // returns true if 2 node are related
     are_brothers(node1, node2)
@@ -76,7 +71,7 @@ class Graph
         return sqrt(sq(node1.get_x() - node2.get_x()) + sq(node1.get_y() - node2.get_y())) > limit;
     }
     
-    // desides which set the nodes should be assigned
+    // decides which set the nodes should be assigned
     set_assign(node1, node2, sets)
     {
         if(!sets.length){
@@ -110,11 +105,11 @@ class Graph
         var sets = [];
         var set_i = -1;
         // loop through nodes
-        for(var i = 0; i < this.nodes.length; i++)
+        for(let i = 0; i < this.nodes.length; i++)
         {
             // generates a max anount of allowed connections (cond) for this node
             var cond = (int)(random(this.edges_max)) + 1;
-            // will check how many connnections the current node has and then will loop the
+            // will check how many connections the current node has and then will loop the
             // rest of the way till it reaches the allowed amount of connections
             for(var j = this.nodes[i].get_total_con(); j < cond; j++)
             {
@@ -167,7 +162,7 @@ class Graph
             }
         }
         // any single nodes (nodes with no connections)
-        for(var i = 0; i < this.nodes.length; i++)
+        for(let i = 0; i < this.nodes.length; i++)
         {
             // checks if a node has less than one connection
             if(this.nodes[i].get_total_con() < 1)
@@ -186,13 +181,13 @@ class Graph
             // we create a 2D array where each array is just a set converted to an array
             // the reason for this is so that we can traverse the sets' information
             var arrays = [];
-            for(var i = 0; i < sets.length; i++){
+            for(let i = 0; i < sets.length; i++){
                 arrays[i] = Array.from(sets[i]);
             }
             
             // will traverse all the nodes in serch for a node that has only
             // one connection (available space).
-            for(var i = 0; i < arrays[0].length; i++)
+            for(let i = 0; i < arrays[0].length; i++)
             {
                 // taverse first set
                 if (this.nodes[arrays[0][i]].get_total_edges() < 2)
@@ -204,7 +199,7 @@ class Graph
             }
             // same algorithm but this time we are trying to find an available 
             // node in the second set
-            for(var i = 0; i < arrays[1].length; i++)
+            for(let i = 0; i < arrays[1].length; i++)
             {
                 if (this.nodes[arrays[1][i]].get_total_edges() < 2)
                 {
@@ -254,7 +249,7 @@ class Graph
                 // then compress the sets again
                 sets = compress_sets(sets);
         }
-        for(var i = 0; i < this.edges.length; i++)
+        for(let i = 0; i < this.edges.length; i++)
         {
             // the edges were only marked for destruction. here we actually destroy them
             // if their destroy attribute is 'true'
@@ -274,7 +269,7 @@ class Graph
             var y = random(200, 664) + 1;
             // we want to make sure that none of the nodes get to close
             // so this loops through all the previous nodes and makes sure
-            // the curren node being created is not "too_close" to another
+            // the current node being created is not "too_close" to another
             // node. if it is break the loop and restart the creation of 
             // this node at line 21.
             for (var j = 0; j < this.nodes.length; j++) {
@@ -283,7 +278,6 @@ class Graph
                 {
                     i--;
                     ready = false; // not ready for creation if yes
-                    print("yo"); // just text to tell me when this happens
                     break;
                 }
             }
@@ -339,12 +333,11 @@ class Graph
                 this.nodes[i].unMarkAsLastMove(); //unmark everyone as last move
                 this.nodes[i].mouse_listener(); //call mouse listener for everyone
 
-                if (this.nodes[i].isLastMove)
+                if (this.nodes[i].isLastMove) //node mouse listener raises "last move" flag
                 {
                     this.lastMove = this.nodes[i].get_id(); //keep last move
                 }
             }
-
             // reset the mouse_downed and mouse_upped functions
             mouseReset();
             // check if the graph is solved
@@ -356,6 +349,7 @@ class Graph
     draw()
     {
         text(this.get_genus(), 100, 500);
+
         text(this.get_ballance(), 100, 520);
         text(this.is_solvable(), 100, 540);
         text(this.solved, 100, 560);
@@ -375,7 +369,6 @@ class Graph
         //this function now loops through the nodes internally
         this.mouse_listener();
 
-        text('last move:' + this.lastMove, 100, 200);
     }
 
 }
