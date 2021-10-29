@@ -321,10 +321,6 @@ class Graph
         for(var i = 0; i < debt; i++)
         {
             var random_index = (int)(random(this.nodes.length))
-            // while(this.nodes[i].get_value() < 0)
-            // {
-            //     random_index = (int)(random(this.nodes.length))
-            // }
             this.nodes[random_index].add_value(1);
             this.balance++;
         }
