@@ -11,12 +11,11 @@ function setup()
     createCanvas(window.innerWidth,window.innerHeight);
     window.addEventListener('resize', function(){ resizeCanvas(window.innerWidth,window.innerHeight)} );
     frameRate(60);
-    angleMode(DEGREES); 
+    angleMode(DEGREES);
     //background_music.setVolume(0.02);
     //background_music.loop()
 
-
-    game = new Game(5, 3, false, 10);
+    game = new Game(20, 4, false, 10);
 
 }
 

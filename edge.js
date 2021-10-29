@@ -22,6 +22,7 @@ class Edge
 
         // get the slope and y intercept of the line produced by the 
         // 2 points
+        this.distance = Math.sqrt( sq(node1.get_y() - node2.get_y()) + sq(node1.get_x() - node2.get_x()))
         this.m = (node1.get_y() - node2.get_y()) / (node1.get_x() - node2.get_x());
         this.b = node1.get_y() - this.m * node1.get_x();
     }
@@ -38,6 +39,28 @@ class Edge
     get_end(x)
     {
         return this.ends[x];
+    }
+    // returns the incline of this line's slope
+    get_rise(id)
+    {
+        var rise = (this.ends[1].get_y() - this.ends[0].get_y()) / 100; 
+        if(id == this.ends[0].get_id()){
+            return rise;
+        }
+        else {
+            return rise * -1;
+        }
+    }
+    // returns the run of this line's slope
+    get_run(id)
+    {
+        var run = (this.ends[1].get_x() - this.ends[0].get_x()) / 100; 
+        if(id == this.ends[0].get_id()){
+            return run;
+        }
+        else {
+            return run * -1;
+        }
     }
     draw()
     {   
@@ -60,14 +83,13 @@ class Edge
     }
     glow()
     {
-        stroke(0,255,255);
+        stroke(0,0,0);
         strokeWeight(10);
+        line(this.ends[0].get_x(), this.ends[0].get_y(), this.ends[1].get_x(), this.ends[1].get_y());
+        stroke(200,255,255);
+        strokeWeight(8);
         line(this.ends[0].get_x(), this.ends[0].get_y(), this.ends[1].get_x(), this.ends[1].get_y());
         stroke(0,0,0);
         strokeWeight(1); 
-    }
-    destroy()
-    {
-        delete this;
     }
 }

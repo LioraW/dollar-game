@@ -32,10 +32,12 @@ class Graph
     {
         return this.edges.length - this.nodes.length + 1;
     }
+    // returns true is the graph is guaranteed 100% solvabe
     is_solvable()
     {
         return this.get_genus() <= this.get_balance();
     }
+    // returns true if the graph is already solved
     is_solved()
     {
         let solved = true;
@@ -83,6 +85,19 @@ class Graph
             }
         }
         return sets.length;
+    }
+    // returns true if all the nodes' dollar values are posotive (or zero) or all negative
+    same_sign()
+    {
+        var sign = Math.sign(this.nodes[0].get_value());
+        for(var i = 0; i < this.nodes.length; i++)
+        {
+            if(sign * this.nodes[i].get_value() < 0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
     // creates the edges
     populate_edges()
@@ -274,6 +289,40 @@ class Graph
         }
         this.solved = this.is_solved();
     }
+    // rebalances the graph if all the nodes' values have the same sign
+    rebalance()
+    {
+        if(this.same_sign())
+        {
+            print('rebalancing');
+            for(var i = 0; i < this.nodes.length; i+=2)
+            {
+                if(Math.abs(this.nodes[i].get_value()) > 0){
+                    this.nodes[i].flip_value();
+                    this.balance += this.nodes[i].get_value() * 2;
+                }else {
+                    this.nodes[i].add_value(Math.sign(this.balance) * -1)
+                    this.balance += this.nodes[i].get_value();
+                }
+            }
+        }
+    }
+    // makes the graph 100% solvable
+    make_solvable()
+    {
+        var debt = (-1 * (this.get_ballance() - this.get_genus())) + (int)(random(5));
+        print(debt)
+        for(var i = 0; i < debt; i++)
+        {
+            var random_index = (int)(random(this.nodes.length))
+            // while(this.nodes[i].get_value() < 0)
+            // {
+            //     random_index = (int)(random(this.nodes.length))
+            // }
+            this.nodes[random_index].add_value(1);
+            this.balance++;
+        }
+    }
     // checks is the mouse has been pressed over the node
     mouse_listener()
     {
@@ -291,6 +340,8 @@ class Graph
             }
             // reset the mouse_downed and mouse_upped functions
             mouseReset();
+            // check if the graph is solved
+            this.solved = this.is_solved();
         }
     }
     // the draw function. literally just loops through the edges and activates there draw functions
@@ -298,8 +349,10 @@ class Graph
     draw()
     {
         text(this.get_genus(), 100, 500);
-        text(this.get_balance(), 100, 520);
-        text(this.is_solved(), 100, 540);
+
+        text(this.get_ballance(), 100, 520);
+        text(this.is_solvable(), 100, 540);
+        text(this.solved, 100, 560);
 
         for(let i = 0; i < this.edges.length; i++)
         {
