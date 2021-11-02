@@ -310,7 +310,7 @@ class Graph
     // makes the graph 100% solvable
     make_solvable()
     {
-        var debt = (-1 * (this.get_ballance() - this.get_genus())) + (int)(random(5));
+        var debt = (-1 * (this.get_balance() - this.get_genus())) + (int)(random(5));
         print(debt)
         for(var i = 0; i < debt; i++)
         {
@@ -350,7 +350,7 @@ class Graph
     {
         text(this.get_genus(), 100, 500);
 
-        text(this.get_ballance(), 100, 520);
+        text(this.get_balance(), 100, 520);
         text(this.is_solvable(), 100, 540);
         text(this.solved, 100, 560);
 
