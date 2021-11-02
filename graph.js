@@ -346,7 +346,7 @@ class Graph
     {
         text(this.get_genus(), 100, 500);
 
-        text(this.get_ballance(), 100, 520);
+        text(this.get_balance(), 100, 520);
         text(this.is_solvable(), 100, 540);
         text(this.solved, 100, 560);
 
