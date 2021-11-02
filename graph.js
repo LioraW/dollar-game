@@ -11,6 +11,7 @@ class Graph
         this.edges = [];    // array for all edges
         this.lastMove = -1;
         this.solved = true;
+        this.counter = 0;
     }
     // returns the last move
     get_last_move()
@@ -21,6 +22,16 @@ class Graph
     set_last_move(id)
     {
         this.lastMove = id;
+    }
+
+    resetCounter()
+    {
+        this.counter = 0;
+    }
+
+    addCounter()
+    {
+        this.counter++;
     }
     // returns the balance of the graph
     get_ballance()
@@ -289,8 +300,7 @@ class Graph
             for (var i = 0; i < this.nodes.length; i++)
             {
                 this.nodes[i].unMarkAsLastMove(); //unmark everyone as last move
-                this.nodes[i].mouse_listener(); //call mouse listener for everyone
-
+                this.counter += this.nodes[i].mouse_listener(); //call mouse listener for everyone
                 if (this.nodes[i].isLastMove)
                 {
                     this.lastMove = this.nodes[i].get_id(); //keep last move
@@ -305,6 +315,7 @@ class Graph
     // same for the nodes
     draw()
     {
+        text("moves made"+this.counter, 40, 40);
         text(this.get_genus(), 100, 500);
         text(this.get_ballance(), 100, 520);
         text(this.solved, 100, 540);

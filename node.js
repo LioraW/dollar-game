@@ -120,7 +120,9 @@ class Node{
             // then give a dollar to connections
             this.give(1);
             this.markAsLastMove();
+            return 1;
         }
+        return 0;
     }
     // returns true if the current node is being hovered over and false otherwise
     hover()

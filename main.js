@@ -44,6 +44,8 @@ function draw()
 
     text(displayWidth + " " + displayHeight, 100, 100);
 
+    
+
     mouseReset();
     translate(width/2, height/2);
     scale(1);

@@ -22,6 +22,7 @@ class Game
             this.graph.nodes[this.graph.lastMove].give(-1);
         }
         this.graph.set_last_move(-1);
+        this.graph.addCounter();
     }
     //returns an object with the node id's as keys and the dollar amounts as the values
     get_starting_state(){
@@ -31,7 +32,10 @@ class Game
     }
     reset_game_state(){
         Object.entries(this.starting_state).forEach(([id, value]) => this.graph.nodes[id].set_value(value))
+        this.graph.resetCounter();
     }
+
+
 
     draw()
     {
