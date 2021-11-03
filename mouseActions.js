@@ -5,7 +5,7 @@ function mousePressed()
 {
     if (getAudioContext().state !== 'running') {
         getAudioContext().resume();
-      }
+    }
 
     mouse_downed = true;
     return false;

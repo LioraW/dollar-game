@@ -16,6 +16,14 @@ class Game
             () => { this.undo(); } );
         this.restartButton = new Button ("restart", 50, 350, 100, 50,
             () => { this.reset_game_state(); } );
+        this.fsButton = new Button ("fs", 1470, 600, 50, 50, 
+            () => { fullscreen_switcher(); } );
+    }
+    listening(is_listening){
+        this.undoButton.mute_IO(!is_listening);
+        this.restartButton.mute_IO(!is_listening);
+        this.fsButton.mute_IO(!is_listening);
+        this.graph.set_listening(!is_listening);
     }
 
     undo () {
@@ -34,25 +42,31 @@ class Game
         Object.entries(this.starting_state).forEach(([id, value]) => this.graph.nodes[id].set_value(value))
     }
     display_game_win() {
+        background(0,0,0,50);
         fill(173, 216, 230);
-        rect(displayWidth/3, displayHeight/3, 300, 100, 7); //outline
-        textAlign(CENTER,CENTER);
+        rectMode(CENTER);
+        rect(windowWidth/2, windowHeight/2, 300, 100, 7); //outline
         fill(0,0,0);
+        textAlign(CENTER,CENTER);
         textSize(30);
-        text("You won!!", displayWidth/3 + 150, displayHeight/3 + 50)
+        text("You won!!", windowWidth/2, windowHeight/2)
         textSize(12); //reset size
     }
 
     draw()
     {
-        this.undoButton.draw(); //apparently, buttons need to happen before the graph for the button to be responsive
-        this.restartButton.draw();
+        background(255, 255, 255);
         this.graph.draw();
-
+        
+        this.undoButton.draw();
+        this.restartButton.draw();
         if (this.graph.is_solved()) {
+            this.undoButton.mute_IO(true);
+            this.restartButton.mute_IO(true);
             this.display_game_win();
         }
-
+        this.fsButton.draw();
+        
     }
 
 }

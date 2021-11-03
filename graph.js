@@ -11,6 +11,11 @@ class Graph
         this.edges = [];    // array for all edges
         this.lastMove = -1;
         this.solved = true;
+        this.listening = false;
+    }
+    set_listening(status)
+    {
+        this.listening = status;
     }
     // returns the last move
     get_last_move()
@@ -327,17 +332,22 @@ class Graph
             for (var i = 0; i < this.nodes.length; i++)
             {
                 this.nodes[i].unMarkAsLastMove(); //unmark everyone as last move
-                this.nodes[i].mouse_listener(); //call mouse listener for everyone
+                var clicked = this.nodes[i].mouse_listener(); //call mouse listener for everyone
 
                 if (this.nodes[i].isLastMove) //node mouse listener raises "last move" flag
                 {
                     this.lastMove = this.nodes[i].get_id(); //keep last move
                 }
+
+                if(clicked){
+                    // reset the mouse_downed and mouse_upped functions
+                    mouseReset();
+                    // check if the graph is solved
+                    this.solved = this.is_solved();
+
+                }
             }
-            // reset the mouse_downed and mouse_upped functions
-            mouseReset();
-            // check if the graph is solved
-            this.solved = this.is_solved();
+            
         }
     }
     // the draw function. literally just loops through the edges and activates there draw functions
@@ -363,8 +373,9 @@ class Graph
             this.nodes[i].draw();
         }
         //this function now loops through the nodes internally
-        this.mouse_listener();
-
+        if(!this.solved && !this.listening){
+            this.mouse_listener();
+        }
     }
 
 }
