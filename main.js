@@ -31,7 +31,7 @@ function setup()
     background_music.loop();
 
     game = new Game(5, 3, false, 10);
-    fs_enforce_button = new Button(() => { this.enforce_fullscreen(); },
+    fs_enforce_button = new CustomButton(() => { this.enforce_fullscreen(); },
         windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
         () => { this.fullscreen_switcher(); })
 
@@ -45,7 +45,7 @@ function draw()
 
     text(displayWidth + " " + displayHeight, 100, 100);
     if(!fullscreen()){
-        fs_enforce_button.draw_custom_button();
+        fs_enforce_button.draw();
         game.listening(false);
     }else{
         game.listening(true);

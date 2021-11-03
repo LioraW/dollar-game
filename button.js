@@ -44,9 +44,5 @@ class Button
         this.mouse_listener();
         this.draw_button();
     }
-    draw_custom_button(){
-        this.mouse_listener();
-        this.text();
-    }
 }
 
