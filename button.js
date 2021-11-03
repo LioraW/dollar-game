@@ -8,15 +8,19 @@ class Button
         this.height = height;
         this.onClick = onClick;
         this.mute = false;
+        this.paused = false;
     }
 
     mute_IO(mute){
         this.mute = mute;
     }
+    pause(status){
+        this.paused = status;
+    }
     // checks is the mouse has been pressed over the button
     mouse_listener()
     {
-        if ( mouse_downed && !this.mute &&
+        if ( mouse_downed && !this.mute && !this.paused &&
             mouseX > this.x - this.width/2 && mouseX < this.x + this.width/2 &&
             mouseY > this.y - this.height/2 && mouseY < this.y + this.height/2)
         {
@@ -24,7 +28,6 @@ class Button
             mouseReset();
             // then call the passed in function
             this.onClick();
-
         }
     }
     draw_button(){

@@ -19,11 +19,11 @@ class Game
         this.fsButton = new Button ("fs", 1470, 600, 50, 50, 
             () => { fullscreen_switcher(); } );
     }
-    listening(is_listening){
-        this.undoButton.mute_IO(!is_listening);
-        this.restartButton.mute_IO(!is_listening);
-        this.fsButton.mute_IO(!is_listening);
-        this.graph.set_listening(!is_listening);
+    pause_game(status){
+        this.undoButton.pause(!status);
+        this.restartButton.pause(!status);
+        this.fsButton.pause(!status);
+        this.graph.set_listening(!status);
     }
 
     undo () {
@@ -64,6 +64,10 @@ class Game
             this.undoButton.mute_IO(true);
             this.restartButton.mute_IO(true);
             this.display_game_win();
+        }else
+        {
+            this.undoButton.mute_IO(false);
+            this.restartButton.mute_IO(false);
         }
         this.fsButton.draw();
         

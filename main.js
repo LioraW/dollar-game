@@ -46,9 +46,9 @@ function draw()
     text(displayWidth + " " + displayHeight, 100, 100);
     if(!fullscreen()){
         fs_enforce_button.draw();
-        game.listening(false);
+        game.pause_game(false);
     }else{
-        game.listening(true);
+        game.pause_game(true);
     }
 
     mouseReset();
