@@ -38,8 +38,6 @@ class Game
         this.restartButton = new Button ("restart", 50, 400, 100, 50,
             () => { this.graph.reset_graph(); } );
 
-
-    }
     //generate graph types
     easy_graph(make_solvable){
         return new Graph(7, 2, make_solvable, 10);
@@ -63,6 +61,8 @@ class Game
         text("You won!!", displayWidth/3 + 150, displayHeight/3 + 50)
         textSize(12); //reset size
     }
+
+
 
     draw()
     {

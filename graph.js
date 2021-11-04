@@ -10,19 +10,7 @@ class Graph
         this.edges = [];    // array for all edges
         this.lastMove = -1;
         this.solved = true;
-
-        //set the graph up
-        this.populate_nodes();
-        this.populate_edges();
-        this.rebalance();
-
-        if (make_solvable){
-            this.make_solvable();
-        }
-
-        //Extra data
-        this.starting_state = this.get_starting_state();
-
+        this.counter = 0;
     }
     //returns an object with the node id's as keys and the dollar amounts as the values
     get_starting_state() {
@@ -51,6 +39,16 @@ class Graph
     set_last_move(id)
     {
         this.lastMove = id;
+    }
+
+    resetCounter()
+    {
+        this.counter = 0;
+    }
+
+    addCounter()
+    {
+        this.counter++;
     }
     // returns the balance of the graph
     get_balance()
@@ -361,9 +359,9 @@ class Graph
             for (var i = 0; i < this.nodes.length; i++)
             {
                 this.nodes[i].unMarkAsLastMove(); //unmark everyone as last move
-                this.nodes[i].mouse_listener(); //call mouse listener for everyone
 
-                if (this.nodes[i].isLastMove) //node mouse listener raises "last move" flag
+                this.counter += this.nodes[i].mouse_listener(); //call mouse listener for everyone
+                if (this.nodes[i].isLastMove)
                 {
                     this.lastMove = this.nodes[i].get_id(); //keep last move
                 }
@@ -378,6 +376,7 @@ class Graph
     // same for the nodes
     draw()
     {
+        text("moves made"+this.counter, 40, 40);
         text(this.get_genus(), 100, 500);
 
         text(this.get_balance(), 100, 520);
