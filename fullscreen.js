@@ -1,10 +1,27 @@
 var w = 0;
 var h = 0;
+var screen_shrunk = false;
+var screen_grew = false;
+var fullscreen_status = false;
+
+
+function reset_screen_changed()
+{
+    screen_shrunk = false;
+    screen_grew = false;
+}
 
 function fullscreen_switcher()
 {
     let fs = fullscreen();
     fullscreen(!fs);
+    if(fs){
+        print("shrink");
+        screen_shrunk = true;
+    }else{
+        print("grow");
+        screen_grew = true;
+    }
 }
 
 function enforce_fullscreen()
@@ -25,4 +42,8 @@ function enforce_fullscreen()
     
     imageMode(CENTER);
     image(fs_icon, windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height);
+    fill(0,0,0);
+    textSize(24);
+    text("Click to Enter\n Fullscreen", windowWidth/2, windowHeight/2);
+    textSize(12);
 }

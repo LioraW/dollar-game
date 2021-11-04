@@ -1,23 +1,11 @@
-{
-    var keyInput = [];
-    // key typed  
-    {
-    var keyFull = [];
-    }
 
-    keyPressed = function () {keyInput[keyCode] = true;};
-    keyReleased = function () {keyInput[keyCode] = false;};
-  
-    keyTyped = function () {
-        keyFull[keyCode] = true;
-    };
-} // key functions
 
 function preload()
 {
     background_music = loadSound("./songs/A Sweet Smile 8 Bit.ogg");
     thwomp = loadSound("./songs/Super Mario 64 Thwomp Sound_128k.ogg")
     fs_icon = loadImage('images/Fullscreen.png');
+    efs_icon = loadImage('images/ExitFullscreen.png');
     print('this is', fs_icon.height);
 }
 
@@ -29,6 +17,7 @@ function setup()
     angleMode(DEGREES);
     background_music.setVolume(0.1);
     background_music.loop();
+    background_music.pause();
 
     game = new Game(5, 3, false, 10);
     fs_enforce_button = new CustomButton(() => { this.enforce_fullscreen(); },
@@ -43,11 +32,25 @@ function draw()
     
     game.draw();
 
-    text(displayWidth + " " + displayHeight, 100, 100);
     if(!fullscreen()){
-        fs_enforce_button.draw();
+        print("small");
+        fs_enforce_button.draw_func_btn();
+
+        if(fullscreen_status === true)
+        {
+            background_music.pause();
+            fullscreen_status = false;
+        }
         game.pause_game(false);
-    }else{
+    }
+    if(fullscreen()){
+        print("big");
+
+        if(fullscreen_status === false)
+        {
+            background_music.play();
+            fullscreen_status = true;
+        }
         game.pause_game(true);
     }
 
@@ -55,6 +58,9 @@ function draw()
     translate(width/2, height/2);
     scale(1);
     pop();
+
+    reset_screen_changed();
+    mouseReset();
 }
 
 

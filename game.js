@@ -16,13 +16,15 @@ class Game
             () => { this.undo(); } );
         this.restartButton = new Button ("restart", 50, 350, 100, 50,
             () => { this.reset_game_state(); } );
-        this.fsButton = new Button ("fs", 1470, 600, 50, 50, 
+        this.efsButton = new CustomButton ( efs_icon, 
+            displayWidth - (efs_icon.width/6), displayHeight - (efs_icon.height/6),
+             efs_icon.width/6, efs_icon.height/6, 
             () => { fullscreen_switcher(); } );
     }
     pause_game(status){
         this.undoButton.pause(!status);
         this.restartButton.pause(!status);
-        this.fsButton.pause(!status);
+        this.efsButton.pause(!status);
         this.graph.set_listening(!status);
     }
 
@@ -69,7 +71,7 @@ class Game
             this.undoButton.mute_IO(false);
             this.restartButton.mute_IO(false);
         }
-        this.fsButton.draw();
+        this.efsButton.draw_img_btn();
         
     }
 
