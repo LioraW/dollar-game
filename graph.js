@@ -1,6 +1,6 @@
 class Graph
 {
-    constructor(node_size, edges_max, make_solvable, money_range)
+    randomGraph(node_size, edges_max, make_solvable, money_range)
     {
         this.node_size = node_size; // how many nodes there are
         this.edges_max = edges_max; // the max amount of connections a node can have
@@ -19,6 +19,25 @@ class Graph
         if (make_solvable){
             this.make_solvable();
         }
+        this.starting_state = this.get_starting_state();
+    }
+    premadeGraph(data, money_range, scalar)
+    {
+        this.data = data;
+        this.money_range = money_range;
+        this.scalar = scalar
+        this.balance = 0;   // overall graph balance
+        this.nodes = [];    // array for all nodes
+        this.edges = [];    // array for all edges
+        this.lastMove = -1;
+        this.solved = true;
+        this.listening = false;
+        this.counter = 0;
+
+        this.build();
+
+        this.rebalance();
+        this.make_solvable();
         this.starting_state = this.get_starting_state();
     }
     // sets the graph listen status (whether it listens to mouse clicks)
@@ -43,7 +62,6 @@ class Graph
         }
         this.set_last_move(-1);
     }
-
     // returns the last move
     get_last_move()
     {
@@ -307,8 +325,8 @@ class Graph
         // this creates a node node_size times
         for (var i = 0; i < this.node_size; i++) {
             var ready = true;   // node is ready to be created
-            var x = random(250, 1286) + 1; // randomly generating the x and y for each node
-            var y = random(200, 664) + 1;
+            var x = random(W(250), W(1286)) + 1; // randomly generating the x and y for each node
+            var y = random(H(200), H(664)) + 1;
             // we want to make sure that none of the nodes get to close
             // so this loops through all the previous nodes and makes sure
             // the current node being created is not "too_close" to another
@@ -330,6 +348,28 @@ class Graph
             }
         }
         this.solved = this.is_solved();
+    }
+    // creates the nodes and edges of a predefined graph
+    build()
+    {
+        for(var i = 0; i < this.data.length; i++)
+        {
+            this.nodes.push(new Node(i, (int)(random(-this.money_range, this.money_range)),
+                                this.data[i][0] * this.scalar + displayWidth/2,
+                                -this.data[i][1] * this.scalar + displayHeight/2));
+            this.balance += this.nodes[i].get_value();
+        }
+        this.solved = this.is_solved();
+        for(var i = 0; i < this.data.length; i++)
+        {
+            for(var j = 0; j < this.data[i][2].length; j++)
+            {
+                var cons = this.data[i][2];
+                if(!this.are_brothers(this.nodes[i], this.nodes[cons[j]])){
+                    this.edges.push(new Edge(this.nodes[i], this.nodes[cons[j]]));
+                }
+            }
+        }
     }
     // rebalances the graph if all the nodes' values have the same sign
     rebalance()
@@ -392,12 +432,12 @@ class Graph
     // same for the nodes
     draw()
     {
-        text("moves made"+this.counter, 40, 40);
-        text(this.get_genus(), 100, 500);
+        text("moves made"+this.counter, W(40), H(40));
+        // text(this.get_genus(), 100, 500);x
 
-        text(this.get_balance(), 100, 520);
-        text(this.is_solvable(), 100, 540);
-        text(this.solved, 100, 560);
+        // text(this.get_balance(), 100, 520);
+        // text(this.is_solvable(), 100, 540);
+        // text(this.solved, 100, 560);
 
         for(let i = 0; i < this.edges.length; i++)
         {
