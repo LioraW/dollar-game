@@ -11,6 +11,14 @@ class Graph
         this.lastMove = -1;
         this.solved = true;
         this.counter = 0;
+
+        this.populate_nodes();
+        this.populate_edges();
+        this.rebalance();
+        if (make_solvable){
+            this.make_solvable();
+        }
+
     }
     //returns an object with the node id's as keys and the dollar amounts as the values
     get_starting_state() {
