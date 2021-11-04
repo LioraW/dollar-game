@@ -15,7 +15,7 @@ function setup()
     //background_music.setVolume(0.02);
     //background_music.loop()
 
-    game = new Game(20, 4, false, 10);
+    game = new Game('hard');
 
 }
 

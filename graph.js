@@ -1,10 +1,9 @@
 class Graph
 {
-    constructor(node_size, edges_max, provable, money_range)
+    constructor(node_size, edges_max, make_solvable, money_range)
     {
         this.node_size = node_size; // how many nodes there are
         this.edges_max = edges_max; // the max amount of connections a node can have
-        this.provable = provable;   // whether this graph must be provable
         this.money_range = money_range; // the range of balances per vertex
         this.balance = 0;   // overall graph balance
         this.nodes = [];    // array for all nodes
@@ -13,6 +12,24 @@ class Graph
         this.solved = true;
         this.counter = 0;
     }
+    //returns an object with the node id's as keys and the dollar amounts as the values
+    get_starting_state() {
+        let state = {};
+        this.nodes.forEach((node) => state[node.get_id()] = node.get_value());
+        console.log(state);
+        return state;
+    }
+    reset_graph() {
+        Object.entries(this.starting_state).forEach(([id, value]) => this.nodes[id].set_value(value));
+    }
+    //undoes the last move
+    undo () {
+        if (this.lastMove !== -1) {
+            this.nodes[this.lastMove].give(-1);
+        }
+        this.set_last_move(-1);
+    }
+
     // returns the last move
     get_last_move()
     {
