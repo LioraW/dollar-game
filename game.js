@@ -16,18 +16,21 @@ class Game
             () => { this.undo(); } );
         this.restartButton = new Button ("restart", 50, 350, 100, 50,
             () => { this.reset_game_state(); } );
+        // the exit full screen (efs) button which exits fullscreen when clicked
         this.efsButton = new CustomButton ( efs_icon, 
             displayWidth - (efs_icon.width/6), displayHeight - (efs_icon.height/6),
             efs_icon.width/6, efs_icon.height/6, 
             () => { fullscreen_switcher(); } );
     }
+    // when this is called it pauses all the buttons AND makes the graph not listen 
+    // to mouse clicks
     pause_game(status){
         this.undoButton.pause(!status);
         this.restartButton.pause(!status);
         this.efsButton.pause(!status);
         this.graph.set_listening(!status);
     }
-
+    // undo move function
     undo () {
         if (this.graph.lastMove !== -1) {
             this.graph.nodes[this.graph.lastMove].give(-1);
@@ -40,9 +43,11 @@ class Game
         this.graph.nodes.forEach((node) => state[node.get_id()] = node.get_value());
         return state;
     }
+    // resets the graph back to the original state
     reset_game_state() {
         Object.entries(this.starting_state).forEach(([id, value]) => this.graph.nodes[id].set_value(value))
     }
+    // what displays when the game is won
     display_game_win() {
         background(0,0,0,50);
         fill(173, 216, 230);

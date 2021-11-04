@@ -13,6 +13,7 @@ class Graph
         this.solved = true;
         this.listening = false;
     }
+    // sets the graph listen status (whether it listens to mouse clicks)
     set_listening(status)
     {
         this.listening = status;

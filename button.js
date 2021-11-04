@@ -12,9 +12,11 @@ class Button
         this.paused = false;
     }
 
+    // controls whether the a button is muted(not active)
     mute_IO(mute){
         this.mute = mute;
     }
+    // controls whether a button is paused(same as not active)
     pause(status){
         this.paused = status;
     }
