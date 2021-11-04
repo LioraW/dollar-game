@@ -56,7 +56,6 @@ function draw()
     translate(width/2, height/2);
     scale(1);
     pop();
-    
     mouseReset();
 }
 

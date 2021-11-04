@@ -18,7 +18,7 @@ class Game
             () => { this.reset_game_state(); } );
         this.efsButton = new CustomButton ( efs_icon, 
             displayWidth - (efs_icon.width/6), displayHeight - (efs_icon.height/6),
-             efs_icon.width/6, efs_icon.height/6, 
+            efs_icon.width/6, efs_icon.height/6, 
             () => { fullscreen_switcher(); } );
     }
     pause_game(status){
