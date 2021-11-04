@@ -3,9 +3,10 @@ class PreGraph extends Graph
     constructor(data, money_range, scalar)
     {
         super();
-        this.data = data;
-        this.money_range = money_range;
-        this.scalar = scalar
+        this.data = data; // the data that contains the "blueprints" to create the graph
+        this.money_range = money_range; // randge of money
+        this.scalar = scalar // scales the whole graph to this size. the bigger the number
+                            // bigger the graph
 
         this.build();
 
