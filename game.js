@@ -2,7 +2,7 @@ class Game
 {
     constructor(type) {
         //create graph
-        switch(type){
+        switch (type) {
             case 'easy':
                 this.graph = this.easy_graph(true);
                 break;
@@ -18,26 +18,42 @@ class Game
         }
         //Change Graph buttons - Solvable
         this.easyGraphButton = new Button("Easy", 50, 150, 100, 50,
-            () => { this.graph = this.easy_graph(true); });
+            () => {
+                this.graph = this.easy_graph(true);
+            });
         this.mediumGraphButton = new Button("Medium", 50, 200, 100, 50,
-            () => { this.graph = this.medium_graph(true); });
+            () => {
+                this.graph = this.medium_graph(true);
+            });
         this.hardGraphButton = new Button("Hard", 50, 250, 100, 50,
-            () => { this.graph = this.hard_graph(true); });
+            () => {
+                this.graph = this.hard_graph(true);
+            });
 
         //Change Graph buttons - Not Necessarily Solvable
         this.easyGraphButton2 = new Button("Easy", displayWidth - 150, 150, 100, 50,
-            () => { this.graph = this.easy_graph(false); });
+            () => {
+                this.graph = this.easy_graph(false);
+            });
         this.mediumGraphButton2 = new Button("Medium", displayWidth - 150, 200, 100, 50,
-            () => { this.graph = this.medium_graph(false); });
+            () => {
+                this.graph = this.medium_graph(false);
+            });
         this.hardGraphButton2 = new Button("Hard", displayWidth - 150, 250, 100, 50,
-            () => { this.graph = this.hard_graph(false); });
+            () => {
+                this.graph = this.hard_graph(false);
+            });
 
         //Buttons with anonymous functions passed in
         this.undoButton = new Button("undo", 50, 350, 100, 50,
-            () => { this.graph.undo(); } );
-        this.restartButton = new Button ("restart", 50, 400, 100, 50,
-            () => { this.graph.reset_graph(); } );
-
+            () => {
+                this.graph.undo();
+            });
+        this.restartButton = new Button("restart", 50, 400, 100, 50,
+            () => {
+                this.graph.reset_graph();
+            });
+    }
     //generate graph types
     easy_graph(make_solvable){
         return new Graph(7, 2, make_solvable, 10);
