@@ -34,7 +34,7 @@ class Graph
         this.counter++;
     }
     // returns the balance of the graph
-    get_ballance()
+    get_balance()
     {
         return this.balance;
     }
@@ -43,20 +43,17 @@ class Graph
     {
         return this.edges.length - this.nodes.length + 1;
     }
+    // returns true is the graph is guaranteed 100% solvabe
     is_solvable()
     {
-        return this.get_genus() <= this.get_ballance();
+        return this.get_genus() <= this.get_balance();
     }
+    // returns true if the graph is already solved
     is_solved()
     {
-        for(var i = 0; i < this.nodes.length; i++)
-        {
-            if(this.nodes[i].get_value() < 0)
-            {
-                return false;
-            }
-        }
-        return true;
+        let solved = true;
+        this.nodes.forEach((node) => { if ( node.get_value() < 0 ) { solved = false; } } );
+        return solved;
     }
     // returns true if 2 node are related
     are_brothers(node1, node2)
@@ -85,7 +82,7 @@ class Graph
         return sqrt(sq(node1.get_x() - node2.get_x()) + sq(node1.get_y() - node2.get_y())) > limit;
     }
     
-    // desides which set the nodes should be assigned
+    // decides which set the nodes should be assigned
     set_assign(node1, node2, sets)
     {
         if(!sets.length){
@@ -100,17 +97,30 @@ class Graph
         }
         return sets.length;
     }
+    // returns true if all the nodes' dollar values are posotive (or zero) or all negative
+    same_sign()
+    {
+        var sign = Math.sign(this.nodes[0].get_value());
+        for(var i = 0; i < this.nodes.length; i++)
+        {
+            if(sign * this.nodes[i].get_value() < 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     // creates the edges
     populate_edges()
     {
         var sets = [];
         var set_i = -1;
         // loop through nodes
-        for(var i = 0; i < this.nodes.length; i++)
+        for(let i = 0; i < this.nodes.length; i++)
         {
             // generates a max anount of allowed connections (cond) for this node
             var cond = (int)(random(this.edges_max)) + 1;
-            // will check how many connnections the current node has and then will loop the
+            // will check how many connections the current node has and then will loop the
             // rest of the way till it reaches the allowed amount of connections
             for(var j = this.nodes[i].get_total_con(); j < cond; j++)
             {
@@ -163,7 +173,7 @@ class Graph
             }
         }
         // any single nodes (nodes with no connections)
-        for(var i = 0; i < this.nodes.length; i++)
+        for(let i = 0; i < this.nodes.length; i++)
         {
             // checks if a node has less than one connection
             if(this.nodes[i].get_total_con() < 1)
@@ -182,13 +192,13 @@ class Graph
             // we create a 2D array where each array is just a set converted to an array
             // the reason for this is so that we can traverse the sets' information
             var arrays = [];
-            for(var i = 0; i < sets.length; i++){
+            for(let i = 0; i < sets.length; i++){
                 arrays[i] = Array.from(sets[i]);
             }
             
             // will traverse all the nodes in serch for a node that has only
             // one connection (available space).
-            for(var i = 0; i < arrays[0].length; i++)
+            for(let i = 0; i < arrays[0].length; i++)
             {
                 // taverse first set
                 if (this.nodes[arrays[0][i]].get_total_edges() < 2)
@@ -200,7 +210,7 @@ class Graph
             }
             // same algorithm but this time we are trying to find an available 
             // node in the second set
-            for(var i = 0; i < arrays[1].length; i++)
+            for(let i = 0; i < arrays[1].length; i++)
             {
                 if (this.nodes[arrays[1][i]].get_total_edges() < 2)
                 {
@@ -250,7 +260,7 @@ class Graph
                 // then compress the sets again
                 sets = compress_sets(sets);
         }
-        for(var i = 0; i < this.edges.length; i++)
+        for(let i = 0; i < this.edges.length; i++)
         {
             // the edges were only marked for destruction. here we actually destroy them
             // if their destroy attribute is 'true'
@@ -270,7 +280,7 @@ class Graph
             var y = random(200, 664) + 1;
             // we want to make sure that none of the nodes get to close
             // so this loops through all the previous nodes and makes sure
-            // the curren node being created is not "too_close" to another
+            // the current node being created is not "too_close" to another
             // node. if it is break the loop and restart the creation of 
             // this node at line 21.
             for (var j = 0; j < this.nodes.length; j++) {
@@ -279,7 +289,6 @@ class Graph
                 {
                     i--;
                     ready = false; // not ready for creation if yes
-                    print("yo"); // just text to tell me when this happens
                     break;
                 }
             }
@@ -291,24 +300,59 @@ class Graph
         }
         this.solved = this.is_solved();
     }
+    // rebalances the graph if all the nodes' values have the same sign
+    rebalance()
+    {
+        if(this.same_sign())
+        {
+            print('rebalancing');
+            for(var i = 0; i < this.nodes.length; i+=2)
+            {
+                if(Math.abs(this.nodes[i].get_value()) > 0){
+                    this.nodes[i].flip_value();
+                    this.balance += this.nodes[i].get_value() * 2;
+                }else {
+                    this.nodes[i].add_value(Math.sign(this.balance) * -1)
+                    this.balance += this.nodes[i].get_value();
+                }
+            }
+        }
+    }
+    // makes the graph 100% solvable
+    make_solvable()
+    {
+        var debt = (-1 * (this.get_balance() - this.get_genus())) + (int)(random(5));
+        print(debt)
+        for(var i = 0; i < debt; i++)
+        {
+            var random_index = (int)(random(this.nodes.length))
+            // while(this.nodes[i].get_value() < 0)
+            // {
+            //     random_index = (int)(random(this.nodes.length))
+            // }
+            this.nodes[random_index].add_value(1);
+            this.balance++;
+        }
+    }
     // checks is the mouse has been pressed over the node
     mouse_listener()
     {
         if(mouse_downed)
         {
-            this.solved = this.is_solved();
             for (var i = 0; i < this.nodes.length; i++)
             {
                 this.nodes[i].unMarkAsLastMove(); //unmark everyone as last move
+
                 this.counter += this.nodes[i].mouse_listener(); //call mouse listener for everyone
                 if (this.nodes[i].isLastMove)
                 {
                     this.lastMove = this.nodes[i].get_id(); //keep last move
                 }
             }
-
             // reset the mouse_downed and mouse_upped functions
             mouseReset();
+            // check if the graph is solved
+            this.solved = this.is_solved();
         }
     }
     // the draw function. literally just loops through the edges and activates there draw functions
@@ -317,8 +361,10 @@ class Graph
     {
         text("moves made"+this.counter, 40, 40);
         text(this.get_genus(), 100, 500);
-        text(this.get_ballance(), 100, 520);
-        text(this.solved, 100, 540);
+
+        text(this.get_balance(), 100, 520);
+        text(this.is_solvable(), 100, 540);
+        text(this.solved, 100, 560);
 
         for(let i = 0; i < this.edges.length; i++)
         {
@@ -335,7 +381,6 @@ class Graph
         //this function now loops through the nodes internally
         this.mouse_listener();
 
-        text('last move:' + this.lastMove, 100, 200);
     }
 
 }
