@@ -75,24 +75,16 @@ class Game
 
     //generate graph types
     easy_graph(make_solvable){
-        var temp = new Graph();
-        temp.randomGraph(7, 2, make_solvable, 10);
-        return temp;
+        return new RandGraph(3, 2, make_solvable, 10);
     }
     medium_graph(make_solvable){
-        var temp = new Graph();
-        temp.randomGraph(12, 3, make_solvable, 10);
-        return temp;
+        return new RandGraph(12, 3, make_solvable, 10);
     }
     hard_graph(make_solvable){
-        var temp = new Graph();
-        temp.randomGraph(20, 4, make_solvable, 10);
-        return temp;
+        return new RandGraph(20, 4, make_solvable, 10);
     }
     premade_graph(data){
-        var temp = new Graph();
-        temp.premadeGraph(data, 10,4);
-        return temp;
+        return new PreGraph(data, 10, 4);
     }
     // undo move function
     undo () {
