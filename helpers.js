@@ -46,3 +46,7 @@ function compress_sets(sets)
     }
     return sets;
 }
+
+function my_button(){
+    print("hello from my button");
+}

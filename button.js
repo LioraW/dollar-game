@@ -1,5 +1,6 @@
 class Button
 {
+    
     constructor(text, x, y, width, height, onClick) {
         this.text = text;
         this.x = x;
@@ -22,6 +23,7 @@ class Button
             mouseReset();
             // then call the passed in function
             this.onClick();
+
 
         }
     }
