@@ -16,18 +16,26 @@ class Game
                 this.graph = this.random_graph(true);
                 break;
         }
-            //Change Graph buttons
-        this.getEasyGraphButton = new Button("Easy", 50, 150, 100, 50,
-            () => { this.graph = this.easy_graph(); });
-        this.getMediumGraphButton = new Button("Medium", 50, 200, 100, 50,
-            () => { this.graph = this.medium_graph(); });
-        this.getHardGraphButton = new Button("Hard", 50, 250, 100, 50,
-            () => { this.graph = this.hard_graph(); });
+        //Change Graph buttons - Solvable
+        this.easyGraphButton = new Button("Easy", 50, 150, 100, 50,
+            () => { this.graph = this.easy_graph(true); });
+        this.mediumGraphButton = new Button("Medium", 50, 200, 100, 50,
+            () => { this.graph = this.medium_graph(true); });
+        this.hardGraphButton = new Button("Hard", 50, 250, 100, 50,
+            () => { this.graph = this.hard_graph(true); });
+
+        //Change Graph buttons - Not Necessarily Solvable
+        this.easyGraphButton2 = new Button("Easy", displayWidth - 150, 150, 100, 50,
+            () => { this.graph = this.easy_graph(false); });
+        this.mediumGraphButton2 = new Button("Medium", displayWidth - 150, 200, 100, 50,
+            () => { this.graph = this.medium_graph(false); });
+        this.hardGraphButton2 = new Button("Hard", displayWidth - 150, 250, 100, 50,
+            () => { this.graph = this.hard_graph(false); });
 
         //Buttons with anonymous functions passed in
-        this.undoButton = new Button("undo", 50, 300, 100, 50,
+        this.undoButton = new Button("undo", 50, 350, 100, 50,
             () => { this.graph.undo(); } );
-        this.restartButton = new Button ("restart", 50, 350, 100, 50,
+        this.restartButton = new Button ("restart", 50, 400, 100, 50,
             () => { this.graph.reset_graph(); } );
 
 
@@ -58,11 +66,25 @@ class Game
 
     draw()
     {
-        this.undoButton.draw(); //apparently, buttons need to happen before the graph for the button to be responsive
+
+        textAlign(CENTER,CENTER);
+        fill(0,0,0);
+        textSize(26);
+        text("Get Solvable Graphs:", 150, 120);
+        text("Get Graphs that Are not Necessarily Solvable:", displayWidth - 300, 120);
+        text("Useful Buttons:", 125, 320);
+        textSize(12); //reset size
+
+        this.easyGraphButton.draw();
+        this.mediumGraphButton.draw();
+        this.hardGraphButton.draw();
+        this.undoButton.draw();
         this.restartButton.draw();
-        this.getEasyGraphButton.draw();
-        this.getMediumGraphButton.draw();
-        this.getHardGraphButton.draw();
+
+        this.easyGraphButton2.draw();
+        this.mediumGraphButton2.draw();
+        this.hardGraphButton2.draw();
+
         this.graph.draw();
 
         if (this.graph.is_solved()) {
