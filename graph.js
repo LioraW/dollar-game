@@ -10,6 +10,7 @@ class Graph
         this.edges = [];    // array for all edges
         this.lastMove = -1;
         this.solved = true;
+        this.listening = false;
         this.counter = 0;
 
         this.populate_nodes();
@@ -19,7 +20,11 @@ class Graph
             this.make_solvable();
         }
         this.starting_state = this.get_starting_state();
-
+    }
+    // sets the graph listen status (whether it listens to mouse clicks)
+    set_listening(status)
+    {
+        this.listening = status;
     }
     //returns an object with the node id's as keys and the dollar amounts as the values
     get_starting_state() {
@@ -352,10 +357,6 @@ class Graph
         for(var i = 0; i < debt; i++)
         {
             var random_index = (int)(random(this.nodes.length))
-            // while(this.nodes[i].get_value() < 0)
-            // {
-            //     random_index = (int)(random(this.nodes.length))
-            // }
             this.nodes[random_index].add_value(1);
             this.balance++;
         }
@@ -368,17 +369,23 @@ class Graph
             for (var i = 0; i < this.nodes.length; i++)
             {
                 this.nodes[i].unMarkAsLastMove(); //unmark everyone as last move
-
-                this.counter += this.nodes[i].mouse_listener(); //call mouse listener for everyone
+                var clicked = this.nodes[i].mouse_listener(); //call mouse listener for everyone
+                this.counter += clicked; //call mouse listener for everyone
+              
                 if (this.nodes[i].isLastMove)
                 {
                     this.lastMove = this.nodes[i].get_id(); //keep last move
                 }
+
+                if(clicked){
+                    // reset the mouse_downed and mouse_upped functions
+                    mouseReset();
+                    // check if the graph is solved
+                    this.solved = this.is_solved();
+
+                }
             }
-            // reset the mouse_downed and mouse_upped functions
-            mouseReset();
-            // check if the graph is solved
-            this.solved = this.is_solved();
+            
         }
     }
     // the draw function. literally just loops through the edges and activates there draw functions
@@ -405,8 +412,9 @@ class Graph
             this.nodes[i].draw();
         }
         //this function now loops through the nodes internally
-        this.mouse_listener();
-
+        if(!this.solved && !this.listening){
+            this.mouse_listener();
+        }
     }
 
 }

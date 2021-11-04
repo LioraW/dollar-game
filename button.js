@@ -8,33 +8,42 @@ class Button
         this.width = width;
         this.height = height;
         this.onClick = onClick;
-    } 
+        this.mute = false;
+        this.paused = false;
+    }
 
-
-    
+    // controls whether the a button is muted(not active)
+    mute_IO(mute){
+        this.mute = mute;
+    }
+    // controls whether a button is paused(same as not active)
+    pause(status){
+        this.paused = status;
+    }
     // checks is the mouse has been pressed over the button
     mouse_listener()
     {
-        if ( mouse_downed &&
-            mouseX > this.x && mouseX < this.x+this.width &&
-            mouseY > this.y && mouseY < this.y + this.height)
+        if ( mouse_downed && !this.mute && !this.paused &&
+            mouseX > this.x - this.width/2 && mouseX < this.x + this.width/2 &&
+            mouseY > this.y - this.height/2 && mouseY < this.y + this.height/2)
         {
             // reset the mouse_downed and mouse_upped functions
             mouseReset();
             // then call the passed in function
             this.onClick();
-
-
         }
     }
     draw_button(){
         fill(255,255,255);
+        rectMode(CENTER);
         rect(this.x, this.y, this.width, this.height, 7); //outline
         fill(127,197,250);
         rect(this.x, this.y, this.width, this.height, 7); //shade
         textAlign(CENTER,CENTER);
+        strokeWeight(0);
         fill(0,0,0);
-        text(this.text, this.x+(this.width/2), this.y+(this.height/2));
+        text(this.text, this.x, this.y);
+        strokeWeight(1);
     }
     draw()
     {

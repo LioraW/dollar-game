@@ -53,7 +53,22 @@ class Game
             () => {
                 this.graph.reset_graph();
             });
+        // the exit full screen (efs) button which exits fullscreen when clicked
+        this.efsButton = new CustomButton ( efs_icon, 
+            displayWidth - (efs_icon.width/6), displayHeight - (efs_icon.height/6),
+            efs_icon.width/6, efs_icon.height/6, 
+            () => { fullscreen_switcher(); } );
     }
+    // when this is called it pauses all the buttons AND makes the graph not listen 
+    // to mouse clicks
+    pause_game(status){
+        this.undoButton.pause(!status);
+        this.restartButton.pause(!status);
+        this.efsButton.pause(!status);
+        this.graph.set_listening(!status);
+    }
+    
+
     //generate graph types
     easy_graph(make_solvable){
         return new Graph(7, 2, make_solvable, 10);
@@ -64,17 +79,28 @@ class Game
     hard_graph(make_solvable){
         return new Graph(20, 4, make_solvable, 10);
     }
+    // undo move function
+    undo () {
+        if (this.graph.lastMove !== -1) {
+            this.graph.nodes[this.graph.lastMove].give(-1);
+        }
+        this.graph.set_last_move(-1);
+    }
+
+    // resets the graph back to the original state
     random_graph(make_solvable){
         return new Graph (random(3, 20), random(2,4), make_solvable, 10);
     }
-
+    // what displays when the game is won
     display_game_win() {
+        background(0,0,0,50);
         fill(173, 216, 230);
-        rect(displayWidth/3, displayHeight/3, 300, 100, 7); //outline
-        textAlign(CENTER,CENTER);
+        rectMode(CENTER);
+        rect(windowWidth/2, windowHeight/2, 300, 100, 7); //outline
         fill(0,0,0);
+        textAlign(CENTER,CENTER);
         textSize(30);
-        text("You won!!", displayWidth/3 + 150, displayHeight/3 + 50)
+        text("You won!!", windowWidth/2, windowHeight/2)
         textSize(12); //reset size
     }
 
@@ -82,6 +108,7 @@ class Game
 
     draw()
     {
+        background(255, 255, 255);
 
         textAlign(CENTER,CENTER);
         fill(0,0,0);
@@ -94,19 +121,26 @@ class Game
         this.easyGraphButton.draw();
         this.mediumGraphButton.draw();
         this.hardGraphButton.draw();
-        this.undoButton.draw();
-        this.restartButton.draw();
 
         this.easyGraphButton2.draw();
         this.mediumGraphButton2.draw();
         this.hardGraphButton2.draw();
 
         this.graph.draw();
-
+        
+        this.undoButton.draw();
+        this.restartButton.draw();
         if (this.graph.is_solved()) {
+            this.undoButton.mute_IO(true);
+            this.restartButton.mute_IO(true);
             this.display_game_win();
+        }else
+        {
+            this.undoButton.mute_IO(false);
+            this.restartButton.mute_IO(false);
         }
-
+        this.efsButton.draw_img_btn();
+        
     }
 
 }

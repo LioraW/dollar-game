@@ -1,9 +1,10 @@
-// document.addEventListener('contextmenu', event => event.preventDefault());
-
 function preload()
 {
-    //background_music = loadSound("./songs/Mario Bros -Remix(Chill Trap)_128k.ogg");
-    //thwomp = loadSound("./songs/Super Mario 64 Thwomp Sound_128k.ogg")
+    background_music = loadSound("./songs/A Sweet Smile 8 Bit.ogg");
+    thwomp = loadSound("./songs/Super Mario 64 Thwomp Sound_128k.ogg")
+    fs_icon = loadImage('images/Fullscreen.png');
+    efs_icon = loadImage('images/ExitFullscreen.png');
+    print('this is', fs_icon.height);
 }
 
 function setup()
@@ -12,36 +13,43 @@ function setup()
     window.addEventListener('resize', function(){ resizeCanvas(window.innerWidth,window.innerHeight)} );
     frameRate(60);
     angleMode(DEGREES);
-    //background_music.setVolume(0.02);
-    //background_music.loop()
+    background_music.setVolume(0.1);
+    background_music.loop();
+    background_music.pause();
 
     game = new Game('hard');
-
+    fs_enforce_button = new CustomButton(() => { this.enforce_fullscreen(); },
+        windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
+        () => { this.fullscreen_switcher(); })
 }
-
-{
-    var keyInput = [];  
-    // key typed  
-    {
-    var keyFull = [];
-    }
-    keyPressed = function () {keyInput[keyCode] = true;};
-    keyReleased = function () {keyInput[keyCode] = false;};
-  
-    keyTyped = function () {
-        keyFull[keyCode] = true;
-    };
-} // key functions
 
 function draw() 
 {
     push();
-    background(255, 255, 255);
-    fill(255,0,0);
     
     game.draw();
 
-    text(displayWidth + " " + displayHeight, 100, 100);
+    if(!fullscreen()){
+        print("small");
+        fs_enforce_button.draw_func_btn();
+
+        if(fullscreen_status === true)
+        {
+            background_music.pause();
+            fullscreen_status = false;
+        }
+        game.pause_game(false);
+    }
+    if(fullscreen()){
+        print("big");
+
+        if(fullscreen_status === false)
+        {
+            background_music.play();
+            fullscreen_status = true;
+        }
+        game.pause_game(true);
+    }
 
     
 
@@ -49,6 +57,7 @@ function draw()
     translate(width/2, height/2);
     scale(1);
     pop();
+    mouseReset();
 }
 
 
