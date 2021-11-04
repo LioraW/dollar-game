@@ -11,9 +11,6 @@ class Graph
         this.lastMove = -1;
         this.solved = true;
 
-        //Extra data
-        this.starting_state = this.get_starting_state();
-
         //set the graph up
         this.populate_nodes();
         this.populate_edges();
@@ -23,16 +20,19 @@ class Graph
             this.make_solvable();
         }
 
-    }
+        //Extra data
+        this.starting_state = this.get_starting_state();
 
+    }
     //returns an object with the node id's as keys and the dollar amounts as the values
     get_starting_state() {
         let state = {};
         this.nodes.forEach((node) => state[node.get_id()] = node.get_value());
+        console.log(state);
         return state;
     }
     reset_graph() {
-        Object.entries(this.starting_state).forEach(([id, value]) => this.nodes[id].set_value(value))
+        Object.entries(this.starting_state).forEach(([id, value]) => this.nodes[id].set_value(value));
     }
     //undoes the last move
     undo () {

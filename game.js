@@ -1,14 +1,40 @@
 class Game
 {
-    constructor(node_size, edges_max, solvable, money_range) {
+    constructor(type) {
         //create graph
-        this.graph = new Graph(node_size, edges_max, solvable, money_range)
+        switch(type){
+            case 'easy':
+                this.graph = this.easy_graph(true);
+                break;
+            case 'medium':
+                this.graph = this.medium_graph(true);
+                break;
+            case 'hard':
+                this.graph = this.hard_graph(true);
+                break;
+            default:
+                this.graph = this.random_graph(true);
+                break;
+        }
 
         //Buttons with anonymous functions passed in
         this.undoButton = new Button("undo", 50, 300, 100, 50,
             () => { this.graph.undo(); } );
         this.restartButton = new Button ("restart", 50, 350, 100, 50,
             () => { this.graph.reset_graph(); } );
+    }
+    //generate graph types
+    easy_graph(make_solvable){
+        return new Graph(7, 2, make_solvable, 10);
+    }
+    medium_graph(make_solvable){
+        return new Graph(12, 3, make_solvable, 10);
+    }
+    hard_graph(make_solvable){
+        return new Graph(20, 4, make_solvable, 10);
+    }
+    random_graph(make_solvable){
+        return new Graph (random(3, 20), random(2,4), make_solvable, 10);
     }
 
     display_game_win() {
