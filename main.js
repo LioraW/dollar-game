@@ -1,5 +1,3 @@
-
-
 function preload()
 {
     background_music = loadSound("./songs/A Sweet Smile 8 Bit.ogg");
@@ -58,8 +56,7 @@ function draw()
     translate(width/2, height/2);
     scale(1);
     pop();
-
-    reset_screen_changed();
+    
     mouseReset();
 }
 
