@@ -71,7 +71,6 @@ class Game
         this.efsButton.pause(!status);
         this.graph.set_listening(!status);
     }
-    
 
     //generate graph types
     easy_graph(make_solvable){
@@ -86,18 +85,11 @@ class Game
     premade_graph(data){
         return new PreGraph(data, 10, 4);
     }
-    // undo move function
-    undo () {
-        if (this.graph.lastMove !== -1) {
-            this.graph.nodes[this.graph.lastMove].give(-1);
-        }
-        this.graph.set_last_move(-1);
-    }
-
     // resets the graph back to the original state
     random_graph(make_solvable){
-        return new Graph().randomGraph(random(3, 20), random(2,4), make_solvable, 10);
+        return new RandGraph(random(3, 20), random(2,4), make_solvable, 10);
     }
+
     // what displays when the game is won
     display_game_win() {
         background(0,0,0,50);
