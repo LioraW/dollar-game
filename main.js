@@ -4,7 +4,6 @@ function preload()
     thwomp = loadSound("./songs/Super Mario 64 Thwomp Sound_128k.ogg")
     fs_icon = loadImage('images/Fullscreen.png');
     efs_icon = loadImage('images/ExitFullscreen.png');
-    print('this is', fs_icon.height);
 }
 
 function setup()
@@ -30,7 +29,6 @@ function draw()
     game.draw();
 
     if(!fullscreen()){
-        print("small");
         fs_enforce_button.draw_func_btn();
 
         if(fullscreen_status === true)
@@ -41,8 +39,6 @@ function draw()
         game.pause_game(false);
     }
     if(fullscreen()){
-        print("big");
-
         if(fullscreen_status === false)
         {
             background_music.play();

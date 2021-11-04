@@ -211,6 +211,6 @@ class Node{
         textAlign(CENTER,CENTER);
         fill(0,0,0);
         text(this.dollar, this.x, this.y);
-        text(this.id + ':' + this.connections.length, this.x+20, this.y-20);
+        //text(this.id + ':' + this.connections.length, this.x+20, this.y-20);
     }
 }
