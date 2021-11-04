@@ -16,12 +16,21 @@ class Game
                 this.graph = this.random_graph(true);
                 break;
         }
+            //Change Graph buttons
+        this.getEasyGraphButton = new Button("Easy", 50, 150, 100, 50,
+            () => { this.graph = this.easy_graph(); });
+        this.getMediumGraphButton = new Button("Medium", 50, 200, 100, 50,
+            () => { this.graph = this.medium_graph(); });
+        this.getHardGraphButton = new Button("Hard", 50, 250, 100, 50,
+            () => { this.graph = this.hard_graph(); });
 
         //Buttons with anonymous functions passed in
         this.undoButton = new Button("undo", 50, 300, 100, 50,
             () => { this.graph.undo(); } );
         this.restartButton = new Button ("restart", 50, 350, 100, 50,
             () => { this.graph.reset_graph(); } );
+
+
     }
     //generate graph types
     easy_graph(make_solvable){
@@ -51,6 +60,9 @@ class Game
     {
         this.undoButton.draw(); //apparently, buttons need to happen before the graph for the button to be responsive
         this.restartButton.draw();
+        this.getEasyGraphButton.draw();
+        this.getMediumGraphButton.draw();
+        this.getHardGraphButton.draw();
         this.graph.draw();
 
         if (this.graph.is_solved()) {
