@@ -18,6 +18,7 @@ class Graph
         if (make_solvable){
             this.make_solvable();
         }
+        this.starting_state = this.get_starting_state();
 
     }
     //returns an object with the node id's as keys and the dollar amounts as the values
