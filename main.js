@@ -17,11 +17,10 @@ function setup()
     background_music.loop();
     background_music.pause();
 
-    game = new Game(5, 3, false, 10);
+    game = new Game('hard');
     fs_enforce_button = new CustomButton(() => { this.enforce_fullscreen(); },
         windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
         () => { this.fullscreen_switcher(); })
-
 }
 
 function draw() 
@@ -51,6 +50,8 @@ function draw()
         }
         game.pause_game(true);
     }
+
+    
 
     mouseReset();
     translate(width/2, height/2);

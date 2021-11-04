@@ -1,10 +1,9 @@
 class Graph
 {
-    constructor(node_size, edges_max, provable, money_range)
+    constructor(node_size, edges_max, make_solvable, money_range)
     {
         this.node_size = node_size; // how many nodes there are
         this.edges_max = edges_max; // the max amount of connections a node can have
-        this.provable = provable;   // whether this graph must be provable
         this.money_range = money_range; // the range of balances per vertex
         this.balance = 0;   // overall graph balance
         this.nodes = [];    // array for all nodes
@@ -12,12 +11,39 @@ class Graph
         this.lastMove = -1;
         this.solved = true;
         this.listening = false;
+        this.counter = 0;
+
+        this.populate_nodes();
+        this.populate_edges();
+        this.rebalance();
+        if (make_solvable){
+            this.make_solvable();
+        }
+        this.starting_state = this.get_starting_state();
     }
     // sets the graph listen status (whether it listens to mouse clicks)
     set_listening(status)
     {
         this.listening = status;
     }
+    //returns an object with the node id's as keys and the dollar amounts as the values
+    get_starting_state() {
+        let state = {};
+        this.nodes.forEach((node) => state[node.get_id()] = node.get_value());
+        console.log(state);
+        return state;
+    }
+    reset_graph() {
+        Object.entries(this.starting_state).forEach(([id, value]) => this.nodes[id].set_value(value));
+    }
+    //undoes the last move
+    undo () {
+        if (this.lastMove !== -1) {
+            this.nodes[this.lastMove].give(-1);
+        }
+        this.set_last_move(-1);
+    }
+
     // returns the last move
     get_last_move()
     {
@@ -27,6 +53,16 @@ class Graph
     set_last_move(id)
     {
         this.lastMove = id;
+    }
+
+    resetCounter()
+    {
+        this.counter = 0;
+    }
+
+    addCounter()
+    {
+        this.counter++;
     }
     // returns the balance of the graph
     get_balance()
@@ -334,8 +370,9 @@ class Graph
             {
                 this.nodes[i].unMarkAsLastMove(); //unmark everyone as last move
                 var clicked = this.nodes[i].mouse_listener(); //call mouse listener for everyone
-
-                if (this.nodes[i].isLastMove) //node mouse listener raises "last move" flag
+                this.counter += clicked; //call mouse listener for everyone
+              
+                if (this.nodes[i].isLastMove)
                 {
                     this.lastMove = this.nodes[i].get_id(); //keep last move
                 }
@@ -355,6 +392,7 @@ class Graph
     // same for the nodes
     draw()
     {
+        text("moves made"+this.counter, 40, 40);
         text(this.get_genus(), 100, 500);
 
         text(this.get_balance(), 100, 520);
