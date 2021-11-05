@@ -49,7 +49,7 @@ class Game
             });
 
         //Buttons with anonymous functions passed in
-        this.undoButton = new CustomButton (undo_icon, W(150), H(350), W(undo_icon.width/6), H(undo_icon.height/6),
+        this.undoButton = new ImageButton(undo_icon, W(150), H(350), W(undo_icon.width/6), H(undo_icon.height/6),
             () => {
                 this.graph.undo();
             });
@@ -58,7 +58,7 @@ class Game
                 this.graph.reset_graph();
             });
         // the exit full screen (efs) button which exits fullscreen when clicked
-        this.efsButton = new CustomButton ( efs_icon, 
+        this.efsButton = new ImageButton( efs_icon, 
             displayWidth - W(efs_icon.width/6), displayHeight - H(efs_icon.height/6),
             W(efs_icon.width/6), H(efs_icon.height/6), 
             () => { fullscreen_switcher(); } );
@@ -128,7 +128,7 @@ class Game
 
         this.graph.draw();
         
-        this.undoButton.draw_img_btn();
+        this.undoButton.draw();
         this.restartButton.draw();
         if (this.graph.is_solved()) {
             this.undoButton.mute_IO(true);
@@ -139,7 +139,7 @@ class Game
             this.undoButton.mute_IO(false);
             this.restartButton.mute_IO(false);
         }
-        this.efsButton.draw_img_btn();
+        this.efsButton.draw();
         
     }
 
