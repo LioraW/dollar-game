@@ -1,13 +1,13 @@
 class Button
 {
-    
-    constructor(text, x, y, width, height, onClick) {
+    constructor(text, x, y, width, height, onClick, color = [127,197,250]) {
         this.text = text;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.onClick = onClick;
+        this.color = color; //an array of [R, G, B]
         this.mute = false;
         this.paused = false;
     }
@@ -37,7 +37,7 @@ class Button
         fill(255,255,255);
         rectMode(CENTER);
         rect(this.x, this.y, this.width, this.height, 7); //outline
-        fill(127,197,250);
+        fill(this.color);
         rect(this.x, this.y, this.width, this.height, 7); //shade
         textAlign(CENTER,CENTER);
         strokeWeight(0);
