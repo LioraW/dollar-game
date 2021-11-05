@@ -49,7 +49,7 @@ class Game
             });
 
         //Buttons with anonymous functions passed in
-        this.undoButton = new Button("undo", W(150), H(350), W(100), H(50),
+        this.undoButton = new CustomButton (undo_icon, W(150), H(350), W(undo_icon.width/6), H(undo_icon.height/6),
             () => {
                 this.graph.undo();
             });
@@ -128,7 +128,7 @@ class Game
 
         this.graph.draw();
         
-        this.undoButton.draw();
+        this.undoButton.draw_img_btn();
         this.restartButton.draw();
         if (this.graph.is_solved()) {
             this.undoButton.mute_IO(true);

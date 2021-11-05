@@ -4,6 +4,7 @@ function preload()
     thwomp = loadSound("./songs/Super Mario 64 Thwomp Sound_128k.ogg")
     fs_icon = loadImage('images/Fullscreen.png');
     efs_icon = loadImage('images/ExitFullscreen.png');
+    undo_icon = loadImage('images/undo.png');
 }
 
 function setup()

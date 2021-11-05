@@ -21,8 +21,8 @@ class PreGraph extends Graph
         for(var i = 0; i < this.data.length; i++)
         {
             this.nodes.push(new Node(i, (int)(random(-this.money_range, this.money_range)),
-                                this.data[i][0] * this.scalar + displayWidth/2,
-                                -this.data[i][1] * this.scalar + displayHeight/2));
+                                W(this.data[i][0]) * this.scalar + displayWidth/2,
+                                H(-this.data[i][1]) * this.scalar + displayHeight/2));
             this.balance += this.nodes[i].get_value();
         }
         this.solved = this.is_solved();
