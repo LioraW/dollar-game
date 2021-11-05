@@ -17,10 +17,14 @@ function setup()
     background_music.loop();
     background_music.pause();
 
+    dummy = new Graph();
+
     game = new Game('hard');
-    fs_enforce_button = new CustomButton(() => { this.enforce_fullscreen(); },
+    fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
         windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
         () => { this.fullscreen_switcher(); })
+
+        print("Goob's got no life and has a flat chest and also is very very faaaaatttt");
 }
 
 function draw() 
@@ -30,7 +34,7 @@ function draw()
     game.draw();
 
     if(!fullscreen()){
-        fs_enforce_button.draw_func_btn();
+        fs_enforce_button.draw();
 
         if(fullscreen_status === true)
         {
