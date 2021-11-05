@@ -5,6 +5,7 @@ function preload()
     fs_icon = loadImage('images/Fullscreen.png');
     efs_icon = loadImage('images/ExitFullscreen.png');
     undo_icon = loadImage('images/undo.png');
+    reset_icon = loadImage('images/reset.png');
 }
 
 function setup()

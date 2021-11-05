@@ -17,33 +17,33 @@ class Game
                 break;
         }
         //Change Graph buttons - Solvable
-        this.easyGraphButton = new Button("Easy", W(150), H(150), W(100), H(50),
+        this.easyGraphButton = new TextButton("Easy", W(150), H(150), W(100), H(20),
             () => {
                 this.graph = this.easy_graph(true);
             });
-        this.mediumGraphButton = new Button("Medium", W(150), H(200), W(100), H(50),
+        this.mediumGraphButton = new TextButton("Medium", W(150), H(175), W(100), H(20),
             () => {
                 this.graph = this.medium_graph(true);
             });
-        this.hardGraphButton = new Button("Hard", W(150), H(250), W(100), H(50),
+        this.hardGraphButton = new TextButton("Hard", W(150), H(200), W(100), H(20),
             () => {
                 this.graph = this.hard_graph(true);
             });
-        this.FlowerGraphButton = new Button("Flower", W(150), H(300), W(100), H(50),
+        this.FlowerGraphButton = new TextButton("Flower", W(150), H(225), W(100), H(20),
             () => {
                 this.graph = this.premade_graph(flower_graph);
             });
 
         //Change Graph buttons - Not Necessarily Solvable
-        this.easyGraphButton2 = new Button("Easy", displayWidth - W(150), H(150), W(100), H(50),
+        this.easyGraphButton2 = new TextButton("Easy", displayWidth - W(150), H(150), W(100), H(20),
             () => {
                 this.graph = this.easy_graph(false);
             });
-        this.mediumGraphButton2 = new Button("Medium", displayWidth - W(150), H(200), W(100), H(50),
+        this.mediumGraphButton2 = new TextButton("Medium", displayWidth - W(150), H(200), W(100), H(20),
             () => {
                 this.graph = this.medium_graph(false);
             });
-        this.hardGraphButton2 = new Button("Hard", displayWidth - W(150), H(250), W(100), H(50),
+        this.hardGraphButton2 = new TextButton("Hard", displayWidth - W(150), H(250), W(100), H(20),
             () => {
                 this.graph = this.hard_graph(false);
             });
@@ -53,7 +53,7 @@ class Game
             () => {
                 this.graph.undo();
             });
-        this.restartButton = new Button("restart", W(150), H(400), W(100), H(50),
+        this.restartButton = new ImageButton(reset_icon, W(150), H(400), W(reset_icon.width/5.5), H(reset_icon.height/5.5),
             () => {
                 this.graph.reset_graph();
             });
