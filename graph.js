@@ -190,7 +190,11 @@ class Graph
     // same for the nodes
     draw()
     {
-        text("moves made"+this.counter, W(40), H(40));
+        textSize(30);
+        text("Welcome to the Dollar Game!", W(700), H(30));
+        
+        textSize(20);
+        text("Number of Moves: "+this.counter, W(700), H(50));
         // text(this.get_genus(), 100, 500);x
 
         // text(this.get_balance(), 100, 520);
