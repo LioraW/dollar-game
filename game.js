@@ -133,6 +133,8 @@ class Game
 
     // what displays when the game is won
     display_game_win() {
+        win_sound = loadSound("./songs/winSoundApplause.ogg");
+        win_sound.setVolume(0.5);
         background(0,0,0,50);
         fill(173, 216, 230);
         rectMode(CENTER);
@@ -142,6 +144,7 @@ class Game
         textSize(30);
         text("You won!!", displayWidth/2, displayHeight/2)
         textSize(12); //reset size
+        win_sound.play();
     }
 
     draw()
