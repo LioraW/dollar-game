@@ -83,7 +83,7 @@ class Game
         }, 12, [200,200,200], [50,50,50], [200,200,200]);
         this.main_menu = new TextButton("Main Menu", W(1075), H(550), W(170), H(40),
         () => {
-            
+            this.tutor_mode = false;
         }, 12, [200,200,200], [50,50,50], [200,200,200]);
     }
     // when this is called it pauses all the buttons AND makes the graph not listen 

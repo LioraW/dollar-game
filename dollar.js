@@ -28,7 +28,8 @@ class Dollar
         push();
         translate(this.x, this.y);
         fill(0,255,0);
-        ellipse(0,0,this.width,this.width);
+        noStroke();
+        ellipse(0,0,W(this.width),H(this.width));
         pop();
     }
 }
