@@ -29,6 +29,7 @@ class Graph
     }
     reset_graph() {
         Object.entries(this.starting_state).forEach(([id, value]) => this.nodes[id].set_value(value));
+        this.resetCounter();
     }
     //undoes the last move
     undo () {
@@ -36,6 +37,7 @@ class Graph
             this.nodes[this.lastMove].give(-1);
         }
         this.set_last_move(-1);
+        this.addCounter();
     }
     // returns the last move
     get_last_move()

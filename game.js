@@ -62,13 +62,11 @@ class Game
             () => {
                 this.undo_pressed = true;
                 this.graph.undo();
-                this.graph.addCounter();
             });
         this.restartButton = new ImageButton(reset_icon, W(150), H(400), W(reset_icon.width/5.5), H(reset_icon.height/5.5),
             () => {
                 this.reset_pressed = true;
                 this.graph.reset_graph();
-                this.graph.resetCounter();
             });
 
         // the exit full screen (efs) button which exits fullscreen when clicked
