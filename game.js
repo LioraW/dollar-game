@@ -70,17 +70,20 @@ class Game
                 this.graph.reset_graph();
                 this.graph.resetCounter();
             });
+
         // the exit full screen (efs) button which exits fullscreen when clicked
         this.efsButton = new ImageButton( efs_icon, 
             displayWidth - W(efs_icon.width/6), displayHeight - H(efs_icon.height/6),
             W(efs_icon.width/6), H(efs_icon.height/6), 
             () => { fullscreen_switcher(); } );
+
         this.repeat_tutorial = new TextButton("Repeat Tutorial", W(850), H(550), W(170), H(40),
         () => {
             this.graph.reset_graph();
             this.graph.resetCounter();
             this.step = 1;
         }, 12, [200,200,200], [50,50,50], [200,200,200]);
+
         this.main_menu = new TextButton("Main Menu", W(1075), H(550), W(170), H(40),
         () => {
             this.tutor_mode = false;
@@ -174,6 +177,7 @@ class Game
             this.restartButton.mute_IO(false);
         }
         this.efsButton.draw();
+
         if(this.tutor_mode){
             this.tutorial();
         }

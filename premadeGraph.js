@@ -19,7 +19,13 @@ class PreGraph extends Graph
 
     // creates the nodes and edges of a predefined graph
     build()
-    {   
+    {
+        this.data.forEach(([key, value]) => {
+
+        })
+
+
+
         for(var i = 0; i < this.data.length; i++)
         {   
             var randDollar = 0;
