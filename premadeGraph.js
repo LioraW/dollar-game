@@ -1,6 +1,6 @@
 class PreGraph extends Graph
 {
-    constructor(data, scalar, money_range = -1)
+    constructor(data, scalar, money_range)
     {
         super();
         this.data = data; // the data that contains the "blueprints" to create the graph
@@ -10,7 +10,7 @@ class PreGraph extends Graph
 
         this.build();
 
-        if(this.money_range < 0){
+        if(!this.data[1].hasOwnProperty('value')){ //check if the data has a dollar value
             this.rebalance();
             this.make_solvable();
         }
@@ -20,32 +20,23 @@ class PreGraph extends Graph
     // creates the nodes and edges of a predefined graph
     build()
     {
-        this.data.forEach(([key, value]) => {
+        this.data.forEach((nodePlan, i) => {
+            let randDollar = (nodePlan.hasOwnProperty('value')) ? nodePlan.value : (int)(random(-this.money_range, this.money_range));
 
-        })
-
-
-
-        for(var i = 0; i < this.data.length; i++)
-        {   
-            var randDollar = 0;
-            if(this.money_range < 0) { randDollar = this.data[i][3]; }
-            else { randDollar = (int)(random(-this.money_range, this.money_range)); }
             this.nodes.push(new Node(i, randDollar,
-                                W(this.data[i][0]) * this.scalar + displayWidth/2,
-                                H(-this.data[i][1]) * this.scalar + displayHeight/2));
-            this.balance += this.nodes[i].get_value();
-        }
-        this.solved = this.is_solved();
-        for(var i = 0; i < this.data.length; i++)
-        {
-            for(var j = 0; j < this.data[i][2].length; j++)
-            {
-                var cons = this.data[i][2];
-                if(!this.are_brothers(this.nodes[i], this.nodes[cons[j]])){
-                    this.edges.push(new Edge(this.nodes[i], this.nodes[cons[j]]));
+                W(nodePlan.X) * this.scalar + displayWidth/2,
+                H(-nodePlan.Y) * this.scalar + displayHeight/2));
+
+        });
+
+        this.data.forEach((nodePlan, i) => {
+            nodePlan.connections.forEach((connectionId) => {
+                if (!this.are_brothers(this.nodes[i], this.nodes[connectionId])){
+                    this.edges.push(new Edge(this.nodes[i], this.nodes[connectionId]));
                 }
-            }
-        }
+            });
+        });
+        this.nodes.forEach(node => { node.get_value(); });
+        this.solved = this.is_solved();
     }
 }

@@ -82,14 +82,13 @@ class Graph
     // returns true if 2 node are related
     are_brothers(node1, node2)
     {
-        for(var i = 0; i < node1.get_total_con(); i++)
-        {
-            if (node2.get_id() === node1.get_con(i).get_id())
-            {
-                return true;
+        let result = false;
+        node1.connections.forEach((conn) => {
+            if (node2.get_id() === conn.get_id()) {
+                result = true;
             }
-        }
-        return false;
+        });
+        return result;
     }
     // returns if two nodes are too close to each other given a radius and nodes
     too_close(node1, node2, radius){

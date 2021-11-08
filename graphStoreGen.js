@@ -4,7 +4,7 @@ const tutorial_graph = [
     {X: 15, Y: 2.5, connections: [0,1,4], value: -2},
     {X: -20, Y: -17.5, connections: [4], value: 2},
     {X: 0, Y: -17.5, connections: [0,2,3], value: 3}
-]
+];
 
 const flower_graph = [
     { X: 0, Y: 60, connections:[1,2]}, // 0
@@ -20,4 +20,4 @@ const flower_graph = [
     {X: -20,Y: -30, connections: [6,12]}, // 10
     {X: 20, Y: -30, connections: [6,12]}, // 11
     { X: 0, Y: -60, connections: [10,11]}, // 12
-]
+];
