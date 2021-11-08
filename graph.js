@@ -10,6 +10,11 @@ class Graph
         this.listening = false;
         this.counter = 0;
     }
+    // returns a node by given index
+    get_node(index)
+    {
+        return this.nodes[index];
+    }
     // sets the graph listen status (whether it listens to mouse clicks)
     set_listening(status)
     {
@@ -70,9 +75,9 @@ class Graph
     // returns true if the graph is already solved
     is_solved()
     {
-        let solved = true;
-        this.nodes.forEach((node) => { if ( node.get_value() < 0 ) { solved = false; } } );
-        return solved;
+        this.solved = true;
+        this.nodes.forEach((node) => { if ( node.get_value() < 0 ) { this.solved = false; } } );
+        return this.solved;
     }
     // returns true if 2 node are related
     are_brothers(node1, node2)

@@ -12,12 +12,12 @@ function fullscreen_switcher()
 // this function displays an animation and png for the fullscreen enforcer button
 function enforce_fullscreen()
 {
-    background(0,0,0,50);
-    
+    background(0,0,0,100);
+    rectMode(CENTER,CENTER);
     // fill of the white rectangle
     fill(255,255,255,200 - w * 2);
     noStroke();
-    rect(windowWidth/2, windowHeight/2, fs_icon.width + w, fs_icon.height + h);
+    rect(windowWidth/2, windowHeight/2, fs_icon.width + w, fs_icon.height + h, 10);
     strokeWeight(0);
 
     // width and height of the rect being updated
@@ -36,6 +36,7 @@ function enforce_fullscreen()
     // the button
     fill(0,0,0);
     textSize(24);
+    textAlign(CENTER);
     text("Click to Enter\n Fullscreen", windowWidth/2, windowHeight/2);
     textSize(12);
 }

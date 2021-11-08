@@ -4,9 +4,9 @@
 // given and convert it to the value coorisponding to that machines display dimensions. 
 
 function W(amount){
-    return (displayWidth / (1920*0.8)) * amount;
+    return (displayWidth / (1920)) * amount;
 }
 
 function H(amount){
-    return (displayHeight / (1080*0.8)) * amount;
+    return (displayHeight / (1080)) * amount;
 } 

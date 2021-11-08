@@ -22,8 +22,8 @@ class RandGraph extends Graph
         // this creates a node node_size times
         for (var i = 0; i < this.node_size; i++) {
             var ready = true;   // node is ready to be created
-            var x = random(W(250), W(1286)) + 1; // randomly generating the x and y for each node
-            var y = random(H(200), H(664)) + 1;
+            var x = random(W(250), W(1670)) + 1; // randomly generating the x and y for each node
+            var y = random(H(200), H(880)) + 1;
             // we want to make sure that none of the nodes get to close
             // so this loops through all the previous nodes and makes sure
             // the current node being created is not "too_close" to another

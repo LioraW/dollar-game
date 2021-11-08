@@ -31,7 +31,6 @@ class Button
     // checks is the mouse has been pressed over the button
     mouse_listener()
     {
-        this.being_hovered();
         if ( mouse_downed && !this.mute && !this.paused && this.being_hovered() )
         {
             // reset the mouse_downed and mouse_upped functions
