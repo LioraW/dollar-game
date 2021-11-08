@@ -150,10 +150,7 @@ class Node{
     {
         if(this.hover())
         {
-            for(var i = 0; i < this.edges.length; i++)
-            {
-                this.edges[i].glow()
-            }
+            this.edges.forEach(edge => { edge.glow(); })
         }
     }
     // sets up animation for the dollar being sent to the other nodes
@@ -211,7 +208,6 @@ class Node{
         ellipse(this.x, this.y, 25, 25);
         fill(255, 0, 0, -25.5*this.dollar);
         ellipse(this.x, this.y, 25, 25);
-        
 
         textAlign(CENTER,CENTER);
         fill(0,0,0);
