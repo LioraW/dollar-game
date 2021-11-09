@@ -203,11 +203,11 @@ class Node{
         ellipseMode(RADIUS);
         fill(255,255,255);
         noStroke();
-        ellipse(this.x, this.y, 25, 25);
+        ellipse(this.x, this.y, W(25), H(25));
         fill(0, 255, 0, 25.5*this.dollar);
-        ellipse(this.x, this.y, 25, 25);
+        ellipse(this.x, this.y, W(25), H(25));
         fill(255, 0, 0, -25.5*this.dollar);
-        ellipse(this.x, this.y, 25, 25);
+        ellipse(this.x, this.y, W(25), H(25));
 
         textAlign(CENTER,CENTER);
         fill(0,0,0);

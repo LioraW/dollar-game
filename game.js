@@ -29,32 +29,39 @@ class Game
         this.easyGraphButton = new TextButton("Easy", W(150), H(150), W(100), H(20),
             () => {
                 this.graph = new RandGraph(7, 3, true, 10);
+                this.tutor_mode = false;
             }, 12, [200,200,200], [50,50,50], [200,200,200]);
         this.mediumGraphButton = new TextButton("Medium", W(150), H(175), W(100), H(20),
             () => {
                 this.graph = new RandGraph(12, 4, true, 10);
+                this.tutor_mode = false;
             }, 12, [200,200,200], [50,50,50], [200,200,200]);
         this.hardGraphButton = new TextButton("Hard", W(150), H(200), W(100), H(20),
             () => {
                 this.graph = new RandGraph(20, 5, true, 10);
+                this.tutor_mode = false;
             }, 12, [200,200,200], [50,50,50], [200,200,200]);
         this.FlowerGraphButton = new TextButton("Flower", W(150), H(225), W(100), H(20),
             () => {
                 this.graph = new PreGraph(flower_graph, 6, 10);
+                this.tutor_mode = false;
             }, 12, [200,200,200], [50,50,50], [200,200,200]);
 
         //Change Graph buttons - Not Necessarily Solvable
         this.easyGraphButton2 = new TextButton("Easy", displayWidth - W(150), H(150), W(100), H(20),
             () => {
                 this.graph = new RandGraph(7, 3, false, 10);
+                this.tutor_mode = false;
             }, 12, [200,200,200], [50,50,50], [200,200,200]);
         this.mediumGraphButton2 = new TextButton("Medium", displayWidth - W(150), H(200), W(100), H(20),
             () => {
                 this.graph = new RandGraph(12, 4, false, 10);
+                this.tutor_mode = false;
             }, 12, [200,200,200], [50,50,50], [200,200,200]);
         this.hardGraphButton2 = new TextButton("Hard", displayWidth - W(150), H(250), W(100), H(20),
             () => {
                 this.graph = new RandGraph(20, 5, false, 10);
+                this.tutor_mode = false;
             }, 12, [200,200,200], [50,50,50], [200,200,200]);
 
         //Buttons with anonymous functions passed in
@@ -62,11 +69,13 @@ class Game
             () => {
                 this.undo_pressed = true;
                 this.graph.undo();
+                this.tutor_mode = false;
             });
         this.restartButton = new ImageButton(reset_icon, W(150), H(400), W(reset_icon.width/5.5), H(reset_icon.height/5.5),
             () => {
                 this.reset_pressed = true;
                 this.graph.reset_graph();
+                this.tutor_mode = false;
             });
         this.tutorialButton = new TextButton("Tutorial Game", displayWidth - W(300), H(500), W(100), H(20),
             () => {

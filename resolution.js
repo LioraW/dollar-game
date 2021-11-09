@@ -9,4 +9,8 @@ function W(amount){
 
 function H(amount){
     return (displayHeight / (1080)) * amount;
-} 
+}
+
+function res_font(amount){
+    return (displayHeight / 160);
+}
