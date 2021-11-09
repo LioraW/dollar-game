@@ -12,5 +12,5 @@ function H(amount){
 }
 
 function res_font(amount){
-    return (displayHeight / 160);
+    return (displayHeight / (1080)) * amount ;
 }

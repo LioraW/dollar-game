@@ -1,6 +1,6 @@
 class TextBox 
 {
-    constructor(text, x, y, w, h, font_size=12){
+    constructor(text, x, y, w, h, font_size){
         this.text = text;
         this.x = x;
         this.y = y;
