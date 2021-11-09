@@ -1,5 +1,6 @@
 // the node class
 class Node{
+
     // constructor
     constructor(id, dollar, x, y)
     {
@@ -131,6 +132,7 @@ class Node{
             this.load_dollars();
             this.give(1);
             this.markAsLastMove();
+            clickSound.play();
             return 1;
         }
         return 0;

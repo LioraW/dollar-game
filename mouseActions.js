@@ -1,12 +1,14 @@
 let mouse_downed = false;
 let mouse_upped = false;
+
 // the exact frame the mouse is pressed down mouse_downed is set true
 function mousePressed()
 {
     if (getAudioContext().state !== 'running') {
         getAudioContext().resume();
+        
     }
-
+    //mouseClickSound.play();
     mouse_downed = true;
     return false;
 }

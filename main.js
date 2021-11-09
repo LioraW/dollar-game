@@ -7,7 +7,7 @@ function preload()
     undo_icon = loadImage('images/undo.png');
     reset_icon = loadImage('images/reset.png');
     backdrop = loadImage('images/yourname.jpg');
-    
+    clickSound = loadSound('songs/mouseClick.ogg');
 
     //tutorial images
     step1_img = loadImage('./images/step1.png');
