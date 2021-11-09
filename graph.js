@@ -10,6 +10,11 @@ class Graph
         this.listening = false;
         this.counter = 0;
     }
+    // returns a node by given index
+    get_node(index)
+    {
+        return this.nodes[index];
+    }
     // sets the graph listen status (whether it listens to mouse clicks)
     set_listening(status)
     {
@@ -24,6 +29,7 @@ class Graph
     }
     reset_graph() {
         Object.entries(this.starting_state).forEach(([id, value]) => this.nodes[id].set_value(value));
+        this.resetCounter();
     }
     //undoes the last move
     undo () {
@@ -31,6 +37,7 @@ class Graph
             this.nodes[this.lastMove].give(-1);
         }
         this.set_last_move(-1);
+        this.addCounter();
     }
     // returns the last move
     get_last_move()
@@ -70,21 +77,20 @@ class Graph
     // returns true if the graph is already solved
     is_solved()
     {
-        let solved = true;
-        this.nodes.forEach((node) => { if ( node.get_value() < 0 ) { solved = false; } } );
-        return solved;
+        this.solved = true;
+        this.nodes.forEach((node) => { if ( node.get_value() < 0 ) { this.solved = false; } } );
+        return this.solved;
     }
     // returns true if 2 node are related
     are_brothers(node1, node2)
     {
-        for(var i = 0; i < node1.get_total_con(); i++)
-        {
-            if (node2.get_id() === node1.get_con(i).get_id())
-            {
-                return true;
+        let result = false;
+        node1.connections.forEach((conn) => {
+            if (node2.get_id() === conn.get_id()) {
+                result = true;
             }
-        }
-        return false;
+        });
+        return result;
     }
     // returns if two nodes are too close to each other given a radius and nodes
     too_close(node1, node2, radius){

@@ -10,6 +10,7 @@ class Node{
         this.connections = [];
         this.edges = [];
         this.isLastMove = false;
+        this.just_clicked = false;
         this.sent_dollar = [];
     }
     // returns the id of this node
@@ -123,6 +124,7 @@ class Node{
     {
         if(mouse_downed && mouseX > this.x-20 && mouseX < this.x+20 && mouseY > this.y-20 && mouseY < this.y+20)
         {
+            this.just_clicked = true;
             // reset the mouse_downed and mouse_upped functions
             //mouseReset();
             // then give a dollar to connections
@@ -148,10 +150,7 @@ class Node{
     {
         if(this.hover())
         {
-            for(var i = 0; i < this.edges.length; i++)
-            {
-                this.edges[i].glow()
-            }
+            this.edges.forEach(edge => { edge.glow(); })
         }
     }
     // sets up animation for the dollar being sent to the other nodes
@@ -159,7 +158,7 @@ class Node{
     {
         for(var i = 0; i < this.connections.length; i++)
         {
-            this.sent_dollar.push(new Dollar(7,this.x, this.y, this.edges[i].get_rise(this.id), this.edges[i].get_run(this.id), this.connections[i]))
+            this.sent_dollar.push(new Dollar(W(20),this.x, this.y, this.edges[i].get_rise(this.id), this.edges[i].get_run(this.id), this.connections[i]))
         }
     }
     // this deletes all the dollars in the sent_dollar array
@@ -203,14 +202,15 @@ class Node{
         this.send_dollars()
         ellipseMode(RADIUS);
         fill(255,255,255);
-        ellipse(this.x, this.y, 20, 20);
+        noStroke();
+        ellipse(this.x, this.y, 25, 25);
         fill(0, 255, 0, 25.5*this.dollar);
-        ellipse(this.x, this.y, 20, 20);
+        ellipse(this.x, this.y, 25, 25);
         fill(255, 0, 0, -25.5*this.dollar);
-        ellipse(this.x, this.y, 20, 20);
+        ellipse(this.x, this.y, 25, 25);
+
         textAlign(CENTER,CENTER);
         fill(0,0,0);
         text(this.dollar, this.x, this.y);
-        //text(this.id + ':' + this.connections.length, this.x+20, this.y-20);
     }
 }

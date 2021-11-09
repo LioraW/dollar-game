@@ -65,7 +65,7 @@ class Edge
     draw()
     {   
         // normally we just draw the edge as a thin black line
-        stroke(0,0,0);
+        stroke(0,180,255, 200);
         strokeWeight(2);    
         line(this.ends[0].get_x(), this.ends[0].get_y(), this.ends[1].get_x(), this.ends[1].get_y());
 
@@ -83,11 +83,11 @@ class Edge
     }
     glow()
     {
-        stroke(0,0,0);
-        strokeWeight(10);
-        line(this.ends[0].get_x(), this.ends[0].get_y(), this.ends[1].get_x(), this.ends[1].get_y());
+        // stroke(100,100,255);
+        // strokeWeight(8);
+        // line(this.ends[0].get_x(), this.ends[0].get_y(), this.ends[1].get_x(), this.ends[1].get_y());
         stroke(200,255,255);
-        strokeWeight(8);
+        strokeWeight(6);
         line(this.ends[0].get_x(), this.ends[0].get_y(), this.ends[1].get_x(), this.ends[1].get_y());
         stroke(0,0,0);
         strokeWeight(1); 
