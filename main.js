@@ -59,7 +59,7 @@ function setup()
                                     "you can do with out stopping and show off your\n" + 
                                     "highscore!", displayWidth/2, displayHeight/2 - H(100), W(455), H(140));
 
-    game = new Game('tutor');
+    game = new Game('easy');
     fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
         windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
         () => { this.fullscreen_switcher(); })

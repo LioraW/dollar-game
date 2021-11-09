@@ -68,6 +68,11 @@ class Game
                 this.reset_pressed = true;
                 this.graph.reset_graph();
             });
+        this.tutorialButton = new TextButton("Tutorial Game", displayWidth - W(300), H(500), W(100), H(20),
+            () => {
+                this.graph = new PreGraph(tutorial_graph, 12);
+                this.tutor_mode = true;
+            }, 12, [200,200,200], [50,50,50], [200,200,200]);
 
         // the exit full screen (efs) button which exits fullscreen when clicked
         this.efsButton = new ImageButton( efs_icon, 
@@ -78,7 +83,6 @@ class Game
         this.repeat_tutorial = new TextButton("Repeat Tutorial", W(850), H(550), W(170), H(40),
         () => {
             this.graph.reset_graph();
-            this.graph.resetCounter();
             this.step = 1;
         }, 12, [200,200,200], [50,50,50], [200,200,200]);
 
@@ -160,11 +164,14 @@ class Game
         this.easyGraphButton2.draw();
         this.mediumGraphButton2.draw();
         this.hardGraphButton2.draw();
+        this.tutorialButton.draw();
 
         this.graph.draw();
         
         this.undoButton.draw();
         this.restartButton.draw();
+
+
         if (this.graph.is_solved()) {
             this.undoButton.mute_IO(true);
             this.restartButton.mute_IO(true);
