@@ -8,7 +8,8 @@ function preload()
     reset_icon = loadImage('images/reset.png');
     backdrop = loadImage('images/yourname.jpg');
     clickSound = loadSound('songs/mouseClick.ogg');
-
+    win_sound = loadSound("./songs/winSound.wav");
+    
     //tutorial images
     step1_img = loadImage('./images/step1.png');
     step2_img = loadImage('./images/step2.png');
