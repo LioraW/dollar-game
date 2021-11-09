@@ -33,9 +33,11 @@ class Button
     {
         if ( mouse_downed && !this.mute && !this.paused && this.being_hovered() )
         {
+            
             // reset the mouse_downed and mouse_upped functions
             mouseReset();
             // then call the passed in function
+            clickSound.play();
             this.onClick();
         }
     }
