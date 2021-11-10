@@ -201,11 +201,6 @@ class Graph
         
         textSize(20);
         text("Number of Moves: "+this.counter, W(700), H(50));
-        // text(this.get_genus(), 100, 500);x
-
-        // text(this.get_balance(), 100, 520);
-        // text(this.is_solvable(), 100, 540);
-        // text(this.solved, 100, 560);
 
         for(let i = 0; i < this.edges.length; i++)
         {
