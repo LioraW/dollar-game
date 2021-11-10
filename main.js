@@ -69,7 +69,6 @@ function setup()
         windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
         () => { this.fullscreen_switcher(); })
 
-        print("Goob's got no life and has a flat chest and also is very very faaaaatttt");
 }
 
 function draw() 
