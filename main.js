@@ -1,13 +1,16 @@
 function preload()
 {
-    background_music = loadSound("./songs/GiSt_Adrift.ogg");
+    background_music = loadSound("./songs/A Sweet Smile 8 Bit.ogg");
+    //background_music = loadSound("./songs/GiSt_Adrift.ogg");
     thwomp = loadSound("./songs/Super Mario 64 Thwomp Sound_128k.ogg")
     fs_icon = loadImage('images/Fullscreen.png');
     efs_icon = loadImage('images/ExitFullscreen.png');
     undo_icon = loadImage('images/undo.png');
     reset_icon = loadImage('images/reset.png');
     backdrop = loadImage('images/yourname.jpg');
-
+    clickSound = loadSound('songs/mouseClick.ogg');
+    win_sound = loadSound("./songs/winSound.wav");
+    
     //tutorial images
     step1_img = loadImage('./images/step1.png');
     step2_img = loadImage('./images/step2.png');
@@ -22,27 +25,27 @@ function setup()
     window.addEventListener('resize', function(){ resizeCanvas(window.innerWidth,window.innerHeight)} );
     frameRate(60);
     angleMode(DEGREES);
-    background_music.setVolume(0.1);
+    background_music.setVolume(0.3);
     background_music.loop();
     background_music.pause();
 
-    this.step1_text = new TextBox(  "click on the node to\n"+
+    this.step1_text = new TextBox(  "Click on the node to\n"+
                                     "give a dollar to its\n" + 
                                     "brother. This node\n" +
                                     "has 1 brother so it\n" +
-                                    "only lose 1 dollar", W(530), H(750), W(185), H(150), res_font(20));
+                                    "only loses 1 dollar", W(530), H(750), W(185), H(150), res_font(20));
     this.step2_text = new TextBox(  "Next click on this\n" +
                                     "node twice to give a\n" + 
                                     "dollar to each of its\n"+
-                                    "bothers. It has 3\n" +
-                                    "brother and we're\n" +
+                                    "brothers. It has 3\n" +
+                                    "brothers and we're\n" +
                                     "giving twice so it will\n" +
                                     "lose 6 dollars", W(1130), H(750), W(185), H(190), res_font(20));
     this.step3_text = new TextBox(  "Lets try clicking on\n" + 
                                     "this node to see what\n" + 
                                     "happens", W(530), H(500), W(200), H(95), res_font(20));
     this.step4_text = new TextBox(  "Actually lets undo\n" + 
-                                    "that move but pressing\n"+
+                                    "that move by pressing\n"+
                                     "the undo button", W(300), H(350), W(215), H(85), res_font(20));
     this.step5_text = new TextBox(  "We can also reset the\n" +
                                     "graph to its original\n" +
@@ -54,7 +57,7 @@ function setup()
                                     "dollar value of 0 or\n" +
                                     "more. [Click to Continue]", 
                                     displayWidth/2, displayHeight/2, W(240), H(150), res_font(20));
-    this.step8_text = new TextBox(  "Congragulations! You solved the graph! Now\n" +
+    this.step8_text = new TextBox(  "Congratulations! You solved the graph! Now\n" +
                                     "you know the basics. You can use these\n" +
                                     "skills to solve even harder graphs. See how many\n" +
                                     "you can do with out stopping and show off your\n" + 

@@ -1,5 +1,6 @@
 class Game
 {
+    userHasWon = false;
     constructor(type) {
         this.paused = false;
         this.tutor_mode = false;
@@ -152,7 +153,9 @@ class Game
         textAlign(CENTER,CENTER);
         textSize(30);
         text("You won!!", displayWidth/2, displayHeight/2)
+        this.userHasWon = true;
         textSize(12); //reset size
+        
     }
 
     draw()
