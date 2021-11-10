@@ -1,7 +1,7 @@
 function preload()
 {
-    background_music = loadSound("./songs/A Sweet Smile 8 Bit.ogg");
-    //background_music = loadSound("./songs/GiSt_Adrift.ogg");
+    //background_music = loadSound("./songs/A Sweet Smile 8 Bit.ogg");
+    background_music = loadSound("./songs/GiSt_Adrift.ogg");
     thwomp = loadSound("./songs/Super Mario 64 Thwomp Sound_128k.ogg")
     fs_icon = loadImage('images/Fullscreen.png');
     efs_icon = loadImage('images/ExitFullscreen.png');
