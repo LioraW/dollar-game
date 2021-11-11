@@ -70,6 +70,7 @@ function setup()
     main_menu = new Menu(main_menu_template);
     mode_menu = new Menu(mode_menu_template);
     diff_menu = new Menu(diff_menu_template);
+    help_menu = new Menu(help_menu_template);
 
     fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
         windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
@@ -82,7 +83,7 @@ const scenes = {
         GAME_MODE: () => { mode_menu.draw() },
             DIFFICULTY:() => { diff_menu.draw() },
             GAME:      () => { game.draw() },
-        HELP:      () => { },
+        HELP:      () => { help_menu.draw() },
             TUTORIAL:  () => { },
             RULES:     () => { },
             PROOF:     () => { },

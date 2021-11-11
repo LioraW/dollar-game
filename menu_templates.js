@@ -9,7 +9,7 @@ const main_menu_template = {
         {
             title: "HOW TO PLAY",
             heightOffset: 160,
-            onClick: () => { scene = scenes.GAME_MODE }
+            onClick: () => { scene = scenes.HELP }
         },
         {
             title: "OPTIONS",
@@ -21,6 +21,27 @@ const main_menu_template = {
             heightOffset: 320,
             onClick: () => { scene = scenes.GAME_MODE }
         },
+    ]
+}
+const help_menu_template = {
+    title: "HOW TO PLAY",
+    buttons: [
+        {
+            title: "TUTORIAL GAME",
+            heightOffset: 80,
+            onClick: () => { game.load_tutor_graph(); scene = scenes.GAME }
+        },
+        {
+            title: "INSTRUCTIONS",
+            heightOffset: 160,
+            onClick: () => { game.load_tutor_graph(); scene = scenes.GAME }
+        },
+        {
+            title: "PROOF",
+            heightOffset: 240,
+            onClick: () => { game.load_tutor_graph(); scene = scenes.GAME }
+        },
+
     ]
 }
 const mode_menu_template = {
