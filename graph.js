@@ -24,7 +24,6 @@ class Graph
     get_starting_state() {
         let state = {};
         this.nodes.forEach((node) => state[node.get_id()] = node.get_value());
-        console.log(state);
         return state;
     }
     reset_graph() {
