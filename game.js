@@ -7,6 +7,7 @@ class Game
         this.step = 1;
         this.undo_pressed = false;
         this.reset_pressed = false;
+        this.win_state = false;
         //create graph
         switch (type) {
             case 'easy':
@@ -26,44 +27,46 @@ class Game
                 this.graph = new RandGraph(random(3, 20), random(2,4), make_solvable, 10);
                 break;
         }
+        {
         //Change Graph buttons - Solvable
-        this.easyGraphButton = new TextButton("Easy", W(150), H(150), W(100), H(20),
-            () => {
-                this.graph = new RandGraph(7, 3, true, 10);
-                this.tutor_mode = false;
-            }, 12, [200,200,200], [50,50,50], [200,200,200]);
-        this.mediumGraphButton = new TextButton("Medium", W(150), H(175), W(100), H(20),
-            () => {
-                this.graph = new RandGraph(12, 4, true, 10);
-                this.tutor_mode = false;
-            }, 12, [200,200,200], [50,50,50], [200,200,200]);
-        this.hardGraphButton = new TextButton("Hard", W(150), H(200), W(100), H(20),
-            () => {
-                this.graph = new RandGraph(20, 5, true, 10);
-                this.tutor_mode = false;
-            }, 12, [200,200,200], [50,50,50], [200,200,200]);
-        this.FlowerGraphButton = new TextButton("Flower", W(150), H(225), W(100), H(20),
-            () => {
-                this.graph = new PreGraph(flower_graph, 6, 10);
-                this.tutor_mode = false;
-            }, 12, [200,200,200], [50,50,50], [200,200,200]);
+        // this.easyGraphButton = new TextButton("Easy", W(150), H(150), W(100), H(20),
+        //     () => {
+        //         this.graph = new RandGraph(7, 3, true, 10);
+        //         this.tutor_mode = false;
+        //     }, res_font(12), [200,200,200], [50,50,50], [200,200,200]);
+        // this.mediumGraphButton = new TextButton("Medium", W(150), H(175), W(100), H(20),
+        //     () => {
+        //         this.graph = new RandGraph(12, 4, true, 10);
+        //         this.tutor_mode = false;
+        //     }, res_font(12), [200,200,200], [50,50,50], [200,200,200]);
+        // this.hardGraphButton = new TextButton("Hard", W(150), H(200), W(100), H(20),
+        //     () => {
+        //         this.graph = new RandGraph(20, 5, true, 10);
+        //         this.tutor_mode = false;
+        //     }, res_font(12), [200,200,200], [50,50,50], [200,200,200]);
+        // this.FlowerGraphButton = new TextButton("Flower", W(150), H(225), W(100), H(20),
+        //     () => {
+        //         this.graph = new PreGraph(flower_graph, 6, 10);
+        //         this.tutor_mode = false;
+        //     }, res_font(12), [200,200,200], [50,50,50], [200,200,200]);
 
         //Change Graph buttons - Not Necessarily Solvable
-        this.easyGraphButton2 = new TextButton("Easy", displayWidth - W(150), H(150), W(100), H(20),
-            () => {
-                this.graph = new RandGraph(7, 3, false, 10);
-                this.tutor_mode = false;
-            }, 12, [200,200,200], [50,50,50], [200,200,200]);
-        this.mediumGraphButton2 = new TextButton("Medium", displayWidth - W(150), H(200), W(100), H(20),
-            () => {
-                this.graph = new RandGraph(12, 4, false, 10);
-                this.tutor_mode = false;
-            }, 12, [200,200,200], [50,50,50], [200,200,200]);
-        this.hardGraphButton2 = new TextButton("Hard", displayWidth - W(150), H(250), W(100), H(20),
-            () => {
-                this.graph = new RandGraph(20, 5, false, 10);
-                this.tutor_mode = false;
-            }, 12, [200,200,200], [50,50,50], [200,200,200]);
+        // this.easyGraphButton2 = new TextButton("Easy", displayWidth - W(150), H(150), W(100), H(20),
+        //     () => {
+        //         this.graph = new RandGraph(7, 3, false, 10);
+        //         this.tutor_mode = false;
+        //     }, res_font(12), [200,200,200], [50,50,50], [200,200,200]);
+        // this.mediumGraphButton2 = new TextButton("Medium", displayWidth - W(150), H(200), W(100), H(20),
+        //     () => {
+        //         this.graph = new RandGraph(12, 4, false, 10);
+        //         this.tutor_mode = false;
+        //     }, res_font(12), [200,200,200], [50,50,50], [200,200,200]);
+        // this.hardGraphButton2 = new TextButton("Hard", displayWidth - W(150), H(250), W(100), H(20),
+        //     () => {
+        //         this.graph = new RandGraph(20, 5, false, 10);
+        //         this.tutor_mode = false;
+        //     }, res_font(12), [200,200,200], [50,50,50], [200,200,200]);
+        }
 
         //Buttons with anonymous functions passed in
         this.undoButton = new ImageButton(undo_icon, W(150), H(350), W(undo_icon.width/6), H(undo_icon.height/6),
@@ -82,7 +85,7 @@ class Game
             () => {
                 this.graph = new PreGraph(tutorial_graph, 12);
                 this.tutor_mode = true;
-            }, 12, [200,200,200], [50,50,50], [200,200,200]);
+            }, res_font(12), [200,200,200], [50,50,50], [200,200,200]);
 
         // the exit full screen (efs) button which exits fullscreen when clicked
         this.efsButton = new ImageButton( efs_icon, 
@@ -91,15 +94,15 @@ class Game
             () => { fullscreen_switcher(); } );
 
         this.repeat_tutorial = new TextButton("Repeat Tutorial", W(850), H(550), W(170), H(40),
-        () => {
-            this.graph.reset_graph();
-            this.step = 1;
-        }, 12, [200,200,200], [50,50,50], [200,200,200]);
+            () => {
+                this.graph.reset_graph();
+                this.step = 1;
+            }, 12, [200,200,200], [50,50,50], [200,200,200]);
 
         this.main_menu = new TextButton("Main Menu", W(1075), H(550), W(170), H(40),
-        () => {
-            this.tutor_mode = false;
-        }, 12, [200,200,200], [50,50,50], [200,200,200]);
+            () => {
+                scene = scenes.MAIN_MENU;
+            }, 12, [200,200,200], [50,50,50], [200,200,200]);
     }
     // when this is called it pauses all the buttons AND makes the graph not listen 
     // to mouse clicks
@@ -142,6 +145,27 @@ class Game
                 break;
         }
     }
+    load_easy_graph(make_solvable){
+        this.graph = new RandGraph(7, 3, make_solvable, 10);
+        this.tutor_mode = false;
+    }
+    load_medium_graph(make_solvable){
+        this.graph = new RandGraph(12, 4, make_solvable, 10);
+        this.tutor_mode = false;
+    }
+    load_hard_graph(make_solvable){
+        this.graph = new RandGraph(20, 5, make_solvable, 10);
+        this.tutor_mode = false;
+    }
+    load_random_graph(make_solvable){
+        this.graph = new RandGraph(random(3, 20), random(2,4), make_solvable, 10);
+        this.tutor_mode = false;
+    }
+    load_tutor_graph(){
+        this.graph = new PreGraph(tutorial_graph,12,-1);
+        this.tutor_mode = true;
+    }
+    
 
     // what displays when the game is won
     display_game_win() {
@@ -155,7 +179,6 @@ class Game
         text("You won!!", displayWidth/2, displayHeight/2)
         this.userHasWon = true;
         textSize(12); //reset size
-        
     }
 
     draw()
@@ -168,15 +191,15 @@ class Game
         text("Useful Buttons:", W(125), H(320));
         textSize(12); //reset size
 
-        this.easyGraphButton.draw();
-        this.mediumGraphButton.draw();
-        this.hardGraphButton.draw();
-        this.FlowerGraphButton.draw();
+        // this.easyGraphButton.draw();
+        // this.mediumGraphButton.draw();
+        // this.hardGraphButton.draw();
+        // this.FlowerGraphButton.draw();
 
-        this.easyGraphButton2.draw();
-        this.mediumGraphButton2.draw();
-        this.hardGraphButton2.draw();
-        this.tutorialButton.draw();
+        // this.easyGraphButton2.draw();
+        // this.mediumGraphButton2.draw();
+        // this.hardGraphButton2.draw();
+        // this.tutorialButton.draw();
 
         this.graph.draw();
         
@@ -188,10 +211,18 @@ class Game
             this.undoButton.mute_IO(true);
             this.restartButton.mute_IO(true);
             this.display_game_win();
+            if(!this.win_state){
+                win_sound.play();
+                this.win_state = true;
+            }
         }else
         {
             this.undoButton.mute_IO(false);
             this.restartButton.mute_IO(false);
+            if(this.win_state){
+                win_sound.pause();
+                this.win_state = false;
+            }
         }
         this.efsButton.draw();
 

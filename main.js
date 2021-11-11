@@ -25,9 +25,11 @@ function setup()
     window.addEventListener('resize', function(){ resizeCanvas(window.innerWidth,window.innerHeight)} );
     frameRate(60);
     angleMode(DEGREES);
-    background_music.setVolume(0.3);
+    background_music.setVolume(0.1);
     background_music.loop();
     background_music.pause();
+    win_sound.setVolume(1);
+    win_sound.pause();
 
     this.step1_text = new TextBox(  "Click on the node to\n"+
                                     "give a dollar to its\n" + 
@@ -65,12 +67,73 @@ function setup()
                                     displayWidth/2, displayHeight/2 - H(100), W(455), H(140), res_font(20));
 
     game = new Game('easy');
+
     fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
         windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
-        () => { this.fullscreen_switcher(); })
+        () => { this.fullscreen_switcher(); });
 
-        print("Goob's got no life and has a flat chest and also is very very faaaaatttt");
+    provable = true;
+    // main menu 
+    {
+    main_menu = new Menu("Dollar Game", displayWidth/2, displayHeight/3, res_font(100), [200,200,200]);
+    main_menu.add_button(new TextButton("PLAY", this.displayWidth/2, this.displayHeight/3 + H(80),
+                    W(500), H(60), () => { scene = scenes.GAME_MODE},
+                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
+    main_menu.add_button(new TextButton("HOW TO PLAY", this.displayWidth/2, this.displayHeight/3 + H(160),
+                    W(500), H(60), () => { scene = scenes.GAME_MODE},
+                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
+    main_menu.add_button(new TextButton("OPTIONS", this.displayWidth/2, this.displayHeight/3 + H(240),
+                    W(500), H(60), () => { scene = scenes.GAME_MODE},
+                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
+    main_menu.add_button(new TextButton("CREDITS", this.displayWidth/2, this.displayHeight/3 + H(320),
+                    W(500), H(60), () => { scene = scenes.GAME_MODE},
+                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
+    }
+    // mode menu
+    {
+        mode_menu = new Menu("MODE", displayWidth/2, displayHeight/3, res_font(100), [200,200,200]);
+        mode_menu.add_button(new TextButton("CAMPAIGN", this.displayWidth/2, this.displayHeight/3 + H(80),
+                    W(500), H(60), () => { scene =  scenes.GAME},
+                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
+        mode_menu.add_button(new TextButton("WINNABLE MAPS", this.displayWidth/2, this.displayHeight/3 + H(160),
+                    W(500), H(60), () => { provable = true; scene =  scenes.DIFFICULTY},
+                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
+        mode_menu.add_button(new TextButton("GOOD/BAD MAPS", this.displayWidth/2, this.displayHeight/3 + H(240),
+                    W(500), H(60), () => { provable = false; scene =  scenes.DIFFICULTY},
+                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
+    }
+    // difficulty menu
+    {
+        diff_menu = new Menu("DIFFICULTY", displayWidth/2, displayHeight/3, res_font(100), [200,200,200]);
+        diff_menu.add_button(new TextButton("EASY", this.displayWidth/2, this.displayHeight/3 + H(80),
+                    W(500), H(60), () => { game.load_easy_graph(provable); scene =  scenes.GAME},
+                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
+        diff_menu.add_button(new TextButton("NORMAL", this.displayWidth/2, this.displayHeight/3 + H(160),
+                    W(500), H(60), () => { game.load_medium_graph(provable); scene =  scenes.GAME},
+                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
+        diff_menu.add_button(new TextButton("HARD", this.displayWidth/2, this.displayHeight/3 + H(240),
+                    W(500), H(60), () => { game.load_hard_graph(provable); scene =  scenes.GAME},
+                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
+        diff_menu.add_button(new TextButton("RANDOM DIFFICULTY", this.displayWidth/2, this.displayHeight/3 + H(320),
+                    W(500), H(60), () => { game.load_random_graph(provable); scene =  scenes.GAME},
+                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
+    }
 }
+
+const scenes = {
+    MAIN_MENU: () => { main_menu.draw() },
+        GAME_MODE: () => { mode_menu.draw() },
+            DIFFICULTY:() => { diff_menu.draw() },
+            GAME:      () => { game.draw() },
+        HELP:      () => { },
+            TUTORIAL:  () => { },
+            RULES:     () => { },
+            PROOF:     () => { },
+        OPTIONS:   () => { },
+            MUSIC:     () => { },
+        CREDITS:   () => { },
+}
+let scene = scenes.MAIN_MENU;
 
 function draw() 
 {
@@ -79,7 +142,7 @@ function draw()
     imageMode(CENTER);
     image(backdrop, displayWidth/2, displayHeight/2, W(backdrop.width), H(backdrop.height));
     
-    game.draw();
+    scene();
 
     if(!fullscreen()){
         fs_enforce_button.draw();
@@ -100,11 +163,6 @@ function draw()
         game.pause_components(true);
     }
 
-    
-
-    mouseReset();
-    translate(width/2, height/2);
-    scale(1);
     pop();
     mouseReset();
 }

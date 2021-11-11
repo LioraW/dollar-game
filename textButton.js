@@ -1,6 +1,6 @@
 class TextButton extends Button
 {
-    constructor(text, x, y, width, height, onClick, font = 12, text_fill = [0,0,0],
+    constructor(text, x, y, width, height, onClick, font = res_font(12), text_fill = [0,0,0],
         color = [127,197,250], outline_color = [0,0,0], hover_color = [255,255,0])
     {
         super(x, y, width, height, onClick);
@@ -53,7 +53,9 @@ class TextButton extends Button
         textAlign(CENTER,CENTER);
         strokeWeight(0);
         fill(this.text_fill);
+        textSize(this.font);
         text(this.text, this.x, this.y);
+        textSize(res_font(12));
         stroke(0,0,0);
         strokeWeight(1);
     }
