@@ -4,7 +4,7 @@ const main_menu_template = {
         {
             title: "PLAY",
             heightOffset: 80,
-            onClick: () => { scene = scenes.MAIN_MENU }
+            onClick: () => { scene = scenes.GAME_MODE }
         },
         {
             title: "HOW TO PLAY",
@@ -38,7 +38,7 @@ const mode_menu_template = {
         },
         {
             title: "UNCERTAIN MAPS",
-            heightOffset: 160,
+            heightOffset: 240,
             onClick: () => { game.make_solvable = false; scene =  scenes.DIFFICULTY }
         },
     ]
