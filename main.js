@@ -71,7 +71,6 @@ function setup()
     mode_menu = new Menu(mode_menu_template);
     diff_menu = new Menu(diff_menu_template);
     help_menu = new Menu(help_menu_template);
-    rules     = new Menu()
 
     fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
         windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
