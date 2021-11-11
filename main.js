@@ -67,57 +67,14 @@ function setup()
                                     displayWidth/2, displayHeight/2 - H(100), W(455), H(140), res_font(20));
 
     game = new Game('easy');
+    main_menu = new Menu(main_menu_template);
+    mode_menu = new Menu(mode_menu_template);
+    diff_menu = new Menu(diff_menu_template);
 
     fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
         windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
         () => { this.fullscreen_switcher(); });
 
-    provable = true;
-    // main menu 
-    {
-    main_menu = new Menu("Dollar Game", displayWidth/2, displayHeight/3, res_font(100), [200,200,200]);
-    main_menu.add_button(new TextButton("PLAY", this.displayWidth/2, this.displayHeight/3 + H(80),
-                    W(500), H(60), () => { scene = scenes.GAME_MODE},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-    main_menu.add_button(new TextButton("HOW TO PLAY", this.displayWidth/2, this.displayHeight/3 + H(160),
-                    W(500), H(60), () => { scene = scenes.GAME_MODE},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-    main_menu.add_button(new TextButton("OPTIONS", this.displayWidth/2, this.displayHeight/3 + H(240),
-                    W(500), H(60), () => { scene = scenes.GAME_MODE},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-    main_menu.add_button(new TextButton("CREDITS", this.displayWidth/2, this.displayHeight/3 + H(320),
-                    W(500), H(60), () => { scene = scenes.GAME_MODE},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-    }
-    // mode menu
-    {
-        mode_menu = new Menu("MODE", displayWidth/2, displayHeight/3, res_font(100), [200,200,200]);
-        mode_menu.add_button(new TextButton("CAMPAIGN", this.displayWidth/2, this.displayHeight/3 + H(80),
-                    W(500), H(60), () => { scene =  scenes.GAME},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-        mode_menu.add_button(new TextButton("WINNABLE MAPS", this.displayWidth/2, this.displayHeight/3 + H(160),
-                    W(500), H(60), () => { provable = true; scene =  scenes.DIFFICULTY},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-        mode_menu.add_button(new TextButton("GOOD/BAD MAPS", this.displayWidth/2, this.displayHeight/3 + H(240),
-                    W(500), H(60), () => { provable = false; scene =  scenes.DIFFICULTY},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-    }
-    // difficulty menu
-    {
-        diff_menu = new Menu("DIFFICULTY", displayWidth/2, displayHeight/3, res_font(100), [200,200,200]);
-        diff_menu.add_button(new TextButton("EASY", this.displayWidth/2, this.displayHeight/3 + H(80),
-                    W(500), H(60), () => { game.load_easy_graph(provable); scene =  scenes.GAME},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-        diff_menu.add_button(new TextButton("NORMAL", this.displayWidth/2, this.displayHeight/3 + H(160),
-                    W(500), H(60), () => { game.load_medium_graph(provable); scene =  scenes.GAME},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-        diff_menu.add_button(new TextButton("HARD", this.displayWidth/2, this.displayHeight/3 + H(240),
-                    W(500), H(60), () => { game.load_hard_graph(provable); scene =  scenes.GAME},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-        diff_menu.add_button(new TextButton("RANDOM DIFFICULTY", this.displayWidth/2, this.displayHeight/3 + H(320),
-                    W(500), H(60), () => { game.load_random_graph(provable); scene =  scenes.GAME},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-    }
 }
 
 const scenes = {
@@ -137,7 +94,6 @@ let scene = scenes.MAIN_MENU;
 
 function draw() 
 {
-    //print(displayWidth, displayHeight);
     push();
     imageMode(CENTER);
     image(backdrop, displayWidth/2, displayHeight/2, W(backdrop.width), H(backdrop.height));

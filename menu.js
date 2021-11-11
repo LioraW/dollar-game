@@ -1,27 +1,43 @@
 class Menu
 {
-    constructor(name, x, y, font_size = res_font(12), text_fill = [0,0,0], draw_title = "null")
+    constructor(buttonsData)
     {
-        this.name = name;
-        this.x = x;
-        this.y = y;
-        this.font_size = font_size;
-        this.text_fill = text_fill;
-        this.buttons = []
+        this.name = buttonsData.title;
+        this.x = displayWidth/2;
+        this.y = displayHeight/3;
+        this.title_font_size = res_font(100);
+        this.text_fill = [200,200,200];
+
+        this.buttonWidth = W(500);
+        this.buttonHeight = H(60);
+        this.buttonFontSize = res_font(32);
+        this.buttonTextFill = [200,200,200];
+        this.buttonColor = [50,50,50];
+        this.buttonOutlineColor = [200,200,200];
+        this.buttonHoverColor = [50, 50, 50];
+
+        this.buttons = [];
+        this.get_buttons(buttonsData.buttons);
     }
-    add_button(button)
+    get_buttons(buttonsData)
     {
-        this.buttons.push(button);
+        buttonsData.forEach(buttonPlan => {
+            let button = new TextButton(buttonPlan.title, this.x, this.y + H(buttonPlan.heightOffset),
+                this.buttonWidth, this.buttonHeight, buttonPlan.onClick, this.buttonFontSize, this.buttonTextFill,
+                this.buttonColor, this.buttonOutlineColor, this.buttonHoverColor);
+            this.buttons.push(button);
+        });
     }
     draw()
     {   
         textAlign(CENTER,CENTER);
         fill(this.text_fill);
-        textSize(this.font_size)
+        textSize(this.title_font_size)
         text(this.name, this.x, this.y);
-        for(var i = 0; i < this.buttons.length; i++)
-        {
-            this.buttons[i].draw();
-        }
+
+        this.buttons.forEach(button => {
+            button.draw();
+        });
+
     }
 }
