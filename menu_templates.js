@@ -27,12 +27,12 @@ const help_menu_template = {
     title: "HOW TO PLAY",
     buttons: [
         {
-            title: "TUTORIAL GAME",
+            title: "TUTORIAL",
             heightOffset: 80,
             onClick: () => { game.load_tutor_graph(); scene = scenes.GAME }
         },
         {
-            title: "INSTRUCTIONS",
+            title: "RULES",
             heightOffset: 160,
             onClick: () => { game.load_tutor_graph(); scene = scenes.GAME }
         },
@@ -70,22 +70,22 @@ const diff_menu_template = {
         {
             title: "EASY",
             heightOffset: 80,
-            onClick: () => { game.load_easy_graph(); scene = scenes.GAME}
+            onClick: () => { game.load_easy_graph(); scene = scenes.GAME }
         },
         {
             title: "NORMAL",
             heightOffset: 160,
-            onClick: () => { game.load_medium_graph(); scene =  scenes.GAME}
+            onClick: () => { game.load_medium_graph(); scene =  scenes.GAME }
         },
         {
             title: "HARD",
             heightOffset: 240,
-            onClick: () => { game.load_hard_graph(); scene =  scenes.GAME}
+            onClick: () => { game.load_hard_graph(); scene =  scenes.GAME }
         },
         {
             title: "RANDOM DIFFICULTY",
             heightOffset: 320,
-            onCLick: () => { game.load_random_graph(); scene =  scenes.GAME}
+            onCLick: () => { game.load_random_graph(); scene =  scenes.GAME }
         }
     ]
 }
