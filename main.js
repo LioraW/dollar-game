@@ -31,113 +31,41 @@ function setup()
     win_sound.setVolume(1);
     win_sound.pause();
 
-    this.step1_text = new TextBox(  "Click on the node to\n"+
-                                    "give a dollar to its\n" + 
-                                    "brother. This node\n" +
-                                    "has 1 brother so it\n" +
-                                    "only loses 1 dollar", W(530), H(750), W(185), H(150), res_font(20));
-    this.step2_text = new TextBox(  "Next click on this\n" +
-                                    "node twice to give a\n" + 
-                                    "dollar to each of its\n"+
-                                    "brothers. It has 3\n" +
-                                    "brothers and we're\n" +
-                                    "giving twice so it will\n" +
-                                    "lose 6 dollars", W(1130), H(750), W(185), H(190), res_font(20));
-    this.step3_text = new TextBox(  "Lets try clicking on\n" + 
-                                    "this node to see what\n" + 
-                                    "happens", W(530), H(500), W(200), H(95), res_font(20));
-    this.step4_text = new TextBox(  "Actually lets undo\n" + 
-                                    "that move by pressing\n"+
-                                    "the undo button", W(300), H(350), W(215), H(85), res_font(20));
-    this.step5_text = new TextBox(  "We can also reset the\n" +
-                                    "graph to its original\n" +
-                                    "form by pressing the\n" + 
-                                    "reset button here", W(350), H(400), W(215), H(105), res_font(20));
-    this.step6_text = new TextBox(  "Wonderful! Now use all\n" +
-                                    "these tools to make\n" +
-                                    "all the nodes have a\n" +
-                                    "dollar value of 0 or\n" +
-                                    "more. [Click to Continue]", 
-                                    displayWidth/2, displayHeight/2, W(240), H(150), res_font(20));
-    this.step8_text = new TextBox(  "Congratulations! You solved the graph! Now\n" +
-                                    "you know the basics. You can use these\n" +
-                                    "skills to solve even harder graphs. See how many\n" +
-                                    "you can do with out stopping and show off your\n" + 
-                                    "highscore!", 
-                                    displayWidth/2, displayHeight/2 - H(100), W(455), H(140), res_font(20));
-
     game = new Game('easy');
+
+    main_menu = new Menu(main_menu_template);
+    mode_menu = new Menu(mode_menu_template);
+    diff_menu = new Menu(diff_menu_template);
+    help_menu = new Menu(help_menu_template);
+    options_menu = new Menu(options_menu_template);
+
+    rules_page = new TextPage(rules_text);
+    proof_page = new TextPage(proof_text);
+    credits_page = new TextPage(credits_text);
 
     fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
         windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
         () => { this.fullscreen_switcher(); });
 
-    provable = true;
-    // main menu 
-    {
-    main_menu = new Menu("Dollar Game", displayWidth/2, displayHeight/3, res_font(100), [200,200,200]);
-    main_menu.add_button(new TextButton("PLAY", this.displayWidth/2, this.displayHeight/3 + H(80),
-                    W(500), H(60), () => { scene = scenes.GAME_MODE},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-    main_menu.add_button(new TextButton("HOW TO PLAY", this.displayWidth/2, this.displayHeight/3 + H(160),
-                    W(500), H(60), () => { scene = scenes.GAME_MODE},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-    main_menu.add_button(new TextButton("OPTIONS", this.displayWidth/2, this.displayHeight/3 + H(240),
-                    W(500), H(60), () => { scene = scenes.GAME_MODE},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-    main_menu.add_button(new TextButton("CREDITS", this.displayWidth/2, this.displayHeight/3 + H(320),
-                    W(500), H(60), () => { scene = scenes.GAME_MODE},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-    }
-    // mode menu
-    {
-        mode_menu = new Menu("MODE", displayWidth/2, displayHeight/3, res_font(100), [200,200,200]);
-        mode_menu.add_button(new TextButton("CAMPAIGN", this.displayWidth/2, this.displayHeight/3 + H(80),
-                    W(500), H(60), () => { scene =  scenes.GAME},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-        mode_menu.add_button(new TextButton("WINNABLE MAPS", this.displayWidth/2, this.displayHeight/3 + H(160),
-                    W(500), H(60), () => { provable = true; scene =  scenes.DIFFICULTY},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-        mode_menu.add_button(new TextButton("GOOD/BAD MAPS", this.displayWidth/2, this.displayHeight/3 + H(240),
-                    W(500), H(60), () => { provable = false; scene =  scenes.DIFFICULTY},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-    }
-    // difficulty menu
-    {
-        diff_menu = new Menu("DIFFICULTY", displayWidth/2, displayHeight/3, res_font(100), [200,200,200]);
-        diff_menu.add_button(new TextButton("EASY", this.displayWidth/2, this.displayHeight/3 + H(80),
-                    W(500), H(60), () => { game.load_easy_graph(provable); scene =  scenes.GAME},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-        diff_menu.add_button(new TextButton("NORMAL", this.displayWidth/2, this.displayHeight/3 + H(160),
-                    W(500), H(60), () => { game.load_medium_graph(provable); scene =  scenes.GAME},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-        diff_menu.add_button(new TextButton("HARD", this.displayWidth/2, this.displayHeight/3 + H(240),
-                    W(500), H(60), () => { game.load_hard_graph(provable); scene =  scenes.GAME},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-        diff_menu.add_button(new TextButton("RANDOM DIFFICULTY", this.displayWidth/2, this.displayHeight/3 + H(320),
-                    W(500), H(60), () => { game.load_random_graph(provable); scene =  scenes.GAME},
-                    res_font(32), [200,200,200], [50,50,50], [200,200,200]));
-    }
 }
 
 const scenes = {
-    MAIN_MENU: () => { main_menu.draw() },
-        GAME_MODE: () => { mode_menu.draw() },
-            DIFFICULTY:() => { diff_menu.draw() },
-            GAME:      () => { game.draw() },
-        HELP:      () => { },
-            TUTORIAL:  () => { },
-            RULES:     () => { },
-            PROOF:     () => { },
-        OPTIONS:   () => { },
-            MUSIC:     () => { },
-        CREDITS:   () => { },
+    MAIN_MENU:         () => { main_menu.draw(); },
+        GAME_MODE:     () => { mode_menu.draw(); },
+            DIFFICULTY:() => { diff_menu.draw(); },
+            GAME:      () => { game.draw(); },
+        HELP:          () => { help_menu.draw(); },
+            TUTORIAL:  () => { }, //help menu starts game if tutorial button is pressed
+            RULES:     () => { rules_page.draw(); },
+            PROOF:     () => { proof_page.draw(); },
+        OPTIONS:       () => { options_menu.draw(); },
+            MUSIC:     () => { }, //no idea what to do here
+        CREDITS:       () => { credits_page.draw(); },
 }
 let scene = scenes.MAIN_MENU;
 
 function draw() 
 {
-    //print(displayWidth, displayHeight);
     push();
     imageMode(CENTER);
     image(backdrop, displayWidth/2, displayHeight/2, W(backdrop.width), H(backdrop.height));

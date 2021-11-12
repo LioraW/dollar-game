@@ -9,6 +9,7 @@ class Graph
         this.solved = true;
         this.listening = false;
         this.counter = 0;
+        this.starting_state = this.get_starting_state();
     }
     // returns a node by given index
     get_node(index)
