@@ -2,7 +2,6 @@ function preload()
 {
     //background_music = loadSound("./songs/A Sweet Smile 8 Bit.ogg");
     background_music = loadSound("./songs/GiSt_Adrift.ogg");
-    thwomp = loadSound("./songs/Super Mario 64 Thwomp Sound_128k.ogg")
     fs_icon = loadImage('images/Fullscreen.png');
     efs_icon = loadImage('images/ExitFullscreen.png');
     undo_icon = loadImage('images/undo.png');
@@ -21,6 +20,8 @@ function preload()
 
 function setup()
 {
+    displayWidth = displayWidth;
+    displayHeight = displayHeight;
     createCanvas(window.innerWidth,window.innerHeight);
     window.addEventListener('resize', function(){ resizeCanvas(window.innerWidth,window.innerHeight)} );
     frameRate(60);
@@ -45,7 +46,7 @@ function setup()
 
     fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
         windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
-        () => { this.fullscreen_switcher(); });
+        () => { this.fullscreen_switcher(); }, admin = true);
 
 }
 

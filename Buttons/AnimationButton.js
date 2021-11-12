@@ -1,7 +1,7 @@
 class AnimatedButton extends Button
 {
-    constructor(drawing, x, y, width, height, onClick) {
-        super(x, y, width, height, onClick);
+    constructor(drawing, x, y, width, height, onClick, admin = false) {
+        super(x, y, width, height, onClick, admin);
         this.drawing = drawing;
     }
     draw(){

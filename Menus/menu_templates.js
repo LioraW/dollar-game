@@ -41,6 +41,11 @@ const help_menu_template = {
             heightOffset: 240,
             onClick: () => { scene = scenes.PROOF }
         },
+        {
+            title: "BACK",
+            heightOffset: 320,
+            onClick: () => { scene = scenes.MAIN_MENU }
+        },
 
     ]
 }
@@ -61,6 +66,11 @@ const mode_menu_template = {
             title: "UNCERTAIN MAPS",
             heightOffset: 240,
             onClick: () => { game.make_solvable = false; scene =  scenes.DIFFICULTY }
+        },
+        {
+            title: "BACK",
+            heightOffset: 320,
+            onClick: () => { scene = scenes.MAIN_MENU }
         },
     ]
 }
@@ -86,7 +96,12 @@ const diff_menu_template = {
             title: "RANDOM DIFFICULTY",
             heightOffset: 320,
             onClick: () => { game.load_random_graph(); scene =  scenes.GAME }
-        }
+        },
+        {
+            title: "BACK",
+            heightOffset: 400,
+            onClick: () => { scene = scenes.MAIN_MENU }
+        },
     ]
 }
 const options_menu_template = {
@@ -107,7 +122,11 @@ const options_menu_template = {
             heightOffset: 240,
             onClick: () => { console.log("Changing theme"); }
         },
-
+        {
+            title: "BACK",
+            heightOffset: 320,
+            onClick: () => { scene = scenes.MAIN_MENU }
+        },
     ]
 }
 //for text pages

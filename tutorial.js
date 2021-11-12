@@ -51,8 +51,10 @@ class Tutorial {
         this.showTextBox(tutorial_template.step4);
 
         if (button) {
+            print('ran step 4 trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
             return 1;
         }
+        print('ran step 4 false');
         return 0;
     }
 

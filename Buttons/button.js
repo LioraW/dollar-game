@@ -1,6 +1,6 @@
 class Button
 {
-    constructor(x, y, width, height, onClick)
+    constructor(x, y, width, height, onClick, admin = false)
     {
         this.x = x;
         this.y = y;
@@ -9,6 +9,7 @@ class Button
         this.onClick = onClick;
         this.mute = false;
         this.paused = false;
+        this.admin = admin;
     }
     // returns true if the button is being hovered over
     being_hovered()
@@ -31,7 +32,7 @@ class Button
     // checks is the mouse has been pressed over the button
     mouse_listener()
     {
-        if ( mouse_downed && !this.mute && !this.paused && this.being_hovered() )
+        if ( mouse_downed && !this.mute && !this.paused && this.being_hovered() && (fullscreen() || this.admin) )
         {
             
             // reset the mouse_downed and mouse_upped functions

@@ -168,7 +168,7 @@ class Graph
     // checks is the mouse has been pressed over the node
     mouse_listener()
     {
-        if(mouse_downed)
+        if(mouse_downed && fullscreen())
         {
             for (var i = 0; i < this.nodes.length; i++)
             {

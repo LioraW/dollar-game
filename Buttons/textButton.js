@@ -1,9 +1,9 @@
 class TextButton extends Button
 {
     constructor(text, x, y, width, height, onClick, font = res_font(12), text_fill = [0,0,0],
-        color = [127,197,250], outline_color = [0,0,0], hover_color = [255,255,0])
+        color = [127,197,250], outline_color = [0,0,0], hover_color = [255,255,0], admin = false)
     {
-        super(x, y, width, height, onClick);
+        super(x, y, width, height, onClick, admin);
         this.text = text;
         this.font = font;
         this.text_fill = text_fill;

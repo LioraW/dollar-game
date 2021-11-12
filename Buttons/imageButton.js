@@ -1,7 +1,7 @@
 class ImageButton extends Button
 {
-    constructor(image, x, y, width, height, onClick, hover_color = [255,255,255]) {
-        super(x, y, width, height, onClick);
+    constructor(image, x, y, width, height, onClick, hover_color = [255,255,255], admin = false) {
+        super(x, y, width, height, onClick, admin);
         this.image = image;
         this.hover_color = hover_color;
     }

@@ -35,13 +35,11 @@ class Game
             () => {
                 this.undo_pressed = true;
                 this.graph.undo();
-                this.tutor_mode = false;
             });
         this.restartButton = new ImageButton(reset_icon, W(150), H(400), W(reset_icon.width/5.5), H(reset_icon.height/5.5),
             () => {
                 this.reset_pressed = true;
                 this.graph.reset_graph();
-                this.tutor_mode = false;
             });
         this.tutorialButton = new TextButton("Tutorial Game", displayWidth - W(300), H(500), W(100), H(20),
             () => {
@@ -69,10 +67,6 @@ class Game
     // when this is called it pauses all the buttons AND makes the graph not listen 
     // to mouse clicks
     pause_components(status){
-        this.undoButton.pause(!status);
-        this.restartButton.pause(!status);
-        this.efsButton.pause(!status);
-        this.graph.set_listening(!status);
     }
 
     tutorial(){
