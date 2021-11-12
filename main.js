@@ -67,10 +67,16 @@ function setup()
                                     displayWidth/2, displayHeight/2 - H(100), W(455), H(140), res_font(20));
 
     game = new Game('easy');
+
     main_menu = new Menu(main_menu_template);
     mode_menu = new Menu(mode_menu_template);
     diff_menu = new Menu(diff_menu_template);
     help_menu = new Menu(help_menu_template);
+    options_menu = new Menu(options_menu_template);
+
+    rules_page = new TextPage(rules_text);
+    proof_page = new TextPage(proof_text);
+    credits_page = new TextPage(credits_text);
 
     fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
         windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
@@ -79,17 +85,17 @@ function setup()
 }
 
 const scenes = {
-    MAIN_MENU:         () => { main_menu.draw() },
-        GAME_MODE:     () => { mode_menu.draw() },
-            DIFFICULTY:() => { diff_menu.draw() },
-            GAME:      () => { game.draw() },
-        HELP:          () => { help_menu.draw() },
-            TUTORIAL:  () => { },
-            RULES:     () => { },
-            PROOF:     () => { },
-        OPTIONS:       () => { },
-            MUSIC:     () => { },
-        CREDITS:       () => { },
+    MAIN_MENU:         () => { main_menu.draw(); },
+        GAME_MODE:     () => { mode_menu.draw(); },
+            DIFFICULTY:() => { diff_menu.draw(); },
+            GAME:      () => { game.draw(); },
+        HELP:          () => { help_menu.draw(); },
+            TUTORIAL:  () => { }, //help menu starts game if tutorial button is pressed
+            RULES:     () => { rules_page.draw(); },
+            PROOF:     () => { proof_page.draw(); },
+        OPTIONS:       () => { options_menu.draw(); },
+            MUSIC:     () => { }, //no idea what to do here
+        CREDITS:       () => { credits_page.draw(); },
 }
 let scene = scenes.MAIN_MENU;
 

@@ -85,7 +85,47 @@ const diff_menu_template = {
         {
             title: "RANDOM DIFFICULTY",
             heightOffset: 320,
-            onCLick: () => { game.load_random_graph(); scene =  scenes.GAME }
+            onClick: () => { game.load_random_graph(); scene =  scenes.GAME }
         }
     ]
+}
+const options_menu_template = {
+    title: "Options",
+    buttons: [
+        {
+            title: "RAISE VOLUME",
+            heightOffset: 80,
+            onClick: () => { console.log("Raising volume!"); }
+        },
+        {
+            title: "LOWER VOLUME",
+            heightOffset: 160,
+            onClick: () => { console.log("Lowering volume!"); }
+        },
+        {
+            title: "TOGGLE THEME",
+            heightOffset: 240,
+            onClick: () => { console.log("Changing theme"); }
+        },
+
+    ]
+}
+//for text pages
+const rules_text = {
+    title: "RULES",
+    text: "Here is the rules for the game .fdjsfdskfjdskljfslkdf dsklaj sdklfjkasldjfsk lfkldss klfdsajklfsdajf kldsjfkldsfjdskfjdsla.\n" +
+        "fdsajffdsslafjkdsljfkdsljfksldfk ljfkslda fds.\n" +
+        "fsdfjkalfjdsklfjskld .fdss\n" +
+        "fdas"
+}
+const credits_text = {
+    title: "CREDITS",
+    text: "Here is who gets credit for the game. .fdjsfdskfjdskljfslkdf dsklaj sdklfjkasldjfsk lfkldss klfdsajklfsdajf kldsjfkldsfjdskfjdsla.\n" +
+        "fdsajffdsslafjkdsljfkdsljfksldfk ljfkslda fds.\n" +
+        "fsdfjkalfjdsklfjskld .fdss\n" +
+        "fdas"
+}
+const proof_text = {
+    title: "PROOF",
+    text: "Here is how you figure out if it's solvable or not"
 }
