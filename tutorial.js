@@ -3,7 +3,8 @@ class Tutorial {
         this.x = 0;
     }
     showTextBox(step_plan){
-        let textBox = new TextBox(step_plan.text, step_plan.x, step_plan.y, step_plan.w, step_plan.h, step_plan.fontSize);
+        let textBox = new TextBox(step_plan.text, W(step_plan.x), H(step_plan.y),
+            W(step_plan.w), H(step_plan.h), res_font(step_plan.fontSize));
         textBox.draw();
     }
 
