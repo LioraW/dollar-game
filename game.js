@@ -9,6 +9,8 @@ class Game
         this.reset_pressed = false;
         this.win_state = false;
         this.make_solvable = false;
+        this.tutorial_game = new Tutorial();
+
         //create graph
         switch (type) {
             case 'easy':
@@ -25,7 +27,7 @@ class Game
                 this.tutor_mode = true;
                 break;
             default:
-                this.graph = new RandGraph(random(3, 20), random(2,4), make_solvable, 10);
+                this.graph = new RandGraph(random(3, 20), random(2,4), this.make_solvable, 10);
                 break;
         }
         //Buttons with anonymous functions passed in
@@ -76,30 +78,30 @@ class Game
     tutorial(){
         switch (this.step) {
             case 1:
-                this.step += step1(this.graph);
+                this.step += this.tutorial_game.step1(this.graph);
                 break;
             case 2:
-                this.step += step2(this.graph);
+                this.step += this.tutorial_game.step2(this.graph);
                 break;
             case 3:
-                this.step += step3(this.graph);
+                this.step += this.tutorial_game.step3(this.graph);
                 break;
             case 4:
-                this.step += step4(this.undo_pressed);
+                this.step += this.tutorial_game.step4(this.undo_pressed);
                 this.undo_pressed = false;
                 break;
             case 5:
-                this.step += step5(this.reset_pressed);
+                this.step += this.tutorial_game.step5(this.reset_pressed);
                 this.reset_pressed = false;
                 break;
             case 6:
-                this.step += step6();
+                this.step += this.tutorial_game.step6();
                 break;
             case 7:
-                this.step += step7(this.graph);
+                this.step += this.tutorial_game.step7(this.graph);
                 break;
             case 8:
-                this.step += step8();
+                this.step += this.tutorial_game.step8();
                 this.repeat_tutorial.draw();
                 this.main_menu.draw();
                 break;

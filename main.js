@@ -31,41 +31,6 @@ function setup()
     win_sound.setVolume(1);
     win_sound.pause();
 
-    this.step1_text = new TextBox(  "Click on the node to\n"+
-                                    "give a dollar to its\n" + 
-                                    "brother. This node\n" +
-                                    "has 1 brother so it\n" +
-                                    "only loses 1 dollar", W(530), H(750), W(185), H(150), res_font(20));
-    this.step2_text = new TextBox(  "Next click on this\n" +
-                                    "node twice to give a\n" + 
-                                    "dollar to each of its\n"+
-                                    "brothers. It has 3\n" +
-                                    "brothers and we're\n" +
-                                    "giving twice so it will\n" +
-                                    "lose 6 dollars", W(1130), H(750), W(185), H(190), res_font(20));
-    this.step3_text = new TextBox(  "Lets try clicking on\n" + 
-                                    "this node to see what\n" + 
-                                    "happens", W(530), H(500), W(200), H(95), res_font(20));
-    this.step4_text = new TextBox(  "Actually lets undo\n" + 
-                                    "that move by pressing\n"+
-                                    "the undo button", W(300), H(350), W(215), H(85), res_font(20));
-    this.step5_text = new TextBox(  "We can also reset the\n" +
-                                    "graph to its original\n" +
-                                    "form by pressing the\n" + 
-                                    "reset button here", W(350), H(400), W(215), H(105), res_font(20));
-    this.step6_text = new TextBox(  "Wonderful! Now use all\n" +
-                                    "these tools to make\n" +
-                                    "all the nodes have a\n" +
-                                    "dollar value of 0 or\n" +
-                                    "more. [Click to Continue]", 
-                                    displayWidth/2, displayHeight/2, W(240), H(150), res_font(20));
-    this.step8_text = new TextBox(  "Congratulations! You solved the graph! Now\n" +
-                                    "you know the basics. You can use these\n" +
-                                    "skills to solve even harder graphs. See how many\n" +
-                                    "you can do with out stopping and show off your\n" + 
-                                    "highscore!", 
-                                    displayWidth/2, displayHeight/2 - H(100), W(455), H(140), res_font(20));
-
     game = new Game('easy');
 
     main_menu = new Menu(main_menu_template);
