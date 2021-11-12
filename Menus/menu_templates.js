@@ -14,12 +14,12 @@ const main_menu_template = {
         {
             title: "OPTIONS",
             heightOffset: 240,
-            onClick: () => { scene = scenes.GAME_MODE }
+            onClick: () => { scene = scenes.OPTIONS }
         },
         {
             title: "CREDITS",
             heightOffset: 320,
-            onClick: () => { scene = scenes.GAME_MODE }
+            onClick: () => { scene = scenes.CREDITS }
         },
     ]
 }
@@ -34,12 +34,12 @@ const help_menu_template = {
         {
             title: "RULES",
             heightOffset: 160,
-            onClick: () => { game.load_tutor_graph(); scene = scenes.GAME }
+            onClick: () => { scene = scenes.RULES }
         },
         {
             title: "PROOF",
             heightOffset: 240,
-            onClick: () => { game.load_tutor_graph(); scene = scenes.GAME }
+            onClick: () => { scene = scenes.PROOF }
         },
 
     ]
