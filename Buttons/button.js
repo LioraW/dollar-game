@@ -2,10 +2,10 @@ class Button
 {
     constructor(x, y, width, height, onClick, admin = false)
     {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;   
+        this.x = W(x);
+        this.y = H(y);
+        this.width = W(width);
+        this.height = H(height);   
         this.onClick = onClick;
         this.mute = false;
         this.paused = false;
@@ -40,7 +40,9 @@ class Button
             // then call the passed in function
             clickSound.play();
             this.onClick();
+            return true;
         }
+        return false;
     }
 }
 

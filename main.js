@@ -6,6 +6,7 @@ function preload()
     efs_icon = loadImage('images/ExitFullscreen.png');
     undo_icon = loadImage('images/undo.png');
     reset_icon = loadImage('images/reset.png');
+    menu_icon = loadImage('images/menu.png');
     backdrop = loadImage('images/yourname.jpg');
     clickSound = loadSound('songs/mouseClick.ogg');
     win_sound = loadSound("./songs/winSound.wav");
@@ -20,8 +21,6 @@ function preload()
 
 function setup()
 {
-    displayWidth = displayWidth;
-    displayHeight = displayHeight;
     createCanvas(window.innerWidth,window.innerHeight);
     window.addEventListener('resize', function(){ resizeCanvas(window.innerWidth,window.innerHeight)} );
     frameRate(60);
@@ -45,7 +44,7 @@ function setup()
     credits_page = new TextPage(credits_text);
 
     fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
-        windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
+        windowWidth/2 * W_undo(), windowHeight/2 * H_undo(), fs_icon.width * W_undo(), fs_icon.height* H_undo(),
         () => { this.fullscreen_switcher(); }, admin = true);
 
 }

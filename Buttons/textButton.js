@@ -1,11 +1,11 @@
 class TextButton extends Button
 {
-    constructor(text, x, y, width, height, onClick, font = res_font(12), text_fill = [0,0,0],
+    constructor(text, x, y, width, height, onClick, font = 12, text_fill = [0,0,0],
         color = [127,197,250], outline_color = [0,0,0], hover_color = [255,255,0], admin = false)
     {
         super(x, y, width, height, onClick, admin);
         this.text = text;
-        this.font = font;
+        this.font = res_font(font);
         this.text_fill = text_fill;
         this.color = color; //an array of [R, G, B]
         this.hover_color = hover_color; //an array of [R, G, B] but for the hover affect
@@ -17,7 +17,7 @@ class TextButton extends Button
     // of the glow and then return that glow color
     draw_hover()
     {
-        if(this.being_hovered())
+        if(this.being_hovered() && !this.mute)
         {
             // this checks whether we should be decrease or increasing the glow intensity
             if(this.edge_brightness_switch){
@@ -55,13 +55,18 @@ class TextButton extends Button
         fill(this.text_fill);
         textSize(this.font);
         text(this.text, this.x, this.y);
+        if(this.mute){
+            fill(0,0,0,100);
+            stroke(0,0,0,100);
+            rect(this.x, this.y, this.width, this.height, 7);
+        }
         textSize(res_font(12));
         stroke(0,0,0);
         strokeWeight(1);
     }
     draw()
     {   
-        this.mouse_listener();
         this.draw_button();
+        return this.mouse_listener();
     }
 }

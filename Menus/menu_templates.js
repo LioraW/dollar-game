@@ -129,6 +129,26 @@ const options_menu_template = {
         },
     ]
 }
+const game_menu_template = {
+    title: "menu",
+    buttons: [
+        {
+            title: "Return",
+            heightOffset: 80,
+            onClick: () => { return false; }
+        },
+        {
+            title: "Volume",
+            heightOffset: 160,
+            onClick: () => { console.log("Raising volume!"); }
+        },
+        {
+            title: "Quit to Main Menu",
+            heightOffset: 240,
+            onClick: () => { scene = scenes.MAIN_MENU; return false; }
+        },
+    ]
+}
 //for text pages
 const rules_text = {
     title: "RULES",
