@@ -17,7 +17,6 @@ class ImageButton extends Button
         return [200,200,200];
     }
     draw(){
-        
         imageMode(CENTER);
         rectMode(CENTER,CENTER);
         fill(this.draw_hover());

@@ -21,7 +21,9 @@ const main_menu_template = {
             heightOffset: 320,
             onClick: () => { scene = scenes.CREDITS }
         },
-    ]
+    ],
+    pic_btns: [],
+    scrubbers: []
 }
 const help_menu_template = {
     title: "HOW TO PLAY",
@@ -46,8 +48,9 @@ const help_menu_template = {
             heightOffset: 320,
             onClick: () => { scene = scenes.MAIN_MENU }
         },
-
-    ]
+    ],
+    pic_btns: [],
+    scrubbers: []
 }
 const mode_menu_template = {
     title: "MODE",
@@ -72,7 +75,9 @@ const mode_menu_template = {
             heightOffset: 320,
             onClick: () => { scene = scenes.MAIN_MENU }
         },
-    ]
+    ],
+    pic_btns: [],
+    scrubbers: []
 }
 const diff_menu_template = {
     title: "DIFFICULTY MENU",
@@ -98,11 +103,18 @@ const diff_menu_template = {
             onClick: () => { game.load_random_graph(); scene =  scenes.GAME }
         },
         {
+            title: "CUSTOM",
+            heightOffset: 400,
+            onClick: () => { }
+        },
+        {
             title: "BACK",
             heightOffset: 400,
             onClick: () => { scene = scenes.MAIN_MENU }
         },
-    ]
+    ],
+    pic_btns: [],
+    scrubbers: []
 }
 const options_menu_template = {
     title: "Options",
@@ -127,7 +139,9 @@ const options_menu_template = {
             heightOffset: 320,
             onClick: () => { scene = scenes.MAIN_MENU }
         },
-    ]
+    ],
+    pic_btns: [],
+    scrubbers: []
 }
 const game_menu_template = {
     title: "menu",
@@ -138,15 +152,32 @@ const game_menu_template = {
             onClick: () => { return false; }
         },
         {
-            title: "Volume",
-            heightOffset: 160,
-            onClick: () => { console.log("Raising volume!"); }
-        },
-        {
             title: "Quit to Main Menu",
             heightOffset: 240,
             onClick: () => { scene = scenes.MAIN_MENU; return false; }
         },
+    ],
+    pic_btns: [
+        {
+            title: "Plus",
+            image: 'images/plus.png',
+            x: 1200, y: 160, w: 40, h: 40,
+            onClick: () => { print('plus') }
+        },
+        {
+            title: "Minus",
+            image: 'images/minus.png',
+            x: 1000, y: 160, w: 40, h:40,
+            onClick: () => { print('minus') }
+        }
+    ],
+    scrubbers: [
+        {
+            title: "Volume",
+            text_x: 100, text_y: 160,
+            scrub_x: 200, scrub_y: 160, w: 300, h: 10,
+
+        }
     ]
 }
 //for text pages
