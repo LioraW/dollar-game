@@ -7,8 +7,6 @@ function preload()
     undo_icon = loadImage('images/undo.png');
     reset_icon = loadImage('images/reset.png');
     menu_icon = loadImage('images/menu.png');
-    plus_icon = loadImage('images/plus.png');
-    minus_icon = loadImage('images/minus.png');
     backdrop = loadImage('images/yourname.jpg');
     clickSound = loadSound('songs/mouseClick.ogg');
     win_sound = loadSound("./songs/winSound.wav");
