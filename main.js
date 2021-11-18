@@ -27,7 +27,7 @@ function setup()
     window.addEventListener('resize', function(){ resizeCanvas(window.innerWidth,window.innerHeight)} );
     frameRate(60);
     angleMode(DEGREES);
-    background_music.setVolume(0.1);
+    background_music.setVolume(Volume.music/10);
     background_music.loop();
     background_music.pause();
     win_sound.setVolume(1);
@@ -64,7 +64,7 @@ const scenes = {
             MUSIC:     () => { }, //no idea what to do here
         CREDITS:       () => { credits_page.draw(); },
 }
-let scene = scenes.MAIN_MENU;
+let scene = scenes.GAME;
 
 function draw() 
 {
@@ -73,6 +73,10 @@ function draw()
     image(backdrop, displayWidth/2, displayHeight/2, W(backdrop.width), H(backdrop.height));
     
     scene();
+    if(Volume.change){
+        background_music.setVolume(Volume.music/10)
+        Volume.change = false;
+    }
 
     if(!fullscreen()){
         fs_enforce_button.draw();

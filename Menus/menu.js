@@ -45,9 +45,9 @@ class Menu
     get_scrubbers(data)
     {
         data.forEach(data => {
-            let scrub = new Scrubber(data.scrub_x, data.scrub_y, data.w, data.h);
+            let scrub = new Scrubber(data.scrub_x, this.y + data.scrub_y, data.w, data.h, data.ref);
             this.scrubbers.push(scrub);
-            this.texts.push([data.title, data.text_x, data.text_y]);
+            this.texts.push([data.title, W(data.text_x), H(data.text_y), res_font(data.text_size)]);
         });
     }
     draw()
@@ -66,6 +66,11 @@ class Menu
         });
         this.scrubbers.forEach(scrub => {
             scrub.draw();
+        });
+        this.texts.forEach(txt => {
+            fill(255,255,255);
+            textSize(txt[3]);
+            text(txt[0], txt[1], txt[2]);
         });
         
         return true_returner;

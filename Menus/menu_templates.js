@@ -1,3 +1,8 @@
+var Volume = {
+    music: 1,
+    change: false,
+}
+
 const main_menu_template = {
     title: "MAIN MENU",
     buttons: [
@@ -120,28 +125,51 @@ const options_menu_template = {
     title: "Options",
     buttons: [
         {
-            title: "RAISE VOLUME",
-            heightOffset: 80,
-            onClick: () => { console.log("Raising volume!"); }
-        },
-        {
-            title: "LOWER VOLUME",
-            heightOffset: 160,
-            onClick: () => { console.log("Lowering volume!"); }
-        },
-        {
             title: "TOGGLE THEME",
-            heightOffset: 240,
+            heightOffset: 80,
             onClick: () => { console.log("Changing theme"); }
         },
         {
             title: "BACK",
-            heightOffset: 320,
+            heightOffset: 240,
             onClick: () => { scene = scenes.MAIN_MENU }
         },
     ],
-    pic_btns: [],
-    scrubbers: []
+    pic_btns: [
+        {
+            title: "Plus",
+            image: 'images/plus.png',
+            x: 1174, y: 160, w: 40, h: 40,
+            onClick: () => { 
+                if(Volume.music < 10){
+                    Volume.music++;
+                    Volume.change = true;
+                } 
+            }
+        },
+        {
+            title: "Minus",
+            image: 'images/minus.png',
+            x: 950, y: 160, w: 40, h:40,
+            onClick: () => { 
+                if(Volume.music > 0){
+                    Volume.music--;
+                    Volume.change = true;
+                }
+            }
+        }
+    ],
+    scrubbers: [
+        {
+            title: "Volume:",
+            ref:() => {
+                return Volume.music/10;
+            },
+            text_x: 810, text_y: 519, text_size: 43,
+            scrub_x: 790, scrub_y: 41, w: 120, h: 30,
+
+        }
+    ]
 }
 const game_menu_template = {
     title: "menu",
@@ -161,21 +189,34 @@ const game_menu_template = {
         {
             title: "Plus",
             image: 'images/plus.png',
-            x: 1200, y: 160, w: 40, h: 40,
-            onClick: () => { print('plus') }
+            x: 1174, y: 160, w: 40, h: 40,
+            onClick: () => { 
+                if(Volume.music < 10){
+                    Volume.music++;
+                    Volume.change = true;
+                } 
+            }
         },
         {
             title: "Minus",
             image: 'images/minus.png',
-            x: 1000, y: 160, w: 40, h:40,
-            onClick: () => { print('minus') }
+            x: 950, y: 160, w: 40, h:40,
+            onClick: () => { 
+                if(Volume.music > 0){
+                    Volume.music--;
+                    Volume.change = true;
+                }
+            }
         }
     ],
     scrubbers: [
         {
-            title: "Volume",
-            text_x: 100, text_y: 160,
-            scrub_x: 200, scrub_y: 160, w: 300, h: 10,
+            title: "Volume:",
+            ref:() => {
+                return Volume.music/10;
+            },
+            text_x: 810, text_y: 519, text_size: 43,
+            scrub_x: 790, scrub_y: 41, w: 120, h: 30,
 
         }
     ]
