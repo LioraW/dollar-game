@@ -48,7 +48,7 @@ function setup()
         () => { this.fullscreen_switcher(); }, admin = true);
 
 }
-
+// list of all the scenes and there functions
 const scenes = {
     MAIN_MENU:         () => { main_menu.draw(); },
         GAME_MODE:     () => { mode_menu.draw(); },
@@ -62,7 +62,7 @@ const scenes = {
             MUSIC:     () => { }, //no idea what to do here
         CREDITS:       () => { credits_page.draw(); },
 }
-let scene = scenes.GAME;
+let scene = scenes.MAIN_MENU;
 
 function draw() 
 {
