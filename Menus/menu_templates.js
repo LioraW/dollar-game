@@ -129,22 +129,3 @@ const options_menu_template = {
         },
     ]
 }
-//for text pages
-const rules_text = {
-    title: "RULES",
-    text: "Here is the rules for the game .fdjsfdskfjdskljfslkdf dsklaj sdklfjkasldjfsk lfkldss klfdsajklfsdajf kldsjfkldsfjdskfjdsla.\n" +
-        "fdsajffdsslafjkdsljfkdsljfksldfk ljfkslda fds.\n" +
-        "fsdfjkalfjdsklfjskld .fdss\n" +
-        "fdas"
-}
-const credits_text = {
-    title: "CREDITS",
-    text: "Here is who gets credit for the game. .fdjsfdskfjdskljfslkdf dsklaj sdklfjkasldjfsk lfkldss klfdsajklfsdajf kldsjfkldsfjdskfjdsla.\n" +
-        "fdsajffdsslafjkdsljfkdsljfksldfk ljfkslda fds.\n" +
-        "fsdfjkalfjdsklfjskld .fdss\n" +
-        "fdas"
-}
-const proof_text = {
-    title: "PROOF",
-    text: "Here is how you figure out if it's solvable or not"
-}
