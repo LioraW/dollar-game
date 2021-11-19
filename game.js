@@ -137,7 +137,7 @@ class Game
         if(this.show_menu)
         {
             var btns = this.menu.draw();
-            this.show_menu = !( btns[0] || btns[2] );
+            this.show_menu = !( btns[0] || btns[1] );
         }
 
         if(this.tutor_mode){
