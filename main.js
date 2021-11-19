@@ -17,6 +17,9 @@ function preload()
     step3_img = loadImage('./images/step3.png');
     step4_img = loadImage('./images/step4.png');
     step5_img = loadImage('./images/step5.png');
+
+    //Custom dollar image
+    dollar_img = loadImage('./images/dollarSign.png');
 }
 
 function setup()

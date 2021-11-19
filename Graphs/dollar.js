@@ -27,7 +27,7 @@ class Dollar
     {
         push();
         translate(this.x, this.y);
-        fill(0,255,0);
+        fill(0,240,255);
         noStroke();
         ellipse(0,0,this.width,this.width);
         pop();
