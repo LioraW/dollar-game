@@ -1,27 +1,32 @@
 //for text pages
 const rules_text = {
     title: "RULES",
-    text: ["The graph is composed of many circles (we call these nodes). Each node has a number which represents how many\n" +
-    " dollars that node has. A node can have any number of dollars, even negative! All the nodes are connected to each\n" +
-    " other by lines (we call these edges). When two nodes are connected we call them “brothers”. \n" +
-    "Here’s a simple example:\n\n",
-        "Here we can see we have 3 nodes:\n" + "Node 1 has $-1.00\n" + "Node 2 has $-4.00\n" + "Node 3 has $8.00\n" +
-        "We can also have the 2 pairs of brothers:\n" + "Node 1 and Node 2\n" + "Node 2 and Node 3\n" +
-        "Notice However that Node 1 and Node 3 are not brothers because they do not have an edge (a line) connecting them.\n\n" +
-        "What do I do with this Graph?\n" +
-        "Use your mouse to click on a Node. When you click on a Node it will send a dollar to ALL of its brothers.\n" +
-        "So If you click on Node 2 you will end of with the following:" ],
-    images: ['rules_image_1', 'rules_image_2'],
-
+    text: "The graph is composed of many circles (we call these nodes). Each node has a number which represents how many\n" +
+    "dollars that node has. A node can have any number of dollars, even negative! All the nodes are connected to at least one\n" +
+    "other node by lines (we call these edges). When two nodes are connected we call them “brothers”. \n" +
+    "\n*** What do I do with this Graph? ***\n" +
+    "Use your mouse to click on a Node. When you click on a Node it will send a dollar to ALL of its brothers, increasing\n" +
+    "the value of each of its brothers and decreasing its own value. A node can still send out dollars even if it has\n" +
+    "a negative value.\n" +
+    "\n*** What is the Goal? ***" +
+    "\nThe goal is to make all nodes in the graph have 0 or more dollars. That means none of the nodes can have a value of -1 " +
+    "\nor less. Therefore you must strategically move dollars around by clicking on nodes to make all the nodes have a dollar" +
+    "\n value of 0 or more. The graph will have more nodes and edges the harder the game mode you chose.\n" +
+        "\n*** Other things you can do ***\n" +
+        "The game play screen also has an undo button, which allows you to undo one (and only one) move.\n" +
+        "The reset button resets the graph to its original state.\n" +
+        "If you are playing in \"Uncertain Solvability\" mode, then there will be a button marked \"Prime Graph\".\n" +
+        "Clicking this button means you are guessing that the graph is unsolvable. The game will tell you if you \n" +
+        "are correct or not."
 }
 const credits_text = {
     title: "CREDITS",
-    text: ["Here is who gets credit for the game. .fdjsfdskfjdskljfslkdf dsklaj sdklfjkasldjfsk lfkldss klfdsajklfsdajf kldsjfkldsfjdskfjdsla.\n" +
+    text: "Here is who gets credit for the game. .fdjsfdskfjdskljfslkdf dsklaj sdklfjkasldjfsk lfkldss klfdsajklfsdajf kldsjfkldsfjdskfjdsla.\n" +
         "fdsajffdsslafjkdsljfkdsljfksldfk ljfkslda fds.\n" +
         "fsdfjkalfjdsklfjskld .fdss\n" +
-        "fdas"]
+        "fdas"
 }
 const proof_text = {
     title: "PROOF",
-    text: ["Here is how you figure out if it's solvable or not"]
+    text: "Here is how you figure out if it's solvable or not"
 }
