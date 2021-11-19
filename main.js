@@ -16,6 +16,7 @@ function preload()
     step3_img = loadImage('./images/step3.png');
     step4_img = loadImage('./images/step4.png');
     step5_img = loadImage('./images/step5.png');
+
 }
 
 function setup()
@@ -41,7 +42,7 @@ function setup()
     options_menu = new Menu(options_menu_template);
 
     rules_page = new TextPage(rules_text);
-    proof_page = new TextPage(proof_text);
+    math_page = new TextPage(math_background_text);
     credits_page = new TextPage(credits_text);
 
     fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
@@ -58,7 +59,7 @@ const scenes = {
         HELP:          () => { help_menu.draw(); },
             TUTORIAL:  () => { }, //help menu starts game if tutorial button is pressed
             RULES:     () => { rules_page.draw(); },
-            PROOF:     () => { proof_page.draw(); },
+            MATH:     () => { math_page.draw(); },
         OPTIONS:       () => { options_menu.draw(); },
             MUSIC:     () => { }, //no idea what to do here
         CREDITS:       () => { credits_page.draw(); },

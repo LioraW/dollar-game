@@ -2,11 +2,16 @@ class TextPage {
     constructor(textPageData) {
         this.title = textPageData.title;
         this.text = textPageData.text;
-        this.x = displayWidth/3;
-        this.y = displayHeight/3;
+        this.x = displayWidth/16;
+        this.y = displayHeight/6;
+        this.offset = 80;
         this.title_font_size = res_font(100);
         this.text_fill = [200,200,200];
         this.text_font_size = res_font(32)
+        this.mainMenuButton = new TextButton("Main Menu", displayWidth*(7/8), this.y - H(10), W(175), H(50),
+            () => { scene = scenes.MAIN_MENU;}, 12, [200,200,200], [50,50,50],
+            [200,200,200], [50, 50, 50]);
+
     }
     draw(){
         textSize(this.title_font_size);
@@ -14,6 +19,8 @@ class TextPage {
         text(this.title, this.x, this.y);
 
         textSize(this.text_font_size);
-        text(this.text, this.x, this.y + H(80));
+        text(this.text, this.x, this.y + H(this.offset));
+        this.mainMenuButton.draw();
+
     }
 }
