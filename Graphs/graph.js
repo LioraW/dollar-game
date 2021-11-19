@@ -35,9 +35,10 @@ class Graph
     undo () {
         if (this.lastMove !== -1) {
             this.nodes[this.lastMove].give(-1);
+            this.addCounter();
         }
         this.set_last_move(-1);
-        this.addCounter();
+
     }
     // returns the last move
     get_last_move()
@@ -69,7 +70,7 @@ class Graph
     {
         return this.edges.length - this.nodes.length + 1;
     }
-    // returns true is the graph is guaranteed 100% solvabe
+    // returns true is the graph is guaranteed 100% solvable
     is_solvable()
     {
         return this.get_genus() <= this.get_balance();
@@ -122,7 +123,7 @@ class Graph
         }
         return sets.length;
     }
-    // returns true if all the nodes' dollar values are posotive (or zero) or all negative
+    // returns true if all the nodes' dollar values are positive (or zero) or all negative
     same_sign()
     {
         var sign = Math.sign(this.nodes[0].get_value());

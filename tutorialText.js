@@ -5,7 +5,6 @@ const tutorial_template = {
         y:750,
         w:185,
         h:150,
-        fontSize: 20
     },
     step2: {
         text: "Next click on this\n" + "node twice to give a\n" + "dollar to each of its\n"+ "brothers. It has 3\n" +
@@ -14,7 +13,6 @@ const tutorial_template = {
         y:750,
         w:185,
         h:190,
-        fontSize: 20
     },
     step3: {
         text: "Lets try clicking on\n" + "this node to see what\n" + "happens",
@@ -22,7 +20,6 @@ const tutorial_template = {
         y:500,
         w:200,
         h:95,
-        fontSize: 20
     },
     step4: {
         text: "Actually lets undo\n" + "that move by pressing\n" + "the undo button",
@@ -30,7 +27,6 @@ const tutorial_template = {
         y:350,
         w:215,
         h:85,
-        fontSize: 20
     },
     step5: {
         text: "We can also reset the\n" + "graph to its original\n" + "form by pressing the\n" + "reset button here",
@@ -38,26 +34,23 @@ const tutorial_template = {
         y:400,
         w:215,
         h:105,
-        fontSize: 20
     },
     step6: {
         text: "Wonderful! Now use all\n" + "these tools to make\n" + "all the nodes have a\n" +
             "dollar value of 0 or\n" + "more. [Click to Continue]",
-        x: 350,
-        y: 400,
+        x:350,
+        y:400,
         w:240,
         h:150,
-        fontSize: 20
     },
     step8: {
         text: "Congratulations! You solved the graph! Now\n" + "you know the basics. You can use these\n" +
             "skills to solve even harder graphs. See how many\n" + "you can do with out stopping and show off your\n" +
             "highscore!",
-        x: 350,
-        y: 400,
+        x:350,
+        y:400,
         w:455,
         h:140,
-        fontSize: 20
     }
 
 }

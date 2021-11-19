@@ -14,12 +14,9 @@ class Button
     // returns true if the button is being hovered over
     being_hovered()
     {
-        if (mouseX > this.x - this.width/2 && mouseX < this.x + this.width/2 &&
-            mouseY > this.y - this.height/2 && mouseY < this.y + this.height/2)
-        {
-            return true;
-        }
-        return false;
+        return mouseX > this.x - this.width / 2 && mouseX < this.x + this.width / 2 &&
+            mouseY > this.y - this.height / 2 && mouseY < this.y + this.height / 2;
+
     }
     // controls whether the a button is muted(not active)
     mute_IO(mute){

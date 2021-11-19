@@ -213,6 +213,7 @@ class Node{
 
         textAlign(CENTER,CENTER);
         fill(0,0,0);
+        textSize(16);
         text(this.dollar, this.x, this.y);
     }
 }

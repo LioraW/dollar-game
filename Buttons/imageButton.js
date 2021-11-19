@@ -5,11 +5,11 @@ class ImageButton extends Button
         this.image = image;
         this.hover_color = hover_color;
     }
-    // if the button is being hovered over we will first caclulate the brightness
+    // if the button is being hovered over we will first calculate the brightness
     // of the glow and then return that glow color
     draw_hover()
     {
-        if(this.being_hovered())
+        if(this.being_hovered() && !this.mute)
         {
             return this.hover_color;
         }
