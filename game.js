@@ -41,7 +41,7 @@ class Game
         this.mainMenuButton = new TextButton("Main Menu", displayWidth/2, displayHeight*(7/8), W(150), H(50),
             () => { scene = scenes.MAIN_MENU }, res_font(16));
 
-        this.gameWinDisplay = new TextButton("You Won!! Great job!", displayWidth/2, displayHeight/2, W(500), H(100),
+        this.gameWinDisplay = new TextButton("You Won!! Great Job!", displayWidth/2, displayHeight/2, W(500), H(100),
             () => { }, res_font(32));
 
         // the exit full screen (efs) button which exits fullscreen when clicked
@@ -83,13 +83,14 @@ class Game
         textSize(30);
         fill([200,200,200]);
         text("DOLLAR GAME", (displayWidth/2) - 150, H(100));
+        textSize(16)
+        text("Moves Counter: " + this.graph.counter, displayWidth/2, displayHeight*(12/13));
         textSize(14);
+
         this.graph.draw();
         this.undoButton.draw();
         this.restartButton.draw();
         this.mainMenuButton.draw();
-        textSize(16)
-        text("Moves Counter: " + this.graph.counter, displayWidth/2, displayHeight*(12/13));
 
         if (this.graph.is_solved()) {
             this.undoButton.mute_IO(true);
