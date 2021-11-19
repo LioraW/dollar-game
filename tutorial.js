@@ -21,7 +21,7 @@ class Tutorial {
     tutorial(graph){
         switch (this.step) {
             case 1:
-                graph.reset_graph(); //act as tutorial resetter
+                graph.reset_graph(); //act as tutorial reset-er
                 this.step += this.step1(graph);
                 break;
             case 2:

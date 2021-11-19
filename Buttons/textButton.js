@@ -1,7 +1,7 @@
 class TextButton extends Button
 {
-    constructor(text, x, y, width, height, onClick, font = res_font(12), text_fill = [0,0,0],
-        color = [127,197,250], outline_color = [0,0,0], hover_color = [255,255,0], admin = false)
+    constructor(text, x, y, width, height, onClick, font = res_font(12), text_fill = [200,200,200],
+        color = [50,50,50], outline_color = [200,200,200], hover_color = [50, 50, 50], admin = false)
     {
         super(x, y, width, height, onClick, admin);
         this.text = text;
@@ -13,7 +13,7 @@ class TextButton extends Button
         this.edge_brightness_switch = 0;
         this.edge_brightness = 100;
     }
-    // if the button is being hovered over we will first caclulate the brightness
+    // if the button is being hovered over we will first calculate the brightness
     // of the glow and then return that glow color
     draw_hover()
     {
@@ -34,7 +34,7 @@ class TextButton extends Button
             // return the glow color
             return [this.hover_color[0], this.hover_color[1], this.hover_color[2], this.edge_brightness];
         }
-        // otherwise remain black
+        // otherwise remain main color
         return this.outline_color;
     }
     draw_button(){

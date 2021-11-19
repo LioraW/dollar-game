@@ -38,8 +38,8 @@ const tutorial_template = {
     step6: {
         text: "Wonderful! Now use all\n" + "these tools to make\n" + "all the nodes have a\n" +
             "dollar value of 0 or\n" + "more. [Click to Continue]",
-        x: 350,
-        y: 400,
+        x:350,
+        y:400,
         w:240,
         h:150,
     },
@@ -47,8 +47,8 @@ const tutorial_template = {
         text: "Congratulations! You solved the graph! Now\n" + "you know the basics. You can use these\n" +
             "skills to solve even harder graphs. See how many\n" + "you can do with out stopping and show off your\n" +
             "highscore!",
-        x: 350,
-        y: 400,
+        x:350,
+        y:400,
         w:455,
         h:140,
     }

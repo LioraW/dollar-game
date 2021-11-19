@@ -100,8 +100,7 @@ class Game
                 win_sound.play();
                 this.win_state = true;
             }
-        }else
-        {
+        }else {
             this.undoButton.mute_IO(false);
             this.restartButton.mute_IO(false);
             if(this.win_state){
