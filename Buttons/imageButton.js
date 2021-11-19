@@ -17,12 +17,11 @@ class ImageButton extends Button
         return [200,200,200];
     }
     draw(){
-        
         imageMode(CENTER);
         rectMode(CENTER,CENTER);
-        this.mouse_listener();
         fill(this.draw_hover());
         rect(this.x, this.y, this.width + 10, this.height + 10, 7);
         image(this.image, this.x, this.y, this.width, this.height);
+        return this.mouse_listener();
     }
 }

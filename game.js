@@ -7,6 +7,9 @@ class Game
         this.win_state = false;
         this.make_solvable = false;
         this.tutorial_game = new Tutorial();
+        this.show_menu = false;
+        this.menu = new Menu(game_menu_template);
+        this.solvability_decleration = false;
 
         //create graph
         switch (type) {
@@ -28,29 +31,47 @@ class Game
                 break;
         }
         //Buttons with anonymous functions passed in
-        this.undoButton = new ImageButton(undo_icon,(displayWidth/2) + 150, displayHeight*(7/8), W(undo_icon.width/6), H(undo_icon.height/6),
+        this.undoButton = new ImageButton(undo_icon,(displayWidth/2)*w_undo() + 150, displayHeight*(7/8)*H_undo(), 
+                                          W(undo_icon.width/6), H(undo_icon.height/6),
             () => {
                 this.tutorial_game.set_undo_pressed();
                 this.graph.undo();
             });
-        this.restartButton = new ImageButton(reset_icon, (displayWidth/2) - 150, displayHeight*(7/8), W(reset_icon.width/5.5), H(reset_icon.height/5.5),
+        this.restartButton = new ImageButton(reset_icon, (displayWidth/2) * W_undo() - 150, displayHeight*(7/8) * H_undo(),
+                                             W(reset_icon.width/5.5), H(reset_icon.height/5.5),
             () => {
                 this.tutorial_game.set_reset_pressed();
                 this.graph.reset_graph();
             });
-        this.mainMenuButton = new TextButton("Main Menu", displayWidth/2, displayHeight*(7/8), W(150), H(50),
-            () => { scene = scenes.MAIN_MENU }, res_font(16));
+        this.menuButton = new ImageButton(menu_icon, 40, 40, menu_icon.width/5, menu_icon.height/5,
+            () => {
+                this.show_menu = !this.show_menu;
+            });
+        this.provableButton = new TextButton("Prime Map", 150, 500, 200, 50,
+            () => {
+                this.provableButton.mute_IO(true);
+                this.solvability_decleration = true;
+            }, 30, [200,200,200], [50,50,50], [200,200,200], [50, 50, 50])
 
-        this.gameWinDisplay = new TextButton("You Won!! Great Job!", displayWidth/2, displayHeight/2, W(500), H(100),
+        this.gameWinDisplay = new TextButton("You Won!! Great Job!", displayWidth/2 * W_undo(), displayHeight/2 * H_undo(), W(500), H(100),
             () => { }, res_font(32));
 
         // the exit full screen (efs) button which exits fullscreen when clicked
-        this.efsButton = new ImageButton( efs_icon, 
-            displayWidth - W(efs_icon.width/6), displayHeight - H(efs_icon.height/6),
-            W(efs_icon.width/6), H(efs_icon.height/6), 
+        this.efsButton = new ImageButton(efs_icon, 
+            displayWidth*W_undo() - efs_icon.width/6, displayHeight*H_undo() - efs_icon.height/6,
+            efs_icon.width/6, efs_icon.height/6, 
             () => { fullscreen_switcher(); } );
 
+        this.repeat_tutorial = new TextButton("Repeat Tutorial", 850, 550, 170, 40,
+            () => {
+                this.graph.reset_graph();
+                this.step = 1;
+            }, 12, [200,200,200], [50,50,50], [200,200,200]);
 
+        this.main_menu = new TextButton("Main Menu", 1075, 550, 170, 40,
+            () => {
+                scene = scenes.MAIN_MENU;
+            }, 12, [200,200,200], [50,50,50], [200,200,200]);
     }
     // when this is called it pauses all the buttons AND makes the graph not listen 
     // to mouse clicks
@@ -90,7 +111,10 @@ class Game
         this.graph.draw();
         this.undoButton.draw();
         this.restartButton.draw();
-        this.mainMenuButton.draw();
+        this.menuButton.draw();
+        if(!this.make_solvable){
+            this.provableButton.draw();
+        }
 
         if (this.graph.is_solved()) {
             this.undoButton.mute_IO(true);
@@ -109,6 +133,12 @@ class Game
             }
         }
         this.efsButton.draw();
+
+        if(this.show_menu)
+        {
+            var btns = this.menu.draw();
+            this.show_menu = !( btns[0] || btns[2] );
+        }
 
         if(this.tutor_mode){
             this.tutorial_game.tutorial(this.graph);
