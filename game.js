@@ -4,9 +4,6 @@ class Game
     constructor(type) {
         this.paused = false;
         this.tutor_mode = false;
-        this.step = 1;
-        this.undo_pressed = false;
-        this.reset_pressed = false;
         this.win_state = false;
         this.make_solvable = false;
         this.tutorial_game = new Tutorial();
@@ -33,19 +30,14 @@ class Game
         //Buttons with anonymous functions passed in
         this.undoButton = new ImageButton(undo_icon, W(150), H(350), W(undo_icon.width/6), H(undo_icon.height/6),
             () => {
-                this.undo_pressed = true;
+                this.tutorial_game.set_undo_pressed();
                 this.graph.undo();
             });
         this.restartButton = new ImageButton(reset_icon, W(150), H(400), W(reset_icon.width/5.5), H(reset_icon.height/5.5),
             () => {
-                this.reset_pressed = true;
+                this.tutorial_game.set_reset_pressed();
                 this.graph.reset_graph();
             });
-        this.tutorialButton = new TextButton("Tutorial Game", displayWidth - W(300), H(500), W(100), H(20),
-            () => {
-                this.graph = new PreGraph(tutorial_graph, 12);
-                this.tutor_mode = true;
-            }, res_font(12), [200,200,200], [50,50,50], [200,200,200]);
 
         // the exit full screen (efs) button which exits fullscreen when clicked
         this.efsButton = new ImageButton( efs_icon, 
@@ -53,54 +45,13 @@ class Game
             W(efs_icon.width/6), H(efs_icon.height/6), 
             () => { fullscreen_switcher(); } );
 
-        this.repeat_tutorial = new TextButton("Repeat Tutorial", W(850), H(550), W(170), H(40),
-            () => {
-                this.graph.reset_graph();
-                this.step = 1;
-            }, 12, [200,200,200], [50,50,50], [200,200,200]);
 
-        this.main_menu = new TextButton("Main Menu", W(1075), H(550), W(170), H(40),
-            () => {
-                scene = scenes.MAIN_MENU;
-            }, 12, [200,200,200], [50,50,50], [200,200,200]);
     }
     // when this is called it pauses all the buttons AND makes the graph not listen 
     // to mouse clicks
     pause_components(status){
     }
 
-    tutorial(){
-        switch (this.step) {
-            case 1:
-                this.step += this.tutorial_game.step1(this.graph);
-                break;
-            case 2:
-                this.step += this.tutorial_game.step2(this.graph);
-                break;
-            case 3:
-                this.step += this.tutorial_game.step3(this.graph);
-                break;
-            case 4:
-                this.step += this.tutorial_game.step4(this.undo_pressed);
-                this.undo_pressed = false;
-                break;
-            case 5:
-                this.step += this.tutorial_game.step5(this.reset_pressed);
-                this.reset_pressed = false;
-                break;
-            case 6:
-                this.step += this.tutorial_game.step6();
-                break;
-            case 7:
-                this.step += this.tutorial_game.step7(this.graph);
-                break;
-            case 8:
-                this.step += this.tutorial_game.step8();
-                this.repeat_tutorial.draw();
-                this.main_menu.draw();
-                break;
-        }
-    }
     load_easy_graph(){
         this.graph = new RandGraph(7, 3, this.make_solvable, 10);
         this.tutor_mode = false;
@@ -161,7 +112,7 @@ class Game
         this.efsButton.draw();
 
         if(this.tutor_mode){
-            this.tutorial();
+            this.tutorial_game.tutorial(this.graph);
         }
     }
 }
