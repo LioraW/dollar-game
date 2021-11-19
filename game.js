@@ -84,7 +84,7 @@ class Game
         fill([200,200,200]);
         text("DOLLAR GAME", (displayWidth/2) - 150, H(100));
         textSize(16)
-        text("Moves Counter: " + this.graph.counter, displayWidth/2, displayHeight*(12/13));
+        text("Moves Counter: " + this.graph.counter, displayWidth*(10/22), displayHeight*(12/13));
         textSize(14);
 
         this.graph.draw();

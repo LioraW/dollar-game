@@ -35,9 +35,10 @@ class Graph
     undo () {
         if (this.lastMove !== -1) {
             this.nodes[this.lastMove].give(-1);
+            this.addCounter();
         }
         this.set_last_move(-1);
-        this.addCounter();
+
     }
     // returns the last move
     get_last_move()
