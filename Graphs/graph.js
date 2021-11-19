@@ -69,7 +69,7 @@ class Graph
     {
         return this.edges.length - this.nodes.length + 1;
     }
-    // returns true is the graph is guaranteed 100% solvabe
+    // returns true is the graph is guaranteed 100% solvable
     is_solvable()
     {
         return this.get_genus() <= this.get_balance();
@@ -122,7 +122,7 @@ class Graph
         }
         return sets.length;
     }
-    // returns true if all the nodes' dollar values are posotive (or zero) or all negative
+    // returns true if all the nodes' dollar values are positive (or zero) or all negative
     same_sign()
     {
         var sign = Math.sign(this.nodes[0].get_value());
@@ -196,12 +196,6 @@ class Graph
     // same for the nodes
     draw()
     {
-        textSize(30);
-        text("Welcome to the Dollar Game!", W(700), H(30));
-        
-        textSize(20);
-        text("Number of Moves: "+this.counter, W(700), H(50));
-
         for(let i = 0; i < this.edges.length; i++)
         {
             this.edges[i].draw();

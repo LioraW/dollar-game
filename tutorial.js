@@ -7,10 +7,10 @@ class Tutorial {
         this.reset_pressed = false;
 
         this.repeat_tutorial = new TextButton("Repeat Tutorial", W(850), H(550), W(170), H(40),
-            () => { this.step = 1 }, 12, [200,200,200], [50,50,50], [200,200,200]);
+            () => { this.step = 1 }, 12);
 
         this.main_menu = new TextButton("Main Menu", W(1075), H(550), W(170), H(40),
-            () => { scene = scenes.MAIN_MENU }, 12, [200,200,200], [50,50,50], [200,200,200]);
+            () => { scene = scenes.MAIN_MENU }, 12);
     }
     set_undo_pressed(){
         this.undo_pressed = !this.undo_pressed;
