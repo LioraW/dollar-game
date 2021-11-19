@@ -6,9 +6,15 @@
 function W(amount){
     return (displayWidth / (1920)) * amount;
 }
+function W_undo(){
+    return 1920 / displayWidth;
+}
 
 function H(amount){
     return (displayHeight / (1080)) * amount;
+}
+function H_undo(){
+    return 1080 / displayHeight;
 }
 
 function res_font(amount){

@@ -2,30 +2,54 @@ class Menu
 {
     constructor(buttonsData)
     {
-        this.name = buttonsData.title;
-        this.x = displayWidth/2;
-        this.y = displayHeight/3;
+        this.name = buttonsData.title;       // title of the menu
+        this.x = displayWidth/2 * W_undo();  // centering of the menu
+        this.y = displayHeight/3 * H_undo();
         this.title_font_size = res_font(100);
-        this.text_fill = [200,200,200];
+        this.text_fill = [200,200,200]; 
 
-        this.buttonWidth = W(500);
-        this.buttonHeight = H(60);
+
+        this.buttonWidth = 500;
+        this.buttonHeight = 60;
         this.buttonFontSize = res_font(32);
-        this.buttonTextFill = [200,200,200];
-        this.buttonColor = [50,50,50];
-        this.buttonOutlineColor = [200,200,200];
-        this.buttonHoverColor = [50, 50, 50];
 
+        // list of buttons scrubers and texts that the menu will hold
         this.buttons = [];
+        this.img_buttons = [];
+        this.scrubbers = [];
+        this.texts = [];
+        // fetching all the button, scrubs, texts data and creating the buttons, scrubs and texts
         this.get_buttons(buttonsData.buttons);
+        this.get_img_btns(buttonsData.pic_btns);
+        this.get_scrubbers(buttonsData.scrubbers);
     }
+    // populates the buttons
     get_buttons(buttonsData)
     {
+        // loop the all the objects freatures contruct the buttons
         buttonsData.forEach(buttonPlan => {
-            let button = new TextButton(buttonPlan.title, this.x, this.y + H(buttonPlan.heightOffset),
-                this.buttonWidth, this.buttonHeight, buttonPlan.onClick, this.buttonFontSize, this.buttonTextFill,
-                this.buttonColor, this.buttonOutlineColor, this.buttonHoverColor);
+            let button = new TextButton(buttonPlan.title, this.x, this.y + buttonPlan.heightOffset,
+                this.buttonWidth, this.buttonHeight, buttonPlan.onClick, this.buttonFontSize);
             this.buttons.push(button);
+        });
+    }
+    // populates the image buttons
+    get_img_btns(data)
+    {
+        data.forEach(data => {
+            let image = loadImage(data.image)
+            let img_button =  new ImageButton(image, data.x, this.y + data.y, 
+                data.w, data.h, data.onClick);
+            this.img_buttons.push(img_button);
+        });
+    }
+    // populates the scrubbers and their appriate texts
+    get_scrubbers(data)
+    {
+        data.forEach(data => {
+            let scrub = new Scrubber(data.scrub_x, this.y + data.scrub_y, data.w, data.h, data.ref);
+            this.scrubbers.push(scrub);
+            this.texts.push([data.title, W(data.text_x), H(data.text_y), res_font(data.text_size)]);
         });
     }
     draw()
@@ -33,11 +57,24 @@ class Menu
         textAlign(CENTER,CENTER);
         fill(this.text_fill);
         textSize(this.title_font_size)
-        text(this.name, this.x, this.y);
+        text(this.name, W(this.x), H(this.y));
 
+        var true_returner = []
         this.buttons.forEach(button => {
-            button.draw();
+            true_returner.push(button.draw());
         });
-
+        this.img_buttons.forEach(img_button => {
+            img_button.draw();
+        });
+        this.scrubbers.forEach(scrub => {
+            scrub.draw();
+        });
+        this.texts.forEach(txt => {
+            fill(255,255,255);
+            textSize(txt[3]);
+            text(txt[0], txt[1], txt[2]);
+        });
+        
+        return true_returner;
     }
 }

@@ -74,7 +74,7 @@ class Edge
         && mouseX > this.ends[0].get_x() - 10 && mouseX < this.ends[1].get_x() + 10
         && !this.ends[0].hover() && !this.ends[1].hover())
         {
-            stroke(255,0,0);
+            stroke(0,255,255);
             strokeWeight(10);
             line(this.ends[0].get_x(), this.ends[0].get_y(), this.ends[1].get_x(), this.ends[1].get_y());
         } 

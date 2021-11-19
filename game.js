@@ -4,12 +4,12 @@ class Game
     constructor(type) {
         this.paused = false;
         this.tutor_mode = false;
-        this.step = 1;
-        this.undo_pressed = false;
-        this.reset_pressed = false;
         this.win_state = false;
         this.make_solvable = false;
         this.tutorial_game = new Tutorial();
+        this.show_menu = false;
+        this.menu = new Menu(game_menu_template);
+        this.solvability_decleration = false;
 
         //create graph
         switch (type) {
@@ -31,35 +31,44 @@ class Game
                 break;
         }
         //Buttons with anonymous functions passed in
-        this.undoButton = new ImageButton(undo_icon, W(150), H(350), W(undo_icon.width/6), H(undo_icon.height/6),
+        this.undoButton = new ImageButton(undo_icon,(displayWidth/2)*w_undo() + 150, displayHeight*(7/8)*H_undo(), 
+                                          W(undo_icon.width/6), H(undo_icon.height/6),
             () => {
-                this.undo_pressed = true;
+                this.tutorial_game.set_undo_pressed();
                 this.graph.undo();
             });
-        this.restartButton = new ImageButton(reset_icon, W(150), H(400), W(reset_icon.width/5.5), H(reset_icon.height/5.5),
+        this.restartButton = new ImageButton(reset_icon, (displayWidth/2) * W_undo() - 150, displayHeight*(7/8) * H_undo(),
+                                             W(reset_icon.width/5.5), H(reset_icon.height/5.5),
             () => {
-                this.reset_pressed = true;
+                this.tutorial_game.set_reset_pressed();
                 this.graph.reset_graph();
             });
-        this.tutorialButton = new TextButton("Tutorial Game", displayWidth - W(300), H(500), W(100), H(20),
+        this.menuButton = new ImageButton(menu_icon, 40, 40, menu_icon.width/5, menu_icon.height/5,
             () => {
-                this.graph = new PreGraph(tutorial_graph, 12);
-                this.tutor_mode = true;
-            }, res_font(12), [200,200,200], [50,50,50], [200,200,200]);
+                this.show_menu = !this.show_menu;
+            });
+        this.provableButton = new TextButton("Prime Map", 150, 500, 200, 50,
+            () => {
+                this.provableButton.mute_IO(true);
+                this.solvability_decleration = true;
+            }, 30, [200,200,200], [50,50,50], [200,200,200], [50, 50, 50])
+
+        this.gameWinDisplay = new TextButton("You Won!! Great Job!", displayWidth/2 * W_undo(), displayHeight/2 * H_undo(), W(500), H(100),
+            () => { }, res_font(32));
 
         // the exit full screen (efs) button which exits fullscreen when clicked
-        this.efsButton = new ImageButton( efs_icon, 
-            displayWidth - W(efs_icon.width/6), displayHeight - H(efs_icon.height/6),
-            W(efs_icon.width/6), H(efs_icon.height/6), 
+        this.efsButton = new ImageButton(efs_icon, 
+            displayWidth*W_undo() - efs_icon.width/6, displayHeight*H_undo() - efs_icon.height/6,
+            efs_icon.width/6, efs_icon.height/6, 
             () => { fullscreen_switcher(); } );
 
-        this.repeat_tutorial = new TextButton("Repeat Tutorial", W(850), H(550), W(170), H(40),
+        this.repeat_tutorial = new TextButton("Repeat Tutorial", 850, 550, 170, 40,
             () => {
                 this.graph.reset_graph();
                 this.step = 1;
             }, 12, [200,200,200], [50,50,50], [200,200,200]);
 
-        this.main_menu = new TextButton("Main Menu", W(1075), H(550), W(170), H(40),
+        this.main_menu = new TextButton("Main Menu", 1075, 550, 170, 40,
             () => {
                 scene = scenes.MAIN_MENU;
             }, 12, [200,200,200], [50,50,50], [200,200,200]);
@@ -69,38 +78,6 @@ class Game
     pause_components(status){
     }
 
-    tutorial(){
-        switch (this.step) {
-            case 1:
-                this.step += this.tutorial_game.step1(this.graph);
-                break;
-            case 2:
-                this.step += this.tutorial_game.step2(this.graph);
-                break;
-            case 3:
-                this.step += this.tutorial_game.step3(this.graph);
-                break;
-            case 4:
-                this.step += this.tutorial_game.step4(this.undo_pressed);
-                this.undo_pressed = false;
-                break;
-            case 5:
-                this.step += this.tutorial_game.step5(this.reset_pressed);
-                this.reset_pressed = false;
-                break;
-            case 6:
-                this.step += this.tutorial_game.step6();
-                break;
-            case 7:
-                this.step += this.tutorial_game.step7(this.graph);
-                break;
-            case 8:
-                this.step += this.tutorial_game.step8();
-                this.repeat_tutorial.draw();
-                this.main_menu.draw();
-                break;
-        }
-    }
     load_easy_graph(){
         this.graph = new RandGraph(7, 3, this.make_solvable, 10);
         this.tutor_mode = false;
@@ -121,36 +98,33 @@ class Game
         this.graph = new PreGraph(tutorial_graph,12,-1);
         this.tutor_mode = true;
     }
-    // what displays when the game is won
-    display_game_win() {
-        background(0,0,0,50);
-        fill(173, 216, 230);
-        rectMode(CENTER);
-        rect(displayWidth/2, displayHeight/2, W(300), H(100), 7); //outline
-        fill(0,0,0);
-        textAlign(CENTER,CENTER);
-        textSize(30);
-        text("You won!!", displayWidth/2, displayHeight/2)
-        this.userHasWon = true;
-        textSize(12); //reset size
-    }
 
     draw()
     {
+        textSize(30);
+        fill([200,200,200]);
+        text("DOLLAR GAME", (displayWidth/2) - 150, H(100));
+        textSize(16)
+        text("Moves Counter: " + this.graph.counter, displayWidth*(10/22), displayHeight*(12/13));
+        textSize(14);
+
         this.graph.draw();
         this.undoButton.draw();
         this.restartButton.draw();
+        this.menuButton.draw();
+        if(!this.make_solvable){
+            this.provableButton.draw();
+        }
 
         if (this.graph.is_solved()) {
             this.undoButton.mute_IO(true);
             this.restartButton.mute_IO(true);
-            this.display_game_win();
+            this.gameWinDisplay.draw();
             if(!this.win_state){
                 win_sound.play();
                 this.win_state = true;
             }
-        }else
-        {
+        }else {
             this.undoButton.mute_IO(false);
             this.restartButton.mute_IO(false);
             if(this.win_state){
@@ -160,8 +134,14 @@ class Game
         }
         this.efsButton.draw();
 
+        if(this.show_menu)
+        {
+            var btns = this.menu.draw();
+            this.show_menu = !( btns[0] || btns[2] );
+        }
+
         if(this.tutor_mode){
-            this.tutorial();
+            this.tutorial_game.tutorial(this.graph);
         }
     }
 }

@@ -6,6 +6,7 @@ function preload()
     efs_icon = loadImage('images/ExitFullscreen.png');
     undo_icon = loadImage('images/undo.png');
     reset_icon = loadImage('images/reset.png');
+    menu_icon = loadImage('images/menu.png');
     backdrop = loadImage('images/yourname.jpg');
     clickSound = loadSound('songs/mouseClick.ogg');
     win_sound = loadSound("./songs/winSound.wav");
@@ -16,17 +17,18 @@ function preload()
     step3_img = loadImage('./images/step3.png');
     step4_img = loadImage('./images/step4.png');
     step5_img = loadImage('./images/step5.png');
+
+    //Custom dollar image
+    dollar_img = loadImage('./images/dollarSign.png');
 }
 
 function setup()
 {
-    displayWidth = displayWidth;
-    displayHeight = displayHeight;
     createCanvas(window.innerWidth,window.innerHeight);
     window.addEventListener('resize', function(){ resizeCanvas(window.innerWidth,window.innerHeight)} );
     frameRate(60);
     angleMode(DEGREES);
-    background_music.setVolume(0.1);
+    background_music.setVolume(Volume.music/10);
     background_music.loop();
     background_music.pause();
     win_sound.setVolume(1);
@@ -41,15 +43,15 @@ function setup()
     options_menu = new Menu(options_menu_template);
 
     rules_page = new TextPage(rules_text);
-    proof_page = new TextPage(proof_text);
+    math_page = new TextPage(math_background_text);
     credits_page = new TextPage(credits_text);
 
     fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
-        windowWidth/2, windowHeight/2, fs_icon.width, fs_icon.height,
+        windowWidth/2 * W_undo(), windowHeight/2 * H_undo(), fs_icon.width * W_undo(), fs_icon.height* H_undo(),
         () => { this.fullscreen_switcher(); }, admin = true);
 
 }
-
+// list of all the scenes and there functions
 const scenes = {
     MAIN_MENU:         () => { main_menu.draw(); },
         GAME_MODE:     () => { mode_menu.draw(); },
@@ -58,7 +60,7 @@ const scenes = {
         HELP:          () => { help_menu.draw(); },
             TUTORIAL:  () => { }, //help menu starts game if tutorial button is pressed
             RULES:     () => { rules_page.draw(); },
-            PROOF:     () => { proof_page.draw(); },
+            MATH:     () => { math_page.draw(); },
         OPTIONS:       () => { options_menu.draw(); },
             MUSIC:     () => { }, //no idea what to do here
         CREDITS:       () => { credits_page.draw(); },
@@ -72,6 +74,10 @@ function draw()
     image(backdrop, displayWidth/2, displayHeight/2, W(backdrop.width), H(backdrop.height));
     
     scene();
+    if(Volume.change){
+        background_music.setVolume(Volume.music/10)
+        Volume.change = false;
+    }
 
     if(!fullscreen()){
         fs_enforce_button.draw();

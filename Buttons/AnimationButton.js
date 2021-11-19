@@ -6,7 +6,7 @@ class AnimatedButton extends Button
     }
     draw(){
         imageMode(CENTER);
-        this.mouse_listener();
         this.drawing();
+        return this.mouse_listener();
     }
 }
