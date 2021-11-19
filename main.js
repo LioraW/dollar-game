@@ -17,10 +17,6 @@ function preload()
     step4_img = loadImage('./images/step4.png');
     step5_img = loadImage('./images/step5.png');
 
-    //rules images
-    rules_image_1 = loadImage('./images/graph_snapshot_1.png');
-    rules_image_2 = loadImage('./images/graph_snapshot_2.png');
-
 }
 
 function setup()
