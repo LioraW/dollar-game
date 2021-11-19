@@ -37,9 +37,9 @@ const help_menu_template = {
             onClick: () => { scene = scenes.RULES }
         },
         {
-            title: "PROOF",
+            title: "MATH BACKGROUND",
             heightOffset: 240,
-            onClick: () => { scene = scenes.PROOF }
+            onClick: () => { scene = scenes.MATH }
         },
         {
             title: "BACK",
