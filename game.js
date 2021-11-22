@@ -5,28 +5,38 @@ class Game
         this.paused = false;
         this.tutor_mode = false;
         this.win_state = false;
-        this.make_solvable = false;
+        this.make_solvable = true;
         this.tutorial_game = new Tutorial();
         this.show_menu = false;
         this.menu = new Menu(game_menu_template);
+        this.win_menu = new Menu(solved_graph_template);
+        this.type = type;
 
         //create graph
         switch (type) {
             case 'easy':
-                this.graph = new RandGraph(7, 3, true, 10);
+                this.graph = new RandGraph(7, 3, this.make_solvable, 10);
+                this.mode = this.load_easy_graph;
                 break;
             case 'medium':
-                this.graph = new RandGraph(12, 4, true, 10);
+                this.graph = new RandGraph(12, 4, this.make_solvable, 10);
+                this.mode = this.load_medium_graph;
                 break;
             case 'hard':
-                this.graph = new RandGraph(20, 5, true, 10);
+                this.graph = new RandGraph(20, 5, this.make_solvable, 10);
+                this.mode = this.load_hard_graph;
                 break;
             case 'tutor':
                 this.graph = new PreGraph(tutorial_graph,12,-1);
+                this.mode = this.load_tutor_graph;
                 this.tutor_mode = true;
                 break;
-            default:
+            case 'random':
                 this.graph = new RandGraph(random(3, 20), random(2,4), this.make_solvable, 10);
+                this.mode = this.load_random_graph;
+                break;
+            default:
+                print('error: wrong graph type entered in constructor');
                 break;
         }
         //Buttons with anonymous functions passed in
@@ -52,9 +62,6 @@ class Game
                 this.solvability_decleration = true;
             }, 30, [200,200,200], [50,50,50], [200,200,200], [50, 50, 50])
 
-        this.gameWinDisplay = new TextButton("You Won!! Great Job!", displayWidth/2 * W_undo(), displayHeight/2 * H_undo(), W(500), H(100),
-            () => { }, res_font(32));
-
         // the exit full screen (efs) button which exits fullscreen when clicked
         this.efsButton = new ImageButton(efs_icon, 
             displayWidth*W_undo() - efs_icon.width/6, displayHeight*H_undo() - efs_icon.height/6,
@@ -67,6 +74,19 @@ class Game
                 this.step = 1;
             }, 12, [200,200,200], [50,50,50], [200,200,200]);
 
+        // button creates new graph to be solved
+        this.new_graph = new TextButton('Next Graph',
+            displayWidth/2 * W_undo(), displayHeight/2 * H_undo() + H(100), 300, 60,
+            () => {
+                this.mode();
+            }, 30, [200,200,200], [50,50,50], [200,200,200]);
+        // returns player to the main menu
+        this.win_main_menu = new TextButton("Main Menu", 
+            displayWidth/2 * W_undo(), displayHeight/2 * H_undo() + H(200), 300, 60,
+            () => {
+                scene = scenes.MAIN_MENU;
+            }, 30, [200,200,200], [50,50,50], [200,200,200]);
+        // tutor button that returns the user to the main menus
         this.main_menu = new TextButton("Main Menu", 1075, 550, 170, 40,
             () => {
                 scene = scenes.MAIN_MENU;
@@ -87,22 +107,46 @@ class Game
     load_easy_graph(){
         this.graph = new RandGraph(7, 3, this.make_solvable, 10);
         this.tutor_mode = false;
+        this.mode = this.load_easy_graph;
     }
     load_medium_graph(){
         this.graph = new RandGraph(12, 4, this.make_solvable, 10);
         this.tutor_mode = false;
+        this.mode = this.load_medium_graph;
     }
     load_hard_graph(){
         this.graph = new RandGraph(20, 5, this.make_solvable, 10);
         this.tutor_mode = false;
+        this.mode = this.load_hard_graph;
     }
     load_random_graph(){
         this.graph = new RandGraph(random(3, 20), random(2,4), this.make_solvable, 10);
         this.tutor_mode = false;
+        this.mode = this.load_random_graph;
     }
     load_tutor_graph(){
         this.graph = new PreGraph(tutorial_graph,12,-1);
         this.tutor_mode = true;
+        this.mode = this.load_tutor_graph;
+    }
+    // display a menu for when the graph is solved
+    gameWinDisplay(){
+        // background
+        fill(50,50,50)
+        strokeWeight(5);
+        stroke(200,200,200)
+        rect(displayWidth/2, displayHeight/2, 400, 400, displayHeight/50);
+
+        // image thumbs up
+        image(thumbs_up, displayWidth/2, displayHeight/2 - H(20), thumbs_up.width/2, thumbs_up.height/2);
+
+        // the buttons
+        noStroke();
+        textSize(res_font(50));
+        fill(255,255,255);
+        text('Graph Passed', displayWidth/2, displayHeight/3 + H(20));
+        this.new_graph.draw();
+        this.win_main_menu.draw();
     }
 
     draw()
@@ -121,10 +165,10 @@ class Game
         if(!this.make_solvable){
             this.provableButton.draw();
         }
-
+        
         if (this.graph.is_solved()) {
-            this.pause_components(true)
-            this.gameWinDisplay.draw();
+            this.pause_components(true);
+            this.gameWinDisplay();
             if(!this.win_state){
                 win_sound.play();
                 this.win_state = true;

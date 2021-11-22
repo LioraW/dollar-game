@@ -5,22 +5,22 @@ const main_menu_template = {
     buttons: [
         {
             title: "PLAY",
-            heightOffset: 80,
+            x: 0, y: 80, w: 500, h: 60,
             onClick: () => { scene = scenes.GAME_MODE }
         },
         {
             title: "HOW TO PLAY",
-            heightOffset: 160,
+            x: 0, y: 160, w: 500, h: 60,
             onClick: () => { scene = scenes.HELP }
         },
         {
             title: "OPTIONS",
-            heightOffset: 240,
+            x: 0, y: 240, w: 500, h: 60,
             onClick: () => { scene = scenes.OPTIONS }
         },
         {
             title: "CREDITS",
-            heightOffset: 320,
+            x: 0, y: 320, w: 500, h: 60,
             onClick: () => { scene = scenes.CREDITS }
         },
     ],
@@ -32,22 +32,22 @@ const help_menu_template = {
     buttons: [
         {
             title: "TUTORIAL",
-            heightOffset: 80,
+            x: 0, y: 80, w: 500, h: 60,
             onClick: () => { game.load_tutor_graph(); scene = scenes.GAME }
         },
         {
             title: "RULES",
-            heightOffset: 160,
+            x: 0, y: 160, w: 500, h: 60,
             onClick: () => { scene = scenes.RULES }
         },
         {
             title: "MATH BACKGROUND",
-            heightOffset: 240,
+            x: 0, y: 240, w: 500, h: 60,
             onClick: () => { scene = scenes.MATH }
         },
         {
             title: "BACK",
-            heightOffset: 320,
+            x: 0, y: 320, w: 500, h: 60,
             onClick: () => { scene = scenes.MAIN_MENU }
         },
     ],
@@ -59,22 +59,22 @@ const mode_menu_template = {
     buttons: [
         {
             title: "CAMPAIGN",
-            heightOffset: 80,
+            x: 0, y: 80, w: 500, h: 60,
             onClick: () => { game.make_solvable = true; scene = scenes.GAME }
         },
         {
             title: "WINNABLE MAPS",
-            heightOffset: 160,
+            x: 0, y: 160, w: 500, h: 60,
             onClick: () => { game.make_solvable = true; scene =  scenes.DIFFICULTY }
         },
         {
             title: "UNCERTAIN MAPS",
-            heightOffset: 240,
+            x: 0, y: 240, w: 500, h: 60,
             onClick: () => { game.make_solvable = false; scene =  scenes.DIFFICULTY }
         },
         {
             title: "BACK",
-            heightOffset: 320,
+            x: 0, y: 320, w: 500, h: 60,
             onClick: () => { scene = scenes.MAIN_MENU }
         },
     ],
@@ -86,32 +86,32 @@ const diff_menu_template = {
     buttons: [
         {
             title: "EASY",
-            heightOffset: 80,
+            x: 0, y: 80, w: 500, h: 60,
             onClick: () => { game.load_easy_graph(); scene = scenes.GAME }
         },
         {
             title: "NORMAL",
-            heightOffset: 160,
+            x: 0, y: 160, w: 500, h: 60,
             onClick: () => { game.load_medium_graph(); scene =  scenes.GAME }
         },
         {
             title: "HARD",
-            heightOffset: 240,
+            x: 0, y: 240, w: 500, h: 60,
             onClick: () => { game.load_hard_graph(); scene =  scenes.GAME }
         },
         {
             title: "RANDOM DIFFICULTY",
-            heightOffset: 320,
+            x: 0, y: 320, w: 500, h: 60,
             onClick: () => { game.load_random_graph(); scene =  scenes.GAME }
         },
         {
             title: "CUSTOM",
-            heightOffset: 400,
+            x: 0, y: 400, w: 500, h: 60,
             onClick: () => { }
         },
         {
             title: "BACK",
-            heightOffset: 400,
+            x: 0, y: 480, w: 500, h: 60,
             onClick: () => { scene = scenes.MAIN_MENU }
         },
     ],
@@ -123,12 +123,12 @@ const options_menu_template = {
     buttons: [
         {
             title: "TOGGLE THEME",
-            heightOffset: 80,
+            x: 0, y: 80, w: 500, h: 60,
             onClick: () => { console.log("Changing theme"); }
         },
         {
             title: "BACK",
-            heightOffset: 240,
+            x: 0, y: 240, w: 500, h: 60,
             onClick: () => { scene = scenes.MAIN_MENU }
         },
     ],
@@ -173,12 +173,12 @@ const game_menu_template = {
     buttons: [
         {
             title: "Return",
-            heightOffset: 80,
+            x: 0, y: 80, w: 500, h: 60,
             onClick: () => { return false; }
         },
         {
             title: "Quit to Main Menu",
-            heightOffset: 240,
+            x: 0, y: 240, w: 500, h: 60,
             onClick: () => { scene = scenes.MAIN_MENU; return false; }
         },
     ],
@@ -217,5 +217,22 @@ const game_menu_template = {
 
         }
     ]
+}
+const solved_graph_template = {
+    title: "Graph Passed ",
+    buttons: [
+        {
+            title: "Next Graph",
+            x: 0, y: 80, w: 500, h: 60,
+            onClick: () => { }
+        },
+        {
+            title: "Quit to Main Menu",
+            x: 0, y: 240, w: 500, h: 60,
+            onClick: () => { scene = scenes.MAIN_MENU; }
+        },
+    ],
+    pic_btns: [],
+    scrubbers: []
 }
  

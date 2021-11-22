@@ -28,8 +28,8 @@ class Menu
     {
         // loop the all the objects freatures contruct the buttons
         buttonsData.forEach(buttonPlan => {
-            let button = new TextButton(buttonPlan.title, this.x, this.y + buttonPlan.heightOffset,
-                this.buttonWidth, this.buttonHeight, buttonPlan.onClick, this.buttonFontSize);
+            let button = new TextButton(buttonPlan.title, this.x + buttonPlan.x, this.y + buttonPlan.y,
+                buttonPlan.w, buttonPlan.h, buttonPlan.onClick, this.buttonFontSize);
             this.buttons.push(button);
         });
     }
