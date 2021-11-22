@@ -46,16 +46,20 @@ class Game
                 this.tutorial_game.set_undo_pressed();
                 this.graph.undo();
             });
+        // resets the graph to its original state
         this.restartButton = new ImageButton(reset_icon, (displayWidth/2) * W_undo() - 150, displayHeight*(7/8) * H_undo(),
                                              reset_icon.width/5.5, reset_icon.height/5.5,
             () => {
                 this.tutorial_game.set_reset_pressed();
                 this.graph.reset_graph();
             });
+        // this is the in game menu button denoted by 3 lines
         this.menuButton = new ImageButton(menu_icon, 40, 40, menu_icon.width/5, menu_icon.height/5,
             () => {
                 this.show_menu = !this.show_menu;
             });
+        // if you click on this button you declare that the current uncertain graph is indeed
+        // winnable
         this.provableButton = new TextButton("Prime Map", 150, 500, 200, 50,
             () => {
                 this.provableButton.mute_IO(true);
@@ -68,6 +72,7 @@ class Game
             efs_icon.width/6, efs_icon.height/6, 
             () => { fullscreen_switcher(); } );
 
+        // repeats the tutorial when clicked
         this.repeat_tutorial = new TextButton("Repeat Tutorial", 850, 550, 170, 40,
             () => {
                 this.graph.reset_graph();
@@ -104,6 +109,7 @@ class Game
         this.provableButton.mute_IO(status);
     }
 
+    // these funciton create a new graph and the type is obvious from the name of each function
     load_easy_graph(){
         this.graph = new RandGraph(7, 3, this.make_solvable, 10);
         this.tutor_mode = false;
