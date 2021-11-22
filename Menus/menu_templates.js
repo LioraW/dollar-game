@@ -1,7 +1,4 @@
-var Volume = {
-    music: 1,
-    change: false,
-}
+
 
 const main_menu_template = {
     title: "MAIN MENU",
@@ -63,7 +60,7 @@ const mode_menu_template = {
         {
             title: "CAMPAIGN",
             heightOffset: 80,
-            onClick: () => { scene = scenes.GAME }
+            onClick: () => { game.make_solvable = true; scene = scenes.GAME }
         },
         {
             title: "WINNABLE MAPS",
@@ -166,7 +163,7 @@ const options_menu_template = {
                 return Volume.music/10;
             },
             text_x: 810, text_y: 519, text_size: 43,
-            scrub_x: 790, scrub_y: 41, w: 120, h: 30,
+            scrub_x: 982, scrub_y: 139, w: 160, h: 40,
 
         }
     ]
@@ -216,8 +213,9 @@ const game_menu_template = {
                 return Volume.music/10;
             },
             text_x: 810, text_y: 519, text_size: 43,
-            scrub_x: 790, scrub_y: 41, w: 120, h: 30,
+            scrub_x: 982, scrub_y: 139, w: 160, h: 40,
 
         }
     ]
 }
+ 

@@ -1,10 +1,10 @@
 class Scrubber
 {
     constructor(x, y, w, h, ref, color = [255,255,255]){
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
+        this.x = W(x);
+        this.y = H(y);
+        this.w = W(w);
+        this.h = H(h);
         this.color = color;
         this.ref = ref;
     }

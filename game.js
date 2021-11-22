@@ -9,7 +9,6 @@ class Game
         this.tutorial_game = new Tutorial();
         this.show_menu = false;
         this.menu = new Menu(game_menu_template);
-        this.solvability_decleration = false;
 
         //create graph
         switch (type) {
@@ -76,6 +75,13 @@ class Game
     // when this is called it pauses all the buttons AND makes the graph not listen 
     // to mouse clicks
     pause_components(status){
+        this.undoButton.mute_IO(status);
+        this.restartButton.mute_IO(status);
+        this.repeat_tutorial.mute_IO(status);
+        this.main_menu.mute_IO(status);
+        this.graph.set_listening(!status);
+        this.menuButton.mute_IO(status);
+        this.provableButton.mute_IO(status);
     }
 
     load_easy_graph(){
@@ -117,16 +123,14 @@ class Game
         }
 
         if (this.graph.is_solved()) {
-            this.undoButton.mute_IO(true);
-            this.restartButton.mute_IO(true);
+            this.pause_components(true)
             this.gameWinDisplay.draw();
             if(!this.win_state){
                 win_sound.play();
                 this.win_state = true;
             }
         }else {
-            this.undoButton.mute_IO(false);
-            this.restartButton.mute_IO(false);
+            this.pause_components(false)
             if(this.win_state){
                 win_sound.pause();
                 this.win_state = false;
@@ -136,8 +140,14 @@ class Game
 
         if(this.show_menu)
         {
+            this.pause_components(true);
+            fill(50,50,50);
+            stroke(200,200,200)
+            strokeWeight(5);
+            rect(displayWidth/2, displayHeight/2, W(600), H(500), displayHeight/100)
             var btns = this.menu.draw();
             this.show_menu = !( btns[0] || btns[1] );
+            strokeWeight(1);
         }
 
         if(this.tutor_mode){

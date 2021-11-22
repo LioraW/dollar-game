@@ -220,7 +220,7 @@ class Graph
             this.nodes[i].draw();
         }
         //this function now loops through the nodes internally
-        if(!this.solved && !this.listening){
+        if(!this.solved && this.listening){
             this.mouse_listener();
         }
     }

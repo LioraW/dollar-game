@@ -8,7 +8,7 @@ function preload()
     menu_icon = loadImage('images/menu.png');
     backdrop = loadImage('images/yourname.jpg');
     clickSound = loadSound('songs/mouseClick.ogg');
-    win_sound = loadSound("./songs/Coin_Flip.ogg");
+    win_sound = loadSound("./songs/Service Bell.mp3");
     
     //tutorial images
     step1_img = loadImage('./images/step1.png');
@@ -73,6 +73,7 @@ function draw()
     
     scene();
 
+    // volume manager
     if(Volume.change){
         background_music.setVolume(Volume.music/10)
         Volume.change = false;
@@ -88,7 +89,6 @@ function draw()
                 background_music.pause();
                 fullscreen_status = false;
             }
-            game.pause_components(false);
         }
         if(fullscreen()){
             if(fullscreen_status === false && background_music.isLoaded())
@@ -96,10 +96,10 @@ function draw()
                 background_music.play();
                 fullscreen_status = true;
             }
-            game.pause_components(true);
         }
     }
 
+    songs = shuffle(songs);
     // looping through songs
     {
         if(!background_music.isPlaying() && fullscreen() && !song.updated){
@@ -112,6 +112,7 @@ function draw()
         if(song.updated === true && background_music.isLoaded() && fullscreen()){
             //print('song is finished loading current song:', songs[song.index]);
             background_music.play();
+            background_music.setVolume(Volume.music/10)
             song.updated = false;
         }
     }

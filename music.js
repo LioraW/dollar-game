@@ -1,5 +1,5 @@
-songs = [
-    "GiSt_Adrift.ogg",
+var songs = [
+    "Coin_Flip.mp3",
     'BVGxmondberg_insomnia.mp3',
     'DontcryxGlimlipxSleepermane_JiroDreams.mp3',
     'Flovryxtenderspring_FirstHeartbreak.mp3',
@@ -11,10 +11,32 @@ songs = [
     'Tenno_Daydreaming.mp3',
     'WYS_Snowman.mp3',
 ]
-song = {
+var Volume = {
+    music: 6, 
+    change: false,
+}
+var song = {
     index: 0,
     updated: false,
 }
+
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
 
 function update_index(index, max){
     print('the max is', max);
