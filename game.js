@@ -32,13 +32,13 @@ class Game
         }
         //Buttons with anonymous functions passed in
         this.undoButton = new ImageButton(undo_icon,(displayWidth/2)*W_undo() + 150, displayHeight*(7/8)*H_undo(), 
-                                          W(undo_icon.width/6), H(undo_icon.height/6),
+                                          undo_icon.width/6, undo_icon.height/6,
             () => {
                 this.tutorial_game.set_undo_pressed();
                 this.graph.undo();
             });
         this.restartButton = new ImageButton(reset_icon, (displayWidth/2) * W_undo() - 150, displayHeight*(7/8) * H_undo(),
-                                             W(reset_icon.width/5.5), H(reset_icon.height/5.5),
+                                             reset_icon.width/5.5, reset_icon.height/5.5,
             () => {
                 this.tutorial_game.set_reset_pressed();
                 this.graph.reset_graph();

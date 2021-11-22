@@ -1,7 +1,6 @@
 function preload()
 {
-    //background_music = loadSound("./songs/A Sweet Smile 8 Bit.ogg");
-    background_music = loadSound("./songs/GiSt_Adrift.ogg");
+    background_music = loadSound("./songs/" + songs[song.index]);
     fs_icon = loadImage('images/Fullscreen.png');
     efs_icon = loadImage('images/ExitFullscreen.png');
     undo_icon = loadImage('images/undo.png');
@@ -9,7 +8,7 @@ function preload()
     menu_icon = loadImage('images/menu.png');
     backdrop = loadImage('images/yourname.jpg');
     clickSound = loadSound('songs/mouseClick.ogg');
-    win_sound = loadSound("./songs/winSound.wav");
+    win_sound = loadSound("./songs/Coin_Flip.ogg");
     
     //tutorial images
     step1_img = loadImage('./images/step1.png');
@@ -29,7 +28,6 @@ function setup()
     frameRate(60);
     angleMode(DEGREES);
     background_music.setVolume(Volume.music/10);
-    background_music.loop();
     background_music.pause();
     win_sound.setVolume(1);
     win_sound.pause();
@@ -74,28 +72,48 @@ function draw()
     image(backdrop, displayWidth/2, displayHeight/2, W(backdrop.width), H(backdrop.height));
     
     scene();
+
     if(Volume.change){
         background_music.setVolume(Volume.music/10)
         Volume.change = false;
     }
 
-    if(!fullscreen()){
-        fs_enforce_button.draw();
+    // fullscreen enforcer
+    {
+        if(!fullscreen()){
+            fs_enforce_button.draw();
 
-        if(fullscreen_status === true)
-        {
-            background_music.pause();
-            fullscreen_status = false;
+            if(fullscreen_status === true)
+            {
+                background_music.pause();
+                fullscreen_status = false;
+            }
+            game.pause_components(false);
         }
-        game.pause_components(false);
+        if(fullscreen()){
+            if(fullscreen_status === false && background_music.isLoaded())
+            {
+                background_music.play();
+                fullscreen_status = true;
+            }
+            game.pause_components(true);
+        }
     }
-    if(fullscreen()){
-        if(fullscreen_status === false)
-        {
-            background_music.play();
-            fullscreen_status = true;
+
+    // looping through songs
+    {
+        if(!background_music.isPlaying() && fullscreen() && !song.updated){
+            //print('song being updated: current song index', song.index);
+            song.index = update_index(song.index, songs.length);
+            background_music = loadSound("./songs/" + songs[song.index]);
+            song.updated = true;
+            //print('after loading song: current song index', song.index);
         }
-        game.pause_components(true);
+        if(song.updated === true && background_music.isLoaded() && fullscreen()){
+            //print('song is finished loading current song:', songs[song.index]);
+            background_music.play();
+            song.updated = false;
+        }
     }
 
     pop();
