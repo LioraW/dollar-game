@@ -164,7 +164,6 @@ const options_menu_template = {
             },
             text_x: 810, text_y: 519, text_size: 43,
             scrub_x: 982, scrub_y: 139, w: 160, h: 40,
-
         }
     ]
 }

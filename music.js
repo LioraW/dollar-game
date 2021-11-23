@@ -1,5 +1,5 @@
 var songs = [
-    "GiSt_Adrift.ogg",
+    "Coin_Flip.mp3",
     'BVGxmondberg_insomnia.mp3',
     'DontcryxGlimlipxSleepermane_JiroDreams.mp3',
     'Flovryxtenderspring_FirstHeartbreak.mp3',
@@ -14,7 +14,7 @@ var songs = [
 var Volume = {
     music: 4, 
     change: false,
-    scale: 20,
+    scale: 30,
 }
 var song = {
     index: 0,

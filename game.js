@@ -11,29 +11,40 @@ class Game
         this.menu = new Menu(game_menu_template);
         this.win_menu = new Menu(solved_graph_template);
         this.type = type;
+        this.score = 0;
+        this.add_score = false;
+        this.highscore;
 
         //create graph
         switch (type) {
             case 'easy':
                 this.graph = new RandGraph(7, 3, this.make_solvable, 10);
                 this.mode = this.load_easy_graph;
+                update_highscore(this.score, 0, this.make_solvable);
+                this.highscore = get_highscore(0, this.make_solvable);
                 break;
             case 'medium':
                 this.graph = new RandGraph(12, 4, this.make_solvable, 10);
                 this.mode = this.load_medium_graph;
+                update_highscore(this.score, 1, this.make_solvable);
+                this.highscore = get_highscore(1, this.make_solvable);
                 break;
             case 'hard':
                 this.graph = new RandGraph(20, 5, this.make_solvable, 10);
                 this.mode = this.load_hard_graph;
+                update_highscore(this.score, 2, this.make_solvable);
+                this.highscore = get_highscore(2, this.make_solvable);
+                break;
+            case 'random':
+                this.graph = new RandGraph(random(3, 20), random(2,4), this.make_solvable, 10);
+                this.mode = this.load_random_graph;
+                update_highscore(this.score, 3, this.make_solvable);
+                this.highscore = get_highscore(3, this.make_solvable);
                 break;
             case 'tutor':
                 this.graph = new PreGraph(tutorial_graph,12,-1);
                 this.mode = this.load_tutor_graph;
                 this.tutor_mode = true;
-                break;
-            case 'random':
-                this.graph = new RandGraph(random(3, 20), random(2,4), this.make_solvable, 10);
-                this.mode = this.load_random_graph;
                 break;
             default:
                 print('error: wrong graph type entered in constructor');
@@ -83,19 +94,18 @@ class Game
         this.new_graph = new TextButton('Next Graph',
             displayWidth/2 * W_undo(), displayHeight/2 * H_undo() + H(100), 300, 60,
             () => {
-                this.mode();
+                this.mode(); this.add_score = false;
             }, 30, [200,200,200], [50,50,50], [200,200,200]);
         // returns player to the main menu
         this.win_main_menu = new TextButton("Main Menu", 
             displayWidth/2 * W_undo(), displayHeight/2 * H_undo() + H(200), 300, 60,
             () => {
-                scene = scenes.MAIN_MENU;
+                this.mode(); scene = scenes.MAIN_MENU; this.add_score = false;
             }, 30, [200,200,200], [50,50,50], [200,200,200]);
         // tutor button that returns the user to the main menus
-        this.main_menu = new TextButton("Main Menu", 1075, 550, 170, 40,
-            () => {
-                scene = scenes.MAIN_MENU;
-            }, 12, [200,200,200], [50,50,50], [200,200,200]);
+    }
+    set_score(val){
+        this.score = val;
     }
     // when this is called it pauses all the buttons AND makes the graph not listen 
     // to mouse clicks
@@ -103,7 +113,6 @@ class Game
         this.undoButton.mute_IO(status);
         this.restartButton.mute_IO(status);
         this.repeat_tutorial.mute_IO(status);
-        this.main_menu.mute_IO(status);
         this.graph.set_listening(!status);
         this.menuButton.mute_IO(status);
         this.provableButton.mute_IO(status);
@@ -114,21 +123,29 @@ class Game
         this.graph = new RandGraph(7, 3, this.make_solvable, 10);
         this.tutor_mode = false;
         this.mode = this.load_easy_graph;
+        update_highscore(this.score, 0, this.make_solvable);
+        this.highscore = get_highscore(0, this.make_solvable);
     }
     load_medium_graph(){
         this.graph = new RandGraph(12, 4, this.make_solvable, 10);
         this.tutor_mode = false;
         this.mode = this.load_medium_graph;
+        update_highscore(this.score, 1, this.make_solvable);
+        this.highscore = get_highscore(1, this.make_solvable);
     }
     load_hard_graph(){
         this.graph = new RandGraph(20, 5, this.make_solvable, 10);
         this.tutor_mode = false;
         this.mode = this.load_hard_graph;
+        update_highscore(this.score, 2, this.make_solvable);
+        this.highscore = get_highscore(2, this.make_solvable);
     }
     load_random_graph(){
         this.graph = new RandGraph(random(3, 20), random(2,4), this.make_solvable, 10);
         this.tutor_mode = false;
         this.mode = this.load_random_graph;
+        update_highscore(this.score, 3, this.make_solvable);
+        this.highscore = get_highscore(3, this.make_solvable)
     }
     load_tutor_graph(){
         this.graph = new PreGraph(tutorial_graph,12,-1);
@@ -137,6 +154,10 @@ class Game
     }
     // display a menu for when the graph is solved
     gameWinDisplay(){
+        if(!this.add_score){
+            this.score++;
+            this.add_score = true;
+        }
         // background
         fill(50,50,50)
         strokeWeight(5);
@@ -157,12 +178,16 @@ class Game
 
     draw()
     {
-        textSize(30);
+        textAlign(CENTER);
+        textSize(res_font(60));
         fill([200,200,200]);
-        text("DOLLAR GAME", (displayWidth/2) - 150, H(100));
-        textSize(16)
-        text("Moves Counter: " + this.graph.counter, displayWidth*(10/22), displayHeight*(12/13));
-        textSize(14);
+        text("DOLLAR GAME", (displayWidth/2), H(150));
+        textSize(res_font(26))
+        text("Move Counter: " + this.graph.counter, displayWidth/2, H(960));
+        textSize(res_font(30));
+        text('SCORE: ' + this.score, W(200), H(50));
+        text('HIGHSCORE: ' + this.highscore,  W(1700), H(50))
+
 
         this.graph.draw();
         this.undoButton.draw();

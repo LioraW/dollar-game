@@ -20,6 +20,7 @@ function preload()
 
     //Custom dollar image
     dollar_img = loadImage('./images/dollarSign.png');
+
 }
 
 function setup()
@@ -73,6 +74,11 @@ function draw()
     image(backdrop, displayWidth/2, displayHeight/2, W(backdrop.width), H(backdrop.height));
     
     scene();
+
+    // reset score everytime the scene is not on the game scene
+    if(scene != scenes.GAME){
+        game.set_score(0);
+    }
 
     // volume manager
     if(Volume.change){
