@@ -1,5 +1,5 @@
 var songs = [
-    "Coin_Flip.mp3",
+    "GiSt_Adrift.ogg",
     'BVGxmondberg_insomnia.mp3',
     'DontcryxGlimlipxSleepermane_JiroDreams.mp3',
     'Flovryxtenderspring_FirstHeartbreak.mp3',
@@ -9,11 +9,12 @@ var songs = [
     'noone\'sperfectxKanisan_GentleWind.mp3',
     'SoftyxKaspa_Contrasts.mp3',
     'Tenno_Daydreaming.mp3',
-    'WYS_Snowman.mp3',
+    //'WYS_Snowman.mp3',
 ]
 var Volume = {
     music: 4, 
     change: false,
+    scale: 20,
 }
 var song = {
     index: 0,
@@ -39,9 +40,7 @@ function shuffle(array) {
   }
 
 function update_index(index, max){
-    print('the max is', max);
     if(index < max - 1){
-        print('adding')
         return ++index;
     }else{
         return 0;

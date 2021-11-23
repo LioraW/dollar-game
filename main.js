@@ -8,7 +8,7 @@ function preload()
     menu_icon = loadImage('images/menu.png');
     backdrop = loadImage('images/yourname.jpg');
     clickSound = loadSound('songs/mouseClick.ogg');
-    win_sound = loadSound("./songs/Service Bell.mp3");
+    win_sound = loadSound("./songs/Service_bell.mp3");
     thumbs_up = loadImage('./images/thumbsUP.png');
     
     //tutorial images
@@ -28,7 +28,7 @@ function setup()
     window.addEventListener('resize', function(){ resizeCanvas(window.innerWidth,window.innerHeight)} );
     frameRate(60);
     angleMode(DEGREES);
-    background_music.setVolume(Volume.music/10);
+    background_music.setVolume(Volume.music/Volume.scale);
     background_music.pause();
     win_sound.setVolume(1);
     win_sound.pause();
@@ -76,7 +76,7 @@ function draw()
 
     // volume manager
     if(Volume.change){
-        background_music.setVolume(Volume.music/10)
+        background_music.setVolume(Volume.music/Volume.scale)
         Volume.change = false;
     }
 
