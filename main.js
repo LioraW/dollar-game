@@ -38,6 +38,7 @@ function setup()
     main_menu = new Menu(main_menu_template);
     mode_menu = new Menu(mode_menu_template);
     diff_menu = new Menu(diff_menu_template);
+    custom_menu  = new Menu(custom_game_menu);
     help_menu = new Menu(help_menu_template);
     options_menu = new Menu(options_menu_template);
 
@@ -55,6 +56,7 @@ const scenes = {
     MAIN_MENU:         () => { main_menu.draw(); },
         GAME_MODE:     () => { mode_menu.draw(); },
             DIFFICULTY:() => { diff_menu.draw(); },
+                CUSTOM: () => { custom_menu.draw(); },
             GAME:      () => { game.draw(); },
         HELP:          () => { help_menu.draw(); },
             TUTORIAL:  () => { }, //help menu starts game if tutorial button is pressed
