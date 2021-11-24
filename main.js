@@ -32,7 +32,7 @@ function setup()
     background_music.setVolume(Volume.music/Volume.scale);
     background_music.pause();
     clickSound.setVolume(0.2);
-    win_sound.setVolume(1);
+    win_sound.setVolume(Volume.music/(Volume.scale/3));
     win_sound.pause();
 
     game = new Game('easy');
@@ -84,6 +84,7 @@ function draw()
     // volume manager
     if(Volume.change){
         background_music.setVolume(Volume.music/Volume.scale)
+        win_sound.setVolume(Volume.music/(Volume.scale/3));
         Volume.change = false;
     }
 

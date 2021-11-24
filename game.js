@@ -92,13 +92,13 @@ class Game
 
         // button creates new graph to be solved
         this.new_graph = new TextButton('Next Graph',
-            displayWidth/2 * W_undo(), displayHeight/2 * H_undo() + H(100), 300, 60,
+            displayWidth/2 * W_undo(), displayHeight/2 * H_undo() + 100, 300, 60,
             () => {
                 this.mode(); this.add_score = false;
             }, 30, [200,200,200], [50,50,50], [200,200,200]);
         // returns player to the main menu
         this.win_main_menu = new TextButton("Main Menu", 
-            displayWidth/2 * W_undo(), displayHeight/2 * H_undo() + H(200), 300, 60,
+            displayWidth/2 * W_undo(), displayHeight/2 * H_undo() + 200, 300, 60,
             () => {
                 this.mode(); scene = scenes.MAIN_MENU; this.add_score = false;
             }, 30, [200,200,200], [50,50,50], [200,200,200]);
@@ -162,10 +162,10 @@ class Game
         fill(50,50,50)
         strokeWeight(5);
         stroke(200,200,200)
-        rect(displayWidth/2, displayHeight/2, 400, 400, displayHeight/50);
+        rect(displayWidth/2, displayHeight/2, W(400), H(400), displayHeight/50);
 
         // image thumbs up
-        image(thumbs_up, displayWidth/2, displayHeight/2 - H(20), thumbs_up.width/2, thumbs_up.height/2);
+        image(thumbs_up, displayWidth/2, displayHeight/2 - H(20), W(thumbs_up.width/1.2), H(thumbs_up.height/1.2));
 
         // the buttons
         noStroke();
