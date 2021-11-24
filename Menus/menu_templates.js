@@ -112,8 +112,13 @@ const custom_game_menu = {
     title: "Custom Game",
     buttons: [
         {
+            title: "Play Game",
+            x: 0, y: 500, w: 500, h: 60,
+            onClick: () => { scene = scenes.GAME; }
+        },
+        {
             title: "Back",
-            x: 0, y: 240, w: 500, h: 60,
+            x: 0, y: 600, w: 500, h: 60,
             onClick: () => { scene = scenes.MAIN_MENU; }
         },
     ],
@@ -121,7 +126,7 @@ const custom_game_menu = {
         {
             title: "Plus",
             image: 'images/plus.png',
-            x: 1174, y: 160, w: 40, h: 40,
+            x: 1074, y: 150, w: 40, h: 40,
             onClick: () => {
                 if(game.custom_number_nodes < 20){
                     game.custom_number_nodes++;
@@ -131,7 +136,7 @@ const custom_game_menu = {
         {
             title: "Minus",
             image: 'images/minus.png',
-            x: 950, y: 160, w: 40, h:40,
+            x: 850, y: 150, w: 40, h:40,
             onClick: () => {
                 if(game.custom_number_nodes > 3){
                     game.custom_number_nodes--;
@@ -141,7 +146,7 @@ const custom_game_menu = {
         {
             title: "Plus",
             image: 'images/plus.png',
-            x: 1174, y: 360, w: 40, h: 40,
+            x: 1074, y: 270, w: 40, h: 40,
             onClick: () => {
                 if(game.custom_number_edges < 5){
                     game.custom_number_edges++;
@@ -151,7 +156,7 @@ const custom_game_menu = {
         {
             title: "Minus",
             image: 'images/minus.png',
-            x: 950, y: 360, w: 40, h:40,
+            x: 850, y: 270, w: 40, h:40,
             onClick: () => {
                 if(game.custom_number_edges > 1){
                     game.custom_number_edges--;
@@ -161,7 +166,7 @@ const custom_game_menu = {
         {
             title: "Plus",
             image: 'images/plus.png',
-            x: 1174, y: 560, w: 40, h: 40,
+            x: 1074, y: 390, w: 40, h: 40,
             onClick: () => {
                 if(game.custom_money_range < 15){
                     game.custom_money_range++;
@@ -171,7 +176,7 @@ const custom_game_menu = {
         {
             title: "Minus",
             image: 'images/minus.png',
-            x: 950, y: 560, w: 40, h:40,
+            x: 850, y: 390, w: 40, h:40,
             onClick: () => {
                 if(game.custom_money_range > 5){
                     game.custom_money_range--;
@@ -183,28 +188,28 @@ const custom_game_menu = {
         {
             title: "Number of Nodes:",
             ref:() => {
-                return game.custom_number_nodes/10;
+                return (game.custom_number_nodes/20); //20 is the max
             },
-            text_x: 810, text_y: 519, text_size: 43,
-            scrub_x: 982, scrub_y: 139, w: 160, h: 40,
+            text_x: 950, text_y: 450, text_size: 36,
+            scrub_x: 882, scrub_y: 130, w: 160, h: 40,
 
         },
         {
             title: "Number of Edges:",
             ref:() => {
-                return game.custom_number_edges/10;
+                return game.custom_number_edges/5; // 5 is the max
             },
-            text_x: 810, text_y: 719, text_size: 43,
-            scrub_x: 982, scrub_y: 339, w: 160, h: 40,
+            text_x: 950, text_y: 575, text_size: 36,
+            scrub_x: 882, scrub_y: 250, w: 160, h: 40,
 
         },
         {
             title: "Money Range:",
             ref:() => {
-                return game.custom_money_range/10;
+                return (game.custom_money_range/15); //15 is the max
             },
-            text_x: 810, text_y: 919, text_size: 43,
-            scrub_x: 982, scrub_y: 539, w: 160, h: 40,
+            text_x: 950, text_y: 700, text_size: 43,
+            scrub_x: 882, scrub_y: 370, w: 160, h: 40,
 
         }
     ]
