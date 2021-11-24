@@ -136,11 +136,12 @@ const custom_game_menu = {
 
             },
             decrease: () => {
-                if(game.custom_number_nodes > 3){
+                if(game.custom_number_nodes > 3) {
                     game.custom_number_nodes--;
                 }
-                console.log("Number of nodes: " + game.custom_number_nodes)
-
+            },
+            value: () => {
+                return game.custom_number_nodes;
             },
             text_x: 950, text_y: 450, text_size: 36,
             scrub_x: 882, scrub_y: 130, w: 160, h: 40,
@@ -155,15 +156,15 @@ const custom_game_menu = {
                 if(game.custom_number_edges < 5){
                     game.custom_number_edges++;
                 }
-                console.log("Number of edges: " + game.custom_number_edges)
 
             },
             decrease: () => {
-                if(game.custom_number_edges > 2){
+                if(game.custom_number_edges > 2) {
                     game.custom_number_edges--;
                 }
-                console.log("Number of edges: " + game.custom_number_edges)
-
+            },
+            value: () => {
+                return game.custom_number_edges;
             },
             text_x: 950, text_y: 575, text_size: 36,
             scrub_x: 882, scrub_y: 250, w: 160, h: 40,
@@ -178,15 +179,16 @@ const custom_game_menu = {
                 if(game.custom_money_range < 15){
                     game.custom_money_range++;
                 }
-                console.log("Money range: " + game.custom_money_range)
 
             },
             decrease: () => {
                 if(game.custom_money_range > 3){
                     game.custom_money_range--;
                 }
-                console.log("Money range: " + game.custom_money_range)
 
+            },
+            value: () => {
+                return game.custom_money_range;
             },
             text_x: 950, text_y: 700, text_size: 36,
             scrub_x: 882, scrub_y: 370, w: 160, h: 40,
