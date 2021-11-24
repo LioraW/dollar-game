@@ -1,3 +1,5 @@
+
+
 const main_menu_template = {
     title: "MAIN MENU",
     buttons: [
@@ -26,6 +28,8 @@ const main_menu_template = {
             onHover: () => { }
         },
     ],
+    pic_btns: [],
+    scrubbers: []
 }
 const help_menu_template = {
     title: "HOW TO PLAY",
@@ -55,6 +59,8 @@ const help_menu_template = {
             onHover: () => { }
         },
     ],
+    pic_btns: [],
+    scrubbers: []
 }
 const mode_menu_template = {
     title: "MODE",
@@ -95,6 +101,8 @@ const mode_menu_template = {
             onHover: () => { }
         },
     ],
+    pic_btns: [],
+    scrubbers: []
 }
 const diff_menu_template = {
     title: "DIFFICULTY",
@@ -138,8 +146,7 @@ const diff_menu_template = {
         {
             title: "CUSTOM",
             x: 0, y: 400, w: 500, h: 60,
-
-            onClick: () => { game.load_custom_graph(); scene = scenes.CUSTOM }
+            onClick: () => { },
             onHover: () => { }
         },
         {
@@ -149,94 +156,9 @@ const diff_menu_template = {
             onHover: () => { }
         },
     ],
+    pic_btns: [],
+    scrubbers: []
 }
-const custom_game_menu = {
-    title: "Custom Game",
-    buttons: [
-        {
-            title: "Play Game",
-            x: 0, y: 500, w: 500, h: 60,
-            onClick: () => { game.load_custom_graph(); scene = scenes.GAME; }
-        },
-        {
-            title: "Back",
-            x: 0, y: 600, w: 500, h: 60,
-            onClick: () => { scene = scenes.MAIN_MENU; }
-        },
-    ],
-    scrubbers: [
-        {
-            title: "Number of Nodes:",
-            ref:() => {
-                return (game.custom_number_nodes/20); //20 is the max
-            },
-            increase: () => {
-                if(game.custom_number_nodes < 20){
-                    game.custom_number_nodes++;
-                }
-            },
-            decrease: () => {
-                if(game.custom_number_nodes > 3) {
-                    game.custom_number_nodes--;
-                }
-            },
-            value: () => {
-                return game.custom_number_nodes;
-            },
-            text_x: 950, text_y: 450, text_size: 36,
-            scrub_x: 882, scrub_y: 130, w: 160, h: 40,
-
-        },
-        {
-            title: "Number of Edges:",
-            ref:() => {
-                return game.custom_number_edges/5; // 5 is the max
-            },
-            increase: () => {
-                if(game.custom_number_edges < 5){
-                    game.custom_number_edges++;
-                }
-
-            },
-            decrease: () => {
-                if(game.custom_number_edges > 2) {
-                    game.custom_number_edges--;
-                }
-            },
-            value: () => {
-                return game.custom_number_edges;
-            },
-            text_x: 950, text_y: 575, text_size: 36,
-            scrub_x: 882, scrub_y: 250, w: 160, h: 40,
-
-        },
-        {
-            title: "Money Range:",
-            ref:() => {
-                return (game.custom_money_range/15); //15 is the max
-            },
-            increase: () => {
-                if(game.custom_money_range < 15){
-                    game.custom_money_range++;
-                }
-
-            },
-            decrease: () => {
-                if(game.custom_money_range > 3){
-                    game.custom_money_range--;
-                }
-
-            },
-            value: () => {
-                return game.custom_money_range;
-            },
-            text_x: 950, text_y: 700, text_size: 36,
-            scrub_x: 882, scrub_y: 370, w: 160, h: 40,
-
-        }
-    ]
-}
-
 const options_menu_template = {
     title: "Options",
     buttons: [
@@ -253,23 +175,37 @@ const options_menu_template = {
             onHover: () => { }
         },
     ],
-    scrubbers: [
+    pic_btns: [
         {
-            title: "Volume:",
-            ref:() => {
-                return Volume.music/10;
+            title: "Plus",
+            image: 'images/plus.png',
+            x: 1174, y: 160, w: 40, h: 40,
+            onClick: () => { 
+                if(Volume.music < 10){
+                    Volume.music++;
+                    Volume.change = true;
+                } 
             },
-            decrease: () => {
+            onHover: () => { }
+        },
+        {
+            title: "Minus",
+            image: 'images/minus.png',
+            x: 950, y: 160, w: 40, h:40,
+            onClick: () => { 
                 if(Volume.music > 0){
                     Volume.music--;
                     Volume.change = true;
                 }
             },
-            increase: () => {
-                if(Volume.music < 10){
-                    Volume.music++;
-                    Volume.change = true;
-                }
+            onHover: () => { }
+        }
+    ],
+    scrubbers: [
+        {
+            title: "Volume:",
+            ref:() => {
+                return Volume.music/10;
             },
             text_x: 810, text_y: 519, text_size: 43,
             scrub_x: 982, scrub_y: 139, w: 160, h: 40,
@@ -292,23 +228,37 @@ const game_menu_template = {
             onHover: () => { }
         },
     ],
-    scrubbers: [
+    pic_btns: [
         {
-            title: "Volume:",
-            ref:() => {
-                return Volume.music/10;
+            title: "Plus",
+            image: 'images/plus.png',
+            x: 1174, y: 160, w: 40, h: 40,
+            onClick: () => { 
+                if(Volume.music < 10){
+                    Volume.music++;
+                    Volume.change = true;
+                } 
             },
-            decrease: () => {
+            onHover: () => { }
+        },
+        {
+            title: "Minus",
+            image: 'images/minus.png',
+            x: 950, y: 160, w: 40, h:40,
+            onClick: () => { 
                 if(Volume.music > 0){
                     Volume.music--;
                     Volume.change = true;
                 }
             },
-            increase: () => {
-                if(Volume.music < 10){
-                    Volume.music++;
-                    Volume.change = true;
-                }
+            onHover: () => { }
+        }
+    ],
+    scrubbers: [
+        {
+            title: "Volume:",
+            ref:() => {
+                return Volume.music/10;
             },
             text_x: 810, text_y: 519, text_size: 43,
             scrub_x: 982, scrub_y: 139, w: 160, h: 40,
@@ -331,6 +281,8 @@ const solved_graph_template = {
             onClick: () => { scene = scenes.MAIN_MENU; },
             onHover: () => { }
         },
-    ]
+    ],
+    pic_btns: [],
+    scrubbers: []
 }
  

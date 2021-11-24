@@ -13,27 +13,20 @@ class Menu
         this.buttonHeight = 60;
         this.buttonFontSize = res_font(32);
 
-        // list of buttons scrubbers and texts that the menu will hold
+        // list of buttons scrubers and texts that the menu will hold
         this.buttons = [];
         this.img_buttons = [];
         this.scrubbers = [];
         this.texts = [];
-
         // fetching all the button, scrubs, texts data and creating the buttons, scrubs and texts
         this.get_buttons(buttonsData.buttons);
-
-        if (buttonsData.hasOwnProperty('pic_btns')){
-            this.get_img_btns(buttonsData.pic_btns);
-            console.log("has pic_btns!");
-        }
-        if(buttonsData.hasOwnProperty('scrubbers')){
-            this.get_scrubbers(buttonsData.scrubbers);
-        }
+        this.get_img_btns(buttonsData.pic_btns);
+        this.get_scrubbers(buttonsData.scrubbers);
     }
     // populates the buttons
     get_buttons(buttonsData)
     {
-        // loop the all the objects features and construct the buttons
+        // loop the all the objects freatures contruct the buttons
         buttonsData.forEach(buttonPlan => {
             let button = new TextButton(buttonPlan.title, this.x + buttonPlan.x, this.y + buttonPlan.y,
                 buttonPlan.w, buttonPlan.h, buttonPlan.onClick, this.buttonFontSize);
@@ -51,20 +44,13 @@ class Menu
             this.img_buttons.push(img_button);
         });
     }
-    // populates the scrubbers and their appropriate texts
+    // populates the scrubbers and their appriate texts
     get_scrubbers(data)
     {
-        data.forEach(scrubber => {
-            //only use the value if the scrubber has a function to return a value
-            let value = () => {};
-            if (scrubber.hasOwnProperty('value')){
-                    value = scrubber.value;
-            }
-            //create the scrubber
-            let scrub = new Scrubber( scrubber.scrub_x, this.y + scrubber.scrub_y, scrubber.w, scrubber.h,
-                                    scrubber.ref, scrubber.decrease, scrubber.increase, value);
+        data.forEach(data => {
+            let scrub = new Scrubber(data.scrub_x, this.y + data.scrub_y, data.w, data.h, data.ref);
             this.scrubbers.push(scrub);
-            this.texts.push([scrubber.title, W(scrubber.text_x), H(scrubber.text_y), res_font(scrubber.text_size)]);
+            this.texts.push([data.title, W(data.text_x), H(data.text_y), res_font(data.text_size)]);
         });
     }
     draw()
