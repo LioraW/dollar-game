@@ -167,7 +167,7 @@ class Game
     load_custom_graph(){
         this.graph = new RandGraph(this.custom_number_nodes, this.custom_number_edges, this.make_solvable, this.custom_money_range);
         this.tutor_mode = false;
-        this.mode = this.load_random_graph;
+        this.mode = this.load_custom_graph;
     }
 
 
@@ -181,7 +181,7 @@ class Game
         fill(50,50,50)
         strokeWeight(5);
         stroke(200,200,200)
-        rect(displayWidth/2, displayHeight/2, W(400), H(400), displayHeight/50);
+        rect(displayWidth/2, displayHeight/2, W(400), H(500), displayHeight/50);
 
         // image thumbs up
         image(thumbs_up, displayWidth/2, displayHeight/2 - H(20), W(thumbs_up.width/1.2), H(thumbs_up.height/1.2));

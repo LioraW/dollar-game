@@ -139,7 +139,7 @@ const diff_menu_template = {
             title: "CUSTOM",
             x: 0, y: 400, w: 500, h: 60,
 
-            onClick: () => { game.load_custom_graph(); scene = scenes.CUSTOM }
+            onClick: () => { scene = scenes.CUSTOM },
             onHover: () => { }
         },
         {
@@ -156,12 +156,14 @@ const custom_game_menu = {
         {
             title: "Play Game",
             x: 0, y: 500, w: 500, h: 60,
-            onClick: () => { game.load_custom_graph(); scene = scenes.GAME; }
+            onClick: () => { game.load_custom_graph(); scene = scenes.GAME; },
+            onHover: () => { }
         },
         {
             title: "Back",
             x: 0, y: 600, w: 500, h: 60,
-            onClick: () => { scene = scenes.MAIN_MENU; }
+            onClick: () => { scene = scenes.MAIN_MENU; },
+            onHover: () => { }
         },
     ],
     scrubbers: [
@@ -173,11 +175,17 @@ const custom_game_menu = {
             increase: () => {
                 if(game.custom_number_nodes < 20){
                     game.custom_number_nodes++;
+                    if(game.custom_number_edges < 2 && game.custom_number_nodes > 2){
+                        game.custom_number_edges++;
+                    }
                 }
             },
             decrease: () => {
-                if(game.custom_number_nodes > 3) {
+                if(game.custom_number_nodes > 2) {
                     game.custom_number_nodes--;
+                    if(game.custom_number_edges > game.custom_number_nodes - 1){
+                        game.custom_number_edges--;
+                    }
                 }
             },
             value: () => {
@@ -195,12 +203,18 @@ const custom_game_menu = {
             increase: () => {
                 if(game.custom_number_edges < 5){
                     game.custom_number_edges++;
+                    if(game.custom_number_edges > game.custom_number_nodes - 1){
+                        game.custom_number_nodes++;
+                    }
                 }
 
             },
             decrease: () => {
-                if(game.custom_number_edges > 2) {
+                if(game.custom_number_edges > 1) {
                     game.custom_number_edges--;
+                    if(game.custom_number_edges < 2){
+                        game.custom_number_nodes = 2;
+                    }
                 }
             },
             value: () => {
