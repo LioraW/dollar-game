@@ -66,8 +66,7 @@ const scenes = {
             MUSIC:     () => { }, //no idea what to do here
         CREDITS:       () => { credits_page.draw(); },
 }
-//let scene = scenes.MAIN_MENU;
-let scene = scenes.CUSTOM;
+let scene = scenes.MAIN_MENU;
 
 function draw() 
 {

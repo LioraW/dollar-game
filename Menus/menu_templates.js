@@ -132,8 +132,6 @@ const custom_game_menu = {
                 if(game.custom_number_nodes < 20){
                     game.custom_number_nodes++;
                 }
-                console.log("Number of nodes: " + game.custom_number_nodes)
-
             },
             decrease: () => {
                 if(game.custom_number_nodes > 3) {
