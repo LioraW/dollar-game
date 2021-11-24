@@ -72,27 +72,27 @@ const mode_menu_template = {
             onHover: () => { }
         },
         {
-            title: "WINNABLE MAPS",
+            title: "VANILLA",
             x: 0, y: 160, w: 500, h: 60,
             onClick: () => { game.make_solvable = true; scene =  scenes.DIFFICULTY },
             onHover: () => { 
-                textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT);
+                textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT,TOP);
                 text('Get points by solving graphs.\n'+
                      'every graph in this mode is\n'+
-                     '100% solvable', W(1350), H(500)) }
+                     '100% solvable', W(1350), H(450)) }
         },
         {
-            title: "UNCERTAIN MAPS",
+            title: "ADVENTURE",
             x: 0, y: 240, w: 500, h: 60,
             onClick: () => { game.make_solvable = false; scene =  scenes.DIFFICULTY },
             onHover: () => { 
-                textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT);
+                textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT,TOP);
                 text('Get points by solving graphs\n'+
                      'and determining a graph unknown\n'+
                      'a graph is unkown when it\n'+
                      'cannot be proven solvable\n'+
                      'Therefore NOT every graph in\n'+
-                     'this mode is solvable', W(1350), H(500)) }
+                     'this mode is solvable', W(1350), H(450)) }
         },
         {
             title: "BACK",
@@ -105,7 +105,7 @@ const mode_menu_template = {
     scrubbers: []
 }
 const diff_menu_template = {
-    title: "DIFFICULTY MENU",
+    title: "DIFFICULTY",
     buttons: [
         {
             title: "EASY",
@@ -135,7 +135,7 @@ const diff_menu_template = {
                 text('CURRENT HIGHSCORE: '+ hs, W(1350), H(600))}
         },
         {
-            title: "RANDOM DIFFICULTY",
+            title: "RANDOM",
             x: 0, y: 320, w: 500, h: 60,
             onClick: () => { game.load_random_graph(); scene =  scenes.GAME },
             onHover: () => { 
