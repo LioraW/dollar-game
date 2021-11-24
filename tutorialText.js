@@ -23,22 +23,22 @@ const tutorial_template = {
     },
     step4: {
         text: "Actually lets undo\n" + "that move by pressing\n" + "the undo button",
-        x:300,
-        y:350,
+        x:1280,
+        y:950,
         w:215,
         h:85,
     },
     step5: {
         text: "We can also reset the\n" + "graph to its original\n" + "form by pressing the\n" + "reset button here",
-        x:350,
-        y:400,
+        x:620,
+        y:940,
         w:215,
         h:105,
     },
     step6: {
         text: "Wonderful! Now use all\n" + "these tools to make\n" + "all the nodes have a\n" +
             "dollar value of 0 or\n" + "more. [Click to Continue]",
-        x:350,
+        x:960,
         y:400,
         w:240,
         h:150,
@@ -47,10 +47,10 @@ const tutorial_template = {
         text: "Congratulations! You solved the graph! Now\n" + "you know the basics. You can use these\n" +
             "skills to solve even harder graphs. See how many\n" + "you can do with out stopping and show off your\n" +
             "highscore!",
-        x:350,
-        y:400,
-        w:455,
-        h:140,
+        x:960,
+        y:540,
+        w:700,
+        h:210,
     }
 
 }

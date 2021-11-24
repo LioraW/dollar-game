@@ -2,11 +2,11 @@ class TextBox
 {
     constructor(text, x, y, w, h, font_size){
         this.text = text;
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-        this.font_size = font_size;
+        this.x = W(x);
+        this.y = H(y);
+        this.w = W(w);
+        this.h = H(h);
+        this.font_size = res_font(font_size);
     }
     draw()
     {

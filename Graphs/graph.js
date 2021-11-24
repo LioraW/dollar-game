@@ -197,16 +197,6 @@ class Graph
     // same for the nodes
     draw()
     {
-        fill(0,255,255);
-        textSize(30);
-        textStyle(ITALIC);
-        text("Welcome to the Dollar Game!", W(700), H(30));
-        
-        fill(0,255,255);
-        textSize(20);
-        textStyle(BOLD);
-        text("Number of Moves: "+this.counter, W(700), H(50));
-
         for(let i = 0; i < this.edges.length; i++)
         {
             this.edges[i].draw();
@@ -220,7 +210,7 @@ class Graph
             this.nodes[i].draw();
         }
         //this function now loops through the nodes internally
-        if(!this.solved && !this.listening){
+        if(!this.solved && this.listening){
             this.mouse_listener();
         }
     }

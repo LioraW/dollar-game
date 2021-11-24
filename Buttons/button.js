@@ -1,6 +1,6 @@
 class Button
 {
-    constructor(x, y, width, height, onClick, admin = false)
+    constructor(x, y, width, height, onClick, admin = false, hover_action = () => {})
     {
         this.x = W(x);
         this.y = H(y);
@@ -10,13 +10,17 @@ class Button
         this.mute = false;
         this.paused = false;
         this.admin = admin;
+        this.hover_action = hover_action;
     }
     // returns true if the button is being hovered over
     being_hovered()
     {
-        return mouseX > this.x - this.width / 2 && mouseX < this.x + this.width / 2 &&
-            mouseY > this.y - this.height / 2 && mouseY < this.y + this.height / 2;
-
+        if(mouseX > this.x - this.width / 2 && mouseX < this.x + this.width / 2 &&
+            mouseY > this.y - this.height / 2 && mouseY < this.y + this.height / 2){
+            this.hover_action();
+            return true;
+        }
+        return false;
     }
     // controls whether the a button is muted(not active)
     mute_IO(mute){

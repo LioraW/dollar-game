@@ -1,7 +1,6 @@
 function preload()
 {
-    //background_music = loadSound("./songs/A Sweet Smile 8 Bit.ogg");
-    background_music = loadSound("./songs/GiSt_Adrift.ogg");
+    background_music = loadSound("./songs/" + songs[song.index]);
     fs_icon = loadImage('images/Fullscreen.png');
     efs_icon = loadImage('images/ExitFullscreen.png');
     undo_icon = loadImage('images/undo.png');
@@ -9,7 +8,8 @@ function preload()
     menu_icon = loadImage('images/menu.png');
     backdrop = loadImage('images/yourname.jpg');
     clickSound = loadSound('songs/mouseClick.ogg');
-    win_sound = loadSound("./songs/winSound.wav");
+    win_sound = loadSound("./songs/Service_bell.mp3");
+    thumbs_up = loadImage('./images/thumbsUP.png');
     
     //tutorial images
     step1_img = loadImage('./images/step1.png');
@@ -20,6 +20,7 @@ function preload()
 
     //Custom dollar image
     dollar_img = loadImage('./images/dollarSign.png');
+
 }
 
 function setup()
@@ -28,10 +29,10 @@ function setup()
     window.addEventListener('resize', function(){ resizeCanvas(window.innerWidth,window.innerHeight)} );
     frameRate(60);
     angleMode(DEGREES);
-    background_music.setVolume(Volume.music/10);
-    background_music.loop();
+    background_music.setVolume(Volume.music/Volume.scale);
     background_music.pause();
-    win_sound.setVolume(1);
+    clickSound.setVolume(0.2);
+    win_sound.setVolume(Volume.music/(Volume.scale/3));
     win_sound.pause();
 
     game = new Game('easy');
@@ -39,6 +40,7 @@ function setup()
     main_menu = new Menu(main_menu_template);
     mode_menu = new Menu(mode_menu_template);
     diff_menu = new Menu(diff_menu_template);
+    custom_menu  = new Menu(custom_game_menu);
     help_menu = new Menu(help_menu_template);
     options_menu = new Menu(options_menu_template);
 
@@ -56,6 +58,7 @@ const scenes = {
     MAIN_MENU:         () => { main_menu.draw(); },
         GAME_MODE:     () => { mode_menu.draw(); },
             DIFFICULTY:() => { diff_menu.draw(); },
+                CUSTOM: () => { custom_menu.draw(); },
             GAME:      () => { game.draw(); },
         HELP:          () => { help_menu.draw(); },
             TUTORIAL:  () => { }, //help menu starts game if tutorial button is pressed
@@ -74,28 +77,55 @@ function draw()
     image(backdrop, displayWidth/2, displayHeight/2, W(backdrop.width), H(backdrop.height));
     
     scene();
+
+    // reset score everytime the scene is not on the game scene
+    if(scene != scenes.GAME){
+        game.set_score(0);
+    }
+
+    // volume manager
     if(Volume.change){
-        background_music.setVolume(Volume.music/10)
+        background_music.setVolume(Volume.music/Volume.scale)
+        win_sound.setVolume(Volume.music/(Volume.scale/3));
         Volume.change = false;
     }
 
-    if(!fullscreen()){
-        fs_enforce_button.draw();
+    // fullscreen enforcer
+    {
+        if(!fullscreen()){
+            fs_enforce_button.draw();
 
-        if(fullscreen_status === true)
-        {
-            background_music.pause();
-            fullscreen_status = false;
+            if(fullscreen_status === true)
+            {
+                background_music.pause();
+                fullscreen_status = false;
+            }
         }
-        game.pause_components(false);
+        if(fullscreen()){
+            if(fullscreen_status === false && background_music.isLoaded())
+            {
+                background_music.play();
+                fullscreen_status = true;
+            }
+        }
     }
-    if(fullscreen()){
-        if(fullscreen_status === false)
-        {
-            background_music.play();
-            fullscreen_status = true;
+
+    songs = shuffle(songs);
+    // looping through songs
+    {
+        if(!background_music.isPlaying() && fullscreen() && !song.updated){
+            //print('song being updated: current song index', song.index);
+            song.index = update_index(song.index, songs.length);
+            background_music = loadSound("./songs/" + songs[song.index]);
+            song.updated = true;
+            //print('after loading song: current song index', song.index);
         }
-        game.pause_components(true);
+        if(song.updated === true && background_music.isLoaded() && fullscreen()){
+            //print('song is finished loading current song:', songs[song.index]);
+            background_music.play();
+            background_music.setVolume(Volume.music/10)
+            song.updated = false;
+        }
     }
 
     pop();
