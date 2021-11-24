@@ -114,7 +114,7 @@ const custom_game_menu = {
         {
             title: "Play Game",
             x: 0, y: 500, w: 500, h: 60,
-            onClick: () => { scene = scenes.GAME; }
+            onClick: () => { game.load_custom_graph(); scene = scenes.GAME; }
         },
         {
             title: "Back",
@@ -131,6 +131,8 @@ const custom_game_menu = {
                 if(game.custom_number_nodes < 20){
                     game.custom_number_nodes++;
                 }
+                console.log("Number of nodes: " + game.custom_number_nodes)
+
             }
         },
         {
@@ -141,6 +143,8 @@ const custom_game_menu = {
                 if(game.custom_number_nodes > 3){
                     game.custom_number_nodes--;
                 }
+                console.log("Number of nodes: " + game.custom_number_nodes)
+
             }
         },
         {
@@ -151,6 +155,8 @@ const custom_game_menu = {
                 if(game.custom_number_edges < 5){
                     game.custom_number_edges++;
                 }
+                console.log("Number of edges: " + game.custom_number_edges)
+
             }
         },
         {
@@ -161,6 +167,7 @@ const custom_game_menu = {
                 if(game.custom_number_edges > 1){
                     game.custom_number_edges--;
                 }
+                console.log("Number of edges: " + game.custom_number_edges)
             }
         },
         {
@@ -171,6 +178,7 @@ const custom_game_menu = {
                 if(game.custom_money_range < 15){
                     game.custom_money_range++;
                 }
+                console.log("Money range: " + game.custom_money_range)
             }
         },
         {
@@ -181,6 +189,7 @@ const custom_game_menu = {
                 if(game.custom_money_range > 5){
                     game.custom_money_range--;
                 }
+                console.log("Money range: " + game.custom_money_range)
             }
         }
     ],
