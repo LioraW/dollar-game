@@ -4,22 +4,26 @@ const main_menu_template = {
         {
             title: "PLAY",
             x: 0, y: 80, w: 500, h: 60,
-            onClick: () => { scene = scenes.GAME_MODE }
+            onClick: () => { scene = scenes.GAME_MODE },
+            onHover: () => { }
         },
         {
             title: "HOW TO PLAY",
             x: 0, y: 160, w: 500, h: 60,
-            onClick: () => { scene = scenes.HELP }
+            onClick: () => { scene = scenes.HELP },
+            onHover: () => { }
         },
         {
             title: "OPTIONS",
             x: 0, y: 240, w: 500, h: 60,
-            onClick: () => { scene = scenes.OPTIONS }
+            onClick: () => { scene = scenes.OPTIONS },
+            onHover: () => { }
         },
         {
             title: "CREDITS",
             x: 0, y: 320, w: 500, h: 60,
-            onClick: () => { scene = scenes.CREDITS }
+            onClick: () => { scene = scenes.CREDITS },
+            onHover: () => { }
         },
     ],
 }
@@ -29,22 +33,26 @@ const help_menu_template = {
         {
             title: "TUTORIAL",
             x: 0, y: 80, w: 500, h: 60,
-            onClick: () => { game.load_tutor_graph(); scene = scenes.GAME }
+            onClick: () => { game.load_tutor_graph(); scene = scenes.GAME },
+            onHover: () => { }
         },
         {
             title: "RULES",
             x: 0, y: 160, w: 500, h: 60,
-            onClick: () => { scene = scenes.RULES }
+            onClick: () => { scene = scenes.RULES },
+            onHover: () => { }
         },
         {
             title: "MATH BACKGROUND",
             x: 0, y: 240, w: 500, h: 60,
-            onClick: () => { scene = scenes.MATH }
+            onClick: () => { scene = scenes.MATH },
+            onHover: () => { }
         },
         {
             title: "BACK",
             x: 0, y: 320, w: 500, h: 60,
-            onClick: () => { scene = scenes.MAIN_MENU }
+            onClick: () => { scene = scenes.MAIN_MENU },
+            onHover: () => { }
         },
     ],
 }
@@ -54,57 +62,91 @@ const mode_menu_template = {
         {
             title: "CAMPAIGN",
             x: 0, y: 80, w: 500, h: 60,
-            onClick: () => { game.make_solvable = true; scene = scenes.GAME }
+            onClick: () => { game.make_solvable = true; scene = scenes.GAME },
+            onHover: () => { }
         },
         {
-            title: "WINNABLE MAPS",
+            title: "VANILLA",
             x: 0, y: 160, w: 500, h: 60,
-            onClick: () => { game.make_solvable = true; scene =  scenes.DIFFICULTY }
+            onClick: () => { game.make_solvable = true; scene =  scenes.DIFFICULTY },
+            onHover: () => { 
+                textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT,TOP);
+                text('Get points by solving graphs.\n'+
+                     'every graph in this mode is\n'+
+                     '100% solvable', W(1350), H(450)) }
         },
         {
-            title: "UNCERTAIN MAPS",
+            title: "ADVENTURE",
             x: 0, y: 240, w: 500, h: 60,
-            onClick: () => { game.make_solvable = false; scene =  scenes.DIFFICULTY }
+            onClick: () => { game.make_solvable = false; scene =  scenes.DIFFICULTY },
+            onHover: () => { 
+                textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT,TOP);
+                text('Get points by solving graphs\n'+
+                     'and determining a graph unknown\n'+
+                     'a graph is unkown when it\n'+
+                     'cannot be proven solvable\n'+
+                     'Therefore NOT every graph in\n'+
+                     'this mode is solvable', W(1350), H(450)) }
         },
         {
             title: "BACK",
             x: 0, y: 320, w: 500, h: 60,
-            onClick: () => { scene = scenes.MAIN_MENU }
+            onClick: () => { scene = scenes.MAIN_MENU },
+            onHover: () => { }
         },
     ],
 }
 const diff_menu_template = {
-    title: "DIFFICULTY MENU",
+    title: "DIFFICULTY",
     buttons: [
         {
             title: "EASY",
             x: 0, y: 80, w: 500, h: 60,
-            onClick: () => { game.load_easy_graph(); scene = scenes.GAME }
+            onClick: () => { game.load_easy_graph(); scene = scenes.GAME },
+            onHover: () => { 
+                textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT);
+                hs = (game.make_solvable ? highscore.normal[0] : highscore.adventure[0]);
+                text('CURRENT HIGHSCORE: '+ hs, W(1350), H(440))}
         },
         {
             title: "NORMAL",
             x: 0, y: 160, w: 500, h: 60,
-            onClick: () => { game.load_medium_graph(); scene =  scenes.GAME }
+            onClick: () => { game.load_medium_graph(); scene =  scenes.GAME },
+            onHover: () => { 
+                textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT);
+                hs = (game.make_solvable ? highscore.normal[1] : highscore.adventure[1]);
+                text('CURRENT HIGHSCORE: '+ hs, W(1350), H(520))}
         },
         {
             title: "HARD",
             x: 0, y: 240, w: 500, h: 60,
-            onClick: () => { game.load_hard_graph(); scene =  scenes.GAME }
+            onClick: () => { game.load_hard_graph(); scene =  scenes.GAME },
+            onHover: () => { 
+                textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT);
+                hs = (game.make_solvable ? highscore.normal[2] : highscore.adventure[2]);
+                text('CURRENT HIGHSCORE: '+ hs, W(1350), H(600))}
         },
         {
-            title: "RANDOM DIFFICULTY",
+            title: "RANDOM",
             x: 0, y: 320, w: 500, h: 60,
-            onClick: () => { game.load_random_graph(); scene =  scenes.GAME }
+            onClick: () => { game.load_random_graph(); scene =  scenes.GAME },
+            onHover: () => { 
+                textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT);
+                hs = (game.make_solvable ? highscore.normal[3] : highscore.adventure[3]);
+                text('CURRENT HIGHSCORE: '+ hs, W(1350), H(680))}
         },
         {
             title: "CUSTOM",
             x: 0, y: 400, w: 500, h: 60,
+
             onClick: () => { game.load_custom_graph(); scene = scenes.CUSTOM }
+            onHover: () => { }
         },
         {
             title: "BACK",
             x: 0, y: 480, w: 500, h: 60,
-            onClick: () => { scene = scenes.MAIN_MENU }
+            onClick: () => { scene = scenes.MAIN_MENU },
+            onHover: () => { }
         },
     ],
 }
@@ -201,12 +243,14 @@ const options_menu_template = {
         {
             title: "TOGGLE THEME",
             x: 0, y: 80, w: 500, h: 60,
-            onClick: () => { console.log("Changing theme"); }
+            onClick: () => { console.log("Changing theme"); },
+            onHover: () => { }
         },
         {
             title: "BACK",
             x: 0, y: 240, w: 500, h: 60,
-            onClick: () => { scene = scenes.MAIN_MENU }
+            onClick: () => { scene = scenes.MAIN_MENU },
+            onHover: () => { }
         },
     ],
     scrubbers: [
@@ -229,7 +273,6 @@ const options_menu_template = {
             },
             text_x: 810, text_y: 519, text_size: 43,
             scrub_x: 982, scrub_y: 139, w: 160, h: 40,
-
         }
     ]
 }
@@ -239,12 +282,14 @@ const game_menu_template = {
         {
             title: "Return",
             x: 0, y: 80, w: 500, h: 60,
-            onClick: () => { return false; }
+            onClick: () => { return false; },
+            onHover: () => { }
         },
         {
             title: "Quit to Main Menu",
             x: 0, y: 240, w: 500, h: 60,
-            onClick: () => { scene = scenes.MAIN_MENU; return false; }
+            onClick: () => { scene = scenes.MAIN_MENU; return false; },
+            onHover: () => { }
         },
     ],
     scrubbers: [
@@ -277,12 +322,14 @@ const solved_graph_template = {
         {
             title: "Next Graph",
             x: 0, y: 80, w: 500, h: 60,
-            onClick: () => { }
+            onClick: () => { },
+            onHover: () => { }
         },
         {
             title: "Quit to Main Menu",
             x: 0, y: 240, w: 500, h: 60,
-            onClick: () => { scene = scenes.MAIN_MENU; }
+            onClick: () => { scene = scenes.MAIN_MENU; },
+            onHover: () => { }
         },
     ]
 }

@@ -20,6 +20,7 @@ function preload()
 
     //Custom dollar image
     dollar_img = loadImage('./images/dollarSign.png');
+
 }
 
 function setup()
@@ -30,7 +31,8 @@ function setup()
     angleMode(DEGREES);
     background_music.setVolume(Volume.music/Volume.scale);
     background_music.pause();
-    win_sound.setVolume(1);
+    clickSound.setVolume(0.2);
+    win_sound.setVolume(Volume.music/(Volume.scale/3));
     win_sound.pause();
 
     game = new Game('easy');
@@ -76,9 +78,15 @@ function draw()
     
     scene();
 
+    // reset score everytime the scene is not on the game scene
+    if(scene != scenes.GAME){
+        game.set_score(0);
+    }
+
     // volume manager
     if(Volume.change){
         background_music.setVolume(Volume.music/Volume.scale)
+        win_sound.setVolume(Volume.music/(Volume.scale/3));
         Volume.change = false;
     }
 

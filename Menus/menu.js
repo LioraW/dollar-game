@@ -37,6 +37,7 @@ class Menu
         buttonsData.forEach(buttonPlan => {
             let button = new TextButton(buttonPlan.title, this.x + buttonPlan.x, this.y + buttonPlan.y,
                 buttonPlan.w, buttonPlan.h, buttonPlan.onClick, this.buttonFontSize);
+            button.set_hover_action(buttonPlan.onHover)
             this.buttons.push(button);
         });
     }

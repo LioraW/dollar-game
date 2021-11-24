@@ -12,6 +12,10 @@ class TextButton extends Button
         this.outline_color = outline_color;
         this.edge_brightness_switch = 0;
         this.edge_brightness = 100;
+        this.hover_action;
+    }
+    set_hover_action(action){
+        this.hover_action = action;
     }
     // if the button is being hovered over we will first calculate the brightness
     // of the glow and then return that glow color
