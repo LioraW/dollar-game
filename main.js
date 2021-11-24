@@ -10,6 +10,7 @@ function preload()
     clickSound = loadSound('songs/mouseClick.ogg');
     win_sound = loadSound("./songs/Service_bell.mp3");
     thumbs_up = loadImage('./images/thumbsUP.png');
+    info_icon = loadImage('./images/info2.png');
     
     //tutorial images
     step1_img = loadImage('./images/step1.png');

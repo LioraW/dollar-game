@@ -14,6 +14,7 @@ class Game
         this.score = 0;
         this.add_score = false;
         this.highscore;
+        this.graph_passed = false;
 
         this.custom_number_nodes = 2;
         this.custom_number_edges = 1;
@@ -83,11 +84,28 @@ class Game
             });
         // if you click on this button you declare that the current uncertain graph is indeed
         // winnable
-        this.provableButton = new TextButton("Prime Map", 150, 500, 200, 50,
+        this.provableButton = new TextButton("Unknown Map", 110, 500, 200, 50,
             () => {
                 this.provableButton.mute_IO(true);
-                this.solvability_decleration = true;
+                if(!this.graph.is_solvable()){
+                    this.graph_passed = true;
+                }
             }, 30, [200,200,200], [50,50,50], [200,200,200], [50, 50, 50])
+        this.provableInfo = new ImageButton(info_icon, 
+            35, 560, info_icon.width/6, info_icon.height/6, 
+            () => { } );
+        //this.provableInfo.mute_IO(true);
+        this.provableInfo.set_hover_action(() => {
+            textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT,TOP);
+            text('An Unknown map is a\n'+
+                 'map which is not\n'+
+                 'proven solvable.\n'+
+                 'Declaring this map\n'+
+                 'Unknown will give you\n'+
+                 'a point if it is in \n'+
+                 'fact unknown, but you\n'+
+                 'lose if it is not!', W(10), H(610))
+        })
 
         // the exit full screen (efs) button which exits fullscreen when clicked
         this.efsButton = new ImageButton(efs_icon, 
@@ -107,12 +125,14 @@ class Game
             displayWidth/2 * W_undo(), displayHeight/2 * H_undo() + 100, 300, 60,
             () => {
                 this.mode(); this.add_score = false;
+                this.graph_passed = false;
             }, 30, [200,200,200], [50,50,50], [200,200,200]);
         // returns player to the main menu
         this.win_main_menu = new TextButton("Main Menu", 
             displayWidth/2 * W_undo(), displayHeight/2 * H_undo() + 200, 300, 60,
             () => {
                 this.mode(); scene = scenes.MAIN_MENU; this.add_score = false;
+                this.graph_passed = false;
             }, 30, [200,200,200], [50,50,50], [200,200,200]);
         // tutor button that returns the user to the main menus
     }
@@ -214,9 +234,10 @@ class Game
         this.menuButton.draw();
         if(!this.make_solvable){
             this.provableButton.draw();
+            this.provableInfo.draw();
         }
         
-        if (this.graph.is_solved()) {
+        if (this.graph.is_solved() || this.graph_passed) {
             this.pause_components(true);
             if(!this.tutor_mode){
                 this.gameWinDisplay();
