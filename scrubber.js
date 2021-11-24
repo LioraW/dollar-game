@@ -1,29 +1,36 @@
 class Scrubber
 {
-    constructor(title, x, y, w, h, ref, lower = ()=>{}, raise = ()=>{}, color = [255,255,255]){
-        this.title = title;
-        this.x = W(x);
-        this.y = H(y);
+    constructor(scrub_x, scrub_y, w, h, ref, decrease, increase, color = [255,255,255], text_size = 36){
+        this.scrub_x = W(scrub_x);
+        this.scrub_y = H(scrub_y);
+
+        this.minus_x = scrub_x - 35; //the W() and H() are taken care of in the image button class
+        this.plus_x = scrub_x + 195;
+        this.buttons_y = scrub_y + 18;
+
         this.w = W(w);
         this.h = H(h);
         this.color = color;
         this.ref = ref;
-        this.lower = lower;
-        this.raise = raise;
-        this.plus = new ImageButton('images/plus.png', this.x + this.w, this.y, 40, 40, this.raise);
-        this.minus = new ImageButton('images/minus.png', this.x, this.y, 40, 40, this.lower);
+        this.text_size = text_size;
+
+        let minus_image = loadImage('images/minus.png');
+        let plus_image = loadImage('images/plus.png');
+
+        this.minus = new ImageButton(minus_image, this.minus_x, this.buttons_y, 40, 40, decrease);
+        this.plus = new ImageButton(plus_image, this.plus_x, this.buttons_y, 40, 40, increase);
+
     }
     draw()
     {
-       // this.minus.draw();
+        this.minus.draw();
         let setting = this.ref();
         noStroke();
         rectMode(CORNER);
         fill(255,255,255,80);
-        rect(this.x, this.y, this.w, this.h)
+        rect(this.scrub_x, this.scrub_y, this.w, this.h)
         fill(255,255,255);
-        rect(this.x, this.y, setting * this.w, this.h)
-       // text(this.title, this.x, this.y);
-        //this.plus.draw();
+        rect(this.scrub_x, this.scrub_y, setting * this.w, this.h)
+        this.plus.draw();
     }
 }

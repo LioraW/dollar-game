@@ -52,10 +52,11 @@ class Menu
     // populates the scrubbers and their appropriate texts
     get_scrubbers(data)
     {
-        data.forEach(data => {
-            let scrub = new Scrubber(data.tile, data.scrub_x, this.y + data.scrub_y, data.w, data.h, data.ref);
+        data.forEach(scrubber => {
+            let scrub = new Scrubber( scrubber.scrub_x, this.y + scrubber.scrub_y, scrubber.w, scrubber.h,
+                                    scrubber.ref, scrubber.decrease, scrubber.increase);
             this.scrubbers.push(scrub);
-            this.texts.push([data.title, W(data.text_x), H(data.text_y), res_font(data.text_size)]);
+            this.texts.push([scrubber.title, W(scrubber.text_x), H(scrubber.text_y), res_font(scrubber.text_size)]);
         });
     }
     draw()
