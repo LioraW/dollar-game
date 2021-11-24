@@ -15,6 +15,10 @@ class Game
         this.add_score = false;
         this.highscore;
 
+        this.custom_number_nodes = 2;
+        this.custom_number_edges = 1;
+        this.custom_money_range = 10;
+
         //create graph
         switch (type) {
             case 'easy':
@@ -40,6 +44,14 @@ class Game
                 this.mode = this.load_random_graph;
                 update_highscore(this.score, 3, this.make_solvable);
                 this.highscore = get_highscore(3, this.make_solvable);
+                break;
+            case 'random':
+                this.graph = new RandGraph(random(3, 20), random(2,4), this.make_solvable, 10);
+                this.mode = this.load_random_graph;
+                break;
+            case 'custom':
+                this.graph = new RandGraph(this.custom_number_nodes, this.custom_number_edges, this.make_solvable, this.custom_money_range);
+                this.mode = this.load_custom_graph;
                 break;
             case 'tutor':
                 this.graph = new PreGraph(tutorial_graph,12,-1);
@@ -118,7 +130,7 @@ class Game
         this.provableButton.mute_IO(status);
     }
 
-    // these funciton create a new graph and the type is obvious from the name of each function
+    // these functions create a new graph and the type is obvious from the name of each function
     load_easy_graph(){
         this.graph = new RandGraph(7, 3, this.make_solvable, 10);
         this.tutor_mode = false;
@@ -152,6 +164,13 @@ class Game
         this.tutor_mode = true;
         this.mode = this.load_tutor_graph;
     }
+    load_custom_graph(){
+        this.graph = new RandGraph(this.custom_number_nodes, this.custom_number_edges, this.make_solvable, this.custom_money_range);
+        this.tutor_mode = false;
+        this.mode = this.load_random_graph;
+    }
+
+
     // display a menu for when the graph is solved
     gameWinDisplay(){
         if(!this.add_score){
