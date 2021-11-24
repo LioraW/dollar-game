@@ -199,7 +199,9 @@ class Game
         
         if (this.graph.is_solved()) {
             this.pause_components(true);
-            this.gameWinDisplay();
+            if(!this.tutor_mode){
+                this.gameWinDisplay();
+            }
             if(!this.win_state){
                 win_sound.play();
                 this.win_state = true;

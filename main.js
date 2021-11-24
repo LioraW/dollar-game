@@ -31,6 +31,7 @@ function setup()
     angleMode(DEGREES);
     background_music.setVolume(Volume.music/Volume.scale);
     background_music.pause();
+    clickSound.setVolume(0.2);
     win_sound.setVolume(1);
     win_sound.pause();
 

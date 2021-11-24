@@ -6,11 +6,11 @@ class Tutorial {
         this.undo_pressed = false;
         this.reset_pressed = false;
 
-        this.repeat_tutorial = new TextButton("Repeat Tutorial", W(850), H(550), W(170), H(40),
-            () => { this.step = 1 }, 12);
+        this.repeat_tutorial = new TextButton("Repeat Tutorial", 810, 550, 250, 60,
+            () => { this.step = 1 }, 25);
 
-        this.main_menu = new TextButton("Main Menu", W(1075), H(550), W(170), H(40),
-            () => { scene = scenes.MAIN_MENU }, 12);
+        this.main_menu = new TextButton("Main Menu", 1115, 550, 250, 60,
+            () => { this.step = 1; scene = scenes.MAIN_MENU }, 25);
     }
     set_undo_pressed(){
         this.undo_pressed = !this.undo_pressed;
@@ -52,16 +52,16 @@ class Tutorial {
         }
     }
 
-    showTextBox(step_plan){
-        let textBox = new TextBox(step_plan.text, W(step_plan.x), H(step_plan.y),
-            W(step_plan.w), H(step_plan.h), res_font(this.fontSize));
+    showTextBox(step_plan, font_size){
+        let textBox = new TextBox(step_plan.text, step_plan.x, step_plan.y,
+            step_plan.w, step_plan.h, font_size);
         textBox.draw();
     }
 
     step1(graph) {
         image(step1_img, displayWidth / 2, displayHeight / 2, W(step1_img.width), H(step1_img.height));
 
-        this.showTextBox(tutorial_template.step1);
+        this.showTextBox(tutorial_template.step1, this.fontSize);
 
         if (graph.get_node(3).isLastMove) {
             return 1;
@@ -71,7 +71,7 @@ class Tutorial {
 
     step2(graph) {
         image(step2_img, displayWidth / 2, displayHeight / 2, W(step2_img.width), H(step2_img.height));
-        this.showTextBox(tutorial_template.step2);
+        this.showTextBox(tutorial_template.step2, this.fontSize);
 
         if (graph.get_node(4).just_clicked) {
             this.x++;
@@ -86,7 +86,7 @@ class Tutorial {
 
     step3(graph) {
         image(step3_img, displayWidth / 2, displayHeight / 2, W(step3_img.width), H(step3_img.height));
-        this.showTextBox(tutorial_template.step3);
+        this.showTextBox(tutorial_template.step3, this.fontSize);
 
         if (graph.get_node(1).isLastMove) {
             return 1;
@@ -96,19 +96,17 @@ class Tutorial {
 
     step4() {
         image(step4_img, displayWidth / 2, displayHeight / 2, W(step4_img.width), H(step4_img.height));
-        this.showTextBox(tutorial_template.step4);
+        this.showTextBox(tutorial_template.step4, this.fontSize);
 
         if (this.undo_pressed) {
-            print('ran step 4 trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
             return 1;
         }
-        print('ran step 4 false');
         return 0;
     }
 
     step5() {
         image(step5_img, displayWidth / 2, displayHeight / 2, W(step5_img.width), H(step5_img.height));
-        this.showTextBox(tutorial_template.step5);
+        this.showTextBox(tutorial_template.step5, this.fontSize);
 
         if (this.reset_pressed) {
             return 1;
@@ -118,7 +116,7 @@ class Tutorial {
 
     step6() {
         background(0, 0, 0, 153);
-        this.showTextBox(tutorial_template.step6);
+        this.showTextBox(tutorial_template.step6, this.fontSize);
 
         if (mouse_downed) {
             mouseReset();
@@ -136,7 +134,7 @@ class Tutorial {
 
     step8() {
         background(0, 0, 0, 153);
-        this.showTextBox(tutorial_template.step8);
+        this.showTextBox(tutorial_template.step8, 31);
         return 0;
     }
 }

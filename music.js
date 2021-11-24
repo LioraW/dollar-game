@@ -12,7 +12,7 @@ var songs = [
     //'WYS_Snowman.mp3',
 ]
 var Volume = {
-    music: 4, 
+    music: 1, 
     change: false,
     scale: 30,
 }
