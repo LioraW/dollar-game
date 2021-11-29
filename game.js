@@ -15,6 +15,7 @@ class Game
         this.add_score = false;
         this.highscore;
         this.graph_passed = false;
+        this.game_over = false;
 
         this.custom_number_nodes = 2;
         this.custom_number_edges = 1;
@@ -89,6 +90,8 @@ class Game
                 this.provableButton.mute_IO(true);
                 if(!this.graph.is_solvable()){
                     this.graph_passed = true;
+                }else{
+                    this.game_over = true;
                 }
             }, 30, [200,200,200], [50,50,50], [200,200,200], [50, 50, 50])
         this.provableInfo = new ImageButton(info_icon, 
@@ -132,7 +135,7 @@ class Game
             displayWidth/2 * W_undo(), displayHeight/2 * H_undo() + 200, 300, 60,
             () => {
                 this.mode(); scene = scenes.MAIN_MENU; this.add_score = false;
-                this.graph_passed = false;
+                this.graph_passed = false; this.game_over = false;
             }, 30, [200,200,200], [50,50,50], [200,200,200]);
         // tutor button that returns the user to the main menus
     }
@@ -189,7 +192,23 @@ class Game
         this.tutor_mode = false;
         this.mode = this.load_custom_graph;
     }
+    gameLoseDisplay(){
+        // background
+        fill(50,50,50)
+        strokeWeight(5);
+        stroke(200,200,200)
+        rect(displayWidth/2, displayHeight/2, W(400), H(500), displayHeight/50);
 
+        // image thumbs up
+        image(guns_up, displayWidth/2, displayHeight/2 + H(30), W(thumbs_up.width), H(thumbs_up.height));
+
+        // the buttons
+        noStroke();
+        textSize(res_font(50));
+        fill(255,255,255);
+        text('GAME OVER', displayWidth/2, displayHeight/3 + H(20));
+        this.win_main_menu.draw();
+    }
 
     // display a menu for when the graph is solved
     gameWinDisplay(){
@@ -219,7 +238,9 @@ class Game
     {
         textAlign(CENTER);
         textSize(res_font(60));
-        fill([200,200,200]);
+        fill([255,255,255]);
+        stroke(0,0,0);
+        strokeWeight(3);
         text("DOLLAR GAME", (displayWidth/2), H(150));
         textSize(res_font(26))
         text("Move Counter: " + this.graph.counter, displayWidth/2, H(960));
@@ -265,6 +286,10 @@ class Game
             var btns = this.menu.draw();
             this.show_menu = !( btns[0] || btns[1] );
             strokeWeight(1);
+        }
+        if(this.game_over){
+            this.pause_components(true);
+            this.gameLoseDisplay();
         }
 
         if(this.tutor_mode){

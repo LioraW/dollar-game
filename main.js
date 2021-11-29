@@ -6,11 +6,14 @@ function preload()
     undo_icon = loadImage('images/undo.png');
     reset_icon = loadImage('images/reset.png');
     menu_icon = loadImage('images/menu.png');
-    backdrop = loadImage('images/yourname.jpg');
+    backdrop = loadImage('./images/' + backgrounds[bg.index]);
+    saved_time = time();
     clickSound = loadSound('songs/mouseClick.ogg');
     win_sound = loadSound("./songs/Service_bell.mp3");
     thumbs_up = loadImage('./images/thumbsUP.png');
+    guns_up = loadImage('./images/game_over.png');
     info_icon = loadImage('./images/info2.png');
+    dollar_icon = loadImage('./images/monetize.png')
     
     //tutorial images
     step1_img = loadImage('./images/step1.png');
@@ -126,6 +129,14 @@ function draw()
             background_music.play();
             background_music.setVolume(Volume.music/10)
             song.updated = false;
+        }
+    }
+    //looping through the backgrounds
+    {
+        if(time() > saved_time + 6 && fullscreen() && !bg.updated){
+            bg.index = update_index(bg.index, backgrounds.length);
+            backdrop = loadImage("./images/" + backgrounds[bg.index]);
+            saved_time = time();
         }
     }
 

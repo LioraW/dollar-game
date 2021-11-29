@@ -6,7 +6,7 @@ class Menu
         this.x = displayWidth/2 * W_undo();  // centering of the menu
         this.y = displayHeight/3 * H_undo();
         this.title_font_size = res_font(100);
-        this.text_fill = [200,200,200]; 
+        this.text_fill = [255,255,255]; 
 
 
         this.buttonWidth = 500;
@@ -71,6 +71,8 @@ class Menu
     {   
         textAlign(CENTER,CENTER);
         fill(this.text_fill);
+        stroke(0,0,0);
+        strokeWeight(4);
         textSize(this.title_font_size)
         text(this.name, W(this.x), H(this.y));
 

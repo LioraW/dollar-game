@@ -9,7 +9,7 @@ var songs = [
     'noone\'sperfectxKanisan_GentleWind.mp3',
     'SoftyxKaspa_Contrasts.mp3',
     'Tenno_Daydreaming.mp3',
-    //'WYS_Snowman.mp3',
+    'WYS_Snowman.mp3',
 ]
 var Volume = {
     music: 1, 
@@ -37,7 +37,7 @@ function shuffle(array) {
     }
   
     return array;
-  }
+}
 
 function update_index(index, max){
     if(index < max - 1){

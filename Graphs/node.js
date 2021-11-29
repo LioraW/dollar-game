@@ -160,7 +160,7 @@ class Node{
     {
         for(var i = 0; i < this.connections.length; i++)
         {
-            this.sent_dollar.push(new Dollar(W(20),this.x, this.y, this.edges[i].get_rise(this.id), this.edges[i].get_run(this.id), this.connections[i]))
+            this.sent_dollar.push(new Dollar(20,this.x, this.y, this.edges[i].get_rise(this.id), this.edges[i].get_run(this.id), this.connections[i]))
         }
     }
     // this deletes all the dollars in the sent_dollar array

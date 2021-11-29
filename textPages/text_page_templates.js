@@ -22,9 +22,26 @@ const rules_text = {
 const credits_text = {
     title: "CREDITS",
     text: "Copyright 2021 by Joshua John, Liora Wachsstock, Jeremy Dobrzanski, and Rami Hanin\n" +
-        "\nMusic by Jeremy Dobrzanski\n" +
-        "\nBackground photos credits go to ....\n" +
-        "\nThe idea is based on this video: https://www.youtube.com/watch?v=U33dsEcKgeQ"
+        "Music:\n" +
+        'GiSt_Adrift by Jeremy Dobrzanski\n' +
+        'Insomnia by BVG x mondberg\n' +
+        'Jiro Dreams by Dontcry x Glimlip x Sleepermane\n' +
+        'First Heartbreak by Flovry x tender spring\n' +
+        'Cloudy Springs by Kainbeats x softy\n' +
+        'Sleepless Wonder by LoafyBuildingx Hoffy Beats\n' +
+        'FarAway by Mila Coolness\n' +
+        'GentleWind by noone\'s perfect x Kanisan\n' +
+        'Contrasts by Softy x Kaspa\n' +
+        'Daydreaming by Tenno\n' +
+        'Snowman by WYS\n' +
+        "\nBackgrounds: \n" +
+        'Island in the Sky by Surendra Rajawat\n' +
+        'A Walk Through the Sky by Sylvain Sarrailh\n' +
+        'The Exchange by Surendra Rajawat\n' +
+        'Ghibli by Surendra Rajawat \n' +
+        'Wowa by Surendra Rajawat \n' +
+        'River Spirit by Surendra Rajawat \n' +
+        "The idea is based on this video: https://www.youtube.com/watch?v=U33dsEcKgeQ"
 }
 const math_background_text = {
     title: "The Math Behind the Game",

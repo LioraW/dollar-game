@@ -1,7 +1,8 @@
 class Dollar
 {
     constructor(width, x, y, rise, run, goal_node){
-        this.width = width;
+        print(width)
+        this.width = W(width);
         this.x = x;
         this.y = y;
         this.rise = rise;
@@ -29,7 +30,7 @@ class Dollar
         translate(this.x, this.y);
         fill(0,240,255);
         noStroke();
-        ellipse(0,0,this.width,this.width);
+        image(dollar_icon, 0, 0, W(dollar_icon.width/6), H(dollar_icon.height/6));
         pop();
     }
 }

@@ -3,10 +3,10 @@ class TextPage {
         this.title = textPageData.title;
         this.text = textPageData.text;
         this.x = displayWidth/16;
-        this.y = displayHeight/6;
-        this.offset = 80;
-        this.title_font_size = res_font(100);
-        this.text_fill = [200,200,200];
+        this.y = displayHeight/8;
+        this.offset = 40;
+        this.title_font_size = res_font(80);
+        this.text_fill = [255,255,255];
         this.text_font_size = res_font(32)
         this.mainMenuButton = new TextButton("Main Menu",
             displayWidth*(7/8)*W_undo(), this.y * H_undo() - H(100), 175, 50,
@@ -17,6 +17,8 @@ class TextPage {
     draw(){
         textSize(this.title_font_size);
         fill(this.text_fill);
+        stroke(0,0,0);
+        strokeWeight(2);
         text(this.title, this.x, this.y);
 
         textSize(this.text_font_size);
