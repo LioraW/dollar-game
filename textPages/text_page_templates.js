@@ -24,7 +24,7 @@ const credits_text = {
     title: "CREDITS",
     text: "Copyright 2021 by Joshua John, Liora Wachsstock, Jeremy Dobrzanski, and Rami Hanin\n" +
         "\nThe idea is based on this video: https://www.youtube.com/watch?v=U33dsEcKgeQ\n" +
-        "\nMusic:\n" +
+        "\nMusic provided by Lofi Radio:\n" +
         'GiSt_Adrift by Jeremy Dobrzanski\n' +
         'Insomnia by BVG x mondberg\n' +
         'Jiro Dreams by Dontcry x Glimlip x Sleepermane\n' +
