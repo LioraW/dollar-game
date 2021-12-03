@@ -55,6 +55,11 @@ function setup()
     fs_enforce_button = new AnimatedButton(() => { this.enforce_fullscreen(); },
         windowWidth/2 * W_undo(), windowHeight/2 * H_undo(), fs_icon.width * W_undo(), fs_icon.height* H_undo(),
         () => { this.fullscreen_switcher(); }, admin = true);
+    // the exit full screen (efs) button which exits fullscreen when clicked
+    this.efsButton = new ImageButton(efs_icon, 
+        displayWidth*W_undo() - efs_icon.width/6, displayHeight*H_undo() - efs_icon.height/6,
+        efs_icon.width/6, efs_icon.height/6, 
+        () => { fullscreen_switcher(); } );
 
 }
 // list of all the scenes and there functions
@@ -79,7 +84,8 @@ function draw()
     push();
     imageMode(CENTER);
     image(backdrop, displayWidth/2, displayHeight/2, W(backdrop.width), H(backdrop.height));
-    
+    this.efsButton.draw();
+
     scene();
 
     // reset score everytime the scene is not on the game scene
@@ -133,7 +139,7 @@ function draw()
     }
     //looping through the backgrounds
     {
-        if(time() > saved_time + 6 && fullscreen() && !bg.updated){
+        if(time() > saved_time + 300 && fullscreen() && !bg.updated){
             bg.index = update_index(bg.index, backgrounds.length);
             backdrop = loadImage("./images/" + backgrounds[bg.index]);
             saved_time = time();

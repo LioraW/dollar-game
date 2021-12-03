@@ -110,11 +110,7 @@ class Game
                  'lose if it is not!', W(10), H(610))
         })
 
-        // the exit full screen (efs) button which exits fullscreen when clicked
-        this.efsButton = new ImageButton(efs_icon, 
-            displayWidth*W_undo() - efs_icon.width/6, displayHeight*H_undo() - efs_icon.height/6,
-            efs_icon.width/6, efs_icon.height/6, 
-            () => { fullscreen_switcher(); } );
+        
 
         // repeats the tutorial when clicked
         this.repeat_tutorial = new TextButton("Repeat Tutorial", 850, 550, 170, 40,
@@ -274,7 +270,6 @@ class Game
                 this.win_state = false;
             }
         }
-        this.efsButton.draw();
 
         if(this.show_menu)
         {

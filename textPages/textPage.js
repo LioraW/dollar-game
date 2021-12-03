@@ -9,7 +9,7 @@ class TextPage {
         this.text_fill = [255,255,255];
         this.text_font_size = res_font(32)
         this.mainMenuButton = new TextButton("Main Menu",
-            displayWidth*(7/8)*W_undo(), this.y * H_undo() - H(100), 175, 50,
+            1700, 70, 175, 50,
             () => { scene = scenes.MAIN_MENU;}, 20, [200,200,200], [50,50,50],
             [200,200,200], [50, 50, 50]);
 

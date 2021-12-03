@@ -1,6 +1,6 @@
 var backgrounds = [
-    // 'yourname.jpg',
-    // 'yourname_clouds.png',
+    'yourname_clouds.png',
+    'yourname.jpg',
     'tokyo.png',
     'japan.png',
     'skycastle.png',

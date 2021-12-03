@@ -60,14 +60,8 @@ const mode_menu_template = {
     title: "MODE",
     buttons: [
         {
-            title: "CAMPAIGN",
-            x: 0, y: 80, w: 500, h: 60,
-            onClick: () => { game.make_solvable = true; scene = scenes.GAME },
-            onHover: () => { }
-        },
-        {
             title: "VANILLA",
-            x: 0, y: 160, w: 500, h: 60,
+            x: 0, y: 80, w: 500, h: 60,
             onClick: () => { game.make_solvable = true; scene =  scenes.DIFFICULTY },
             onHover: () => { 
                 textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT,TOP);
@@ -77,7 +71,7 @@ const mode_menu_template = {
         },
         {
             title: "ADVENTURE",
-            x: 0, y: 240, w: 500, h: 60,
+            x: 0, y: 160, w: 500, h: 60,
             onClick: () => { game.make_solvable = false; scene =  scenes.DIFFICULTY },
             onHover: () => { 
                 textSize(res_font(30)); stroke(0,0,0); strokeWeight(1); fill(200,200,200); textAlign(LEFT,TOP);
@@ -90,7 +84,7 @@ const mode_menu_template = {
         },
         {
             title: "BACK",
-            x: 0, y: 320, w: 500, h: 60,
+            x: 0, y: 240, w: 500, h: 60,
             onClick: () => { scene = scenes.MAIN_MENU },
             onHover: () => { }
         },
