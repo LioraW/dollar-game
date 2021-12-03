@@ -22,12 +22,10 @@ const flower_graph = [
     { X: 0, Y: -60, connections: [10,11] }, // 12
 ];
 const example_graph_1 = [
-    { X: -20, Y: 2.5, connections: [1], value: -1 },
-    { X: 15, Y: 2.5, connections: [0,2], value: -4 },
-    { X: -20, Y: -17.5, connections: [1], value: 8 },
+    { X: -45, Y: 13, connections: [1], value: -8 },
+    { X: -30, Y: 13, connections: [0], value: 7 },
 ];
 const example_graph_2 = [
-    { X: -20, Y: 4.5, connections: [1], value: -1 },
-    { X: 15, Y: 4.5, connections: [0,2], value: -4 },
-    { X: -20, Y: -34.5, connections: [1], value: 8 },
+    { X: 35, Y: 13, connections: [1], value: 8 },
+    { X: 20, Y: 13, connections: [0], value: -8 },
 ];

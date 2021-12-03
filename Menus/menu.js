@@ -24,7 +24,6 @@ class Menu
 
         if (buttonsData.hasOwnProperty('pic_btns')){
             this.get_img_btns(buttonsData.pic_btns);
-            console.log("has pic_btns!");
         }
         if(buttonsData.hasOwnProperty('scrubbers')){
             this.get_scrubbers(buttonsData.scrubbers);

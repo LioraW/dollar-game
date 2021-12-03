@@ -13,7 +13,7 @@ class Game
         this.type = type;
         this.score = 0;
         this.add_score = false;
-        this.highscore;
+        this.highscore = 0;
         this.graph_passed = false;
         this.game_over = false;
 
@@ -47,10 +47,6 @@ class Game
                 update_highscore(this.score, 3, this.make_solvable);
                 this.highscore = get_highscore(3, this.make_solvable);
                 break;
-            case 'random':
-                this.graph = new RandGraph(random(3, 20), random(2,4), this.make_solvable, 10);
-                this.mode = this.load_random_graph;
-                break;
             case 'custom':
                 this.graph = new RandGraph(this.custom_number_nodes, this.custom_number_edges, this.make_solvable, this.custom_money_range);
                 this.mode = this.load_custom_graph;
@@ -61,9 +57,10 @@ class Game
                 this.tutor_mode = true;
                 break;
             default:
-                print('error: wrong graph type entered in constructor');
+                console.log('error: wrong graph type entered in constructor');
                 break;
         }
+
         //Buttons with anonymous functions passed in
         this.undoButton = new ImageButton(undo_icon,(displayWidth/2)*W_undo() + 150, displayHeight*(7/8)*H_undo(), 
                                           undo_icon.width/6, undo_icon.height/6,
@@ -78,13 +75,14 @@ class Game
                 this.tutorial_game.set_reset_pressed();
                 this.graph.reset_graph();
             });
-        // this is the in game menu button denoted by 3 lines
+
+        // this is the "in game" menu button denoted by 3 lines
         this.menuButton = new ImageButton(menu_icon, 40, 40, menu_icon.width/5, menu_icon.height/5,
             () => {
                 this.show_menu = !this.show_menu;
             });
-        // if you click on this button you declare that the current uncertain graph is indeed
-        // winnable
+
+        // if you click on this button you declare that the current uncertain graph is indeed winnable
         this.provableButton = new TextButton("Unknown Map", 110, 500, 200, 50,
             () => {
                 this.provableButton.mute_IO(true);
@@ -93,8 +91,9 @@ class Game
                 }else{
                     this.game_over = true;
                 }
-            }, 30, [200,200,200], [50,50,50], [200,200,200], [50, 50, 50])
-        this.provableInfo = new ImageButton(info_icon, 
+            }, 30);
+
+        this.provableInfo = new ImageButton(info_icon,
             35, 560, info_icon.width/6, info_icon.height/6, 
             () => { } );
         //this.provableInfo.mute_IO(true);
@@ -117,7 +116,7 @@ class Game
             () => {
                 this.graph.reset_graph();
                 this.step = 1;
-            }, 12, [200,200,200], [50,50,50], [200,200,200]);
+            }, 12);
 
         // button creates new graph to be solved
         this.new_graph = new TextButton('Next Graph',
@@ -125,14 +124,15 @@ class Game
             () => {
                 this.mode(); this.add_score = false;
                 this.graph_passed = false;
-            }, 30, [200,200,200], [50,50,50], [200,200,200]);
+            }, 30);
+
         // returns player to the main menu
         this.win_main_menu = new TextButton("Main Menu", 
             displayWidth/2 * W_undo(), displayHeight/2 * H_undo() + 200, 300, 60,
             () => {
                 this.mode(); scene = scenes.MAIN_MENU; this.add_score = false;
                 this.graph_passed = false; this.game_over = false;
-            }, 30, [200,200,200], [50,50,50], [200,200,200]);
+            }, 30);
         // tutor button that returns the user to the main menus
     }
     set_score(val){
