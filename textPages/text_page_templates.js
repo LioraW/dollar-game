@@ -15,14 +15,16 @@ const rules_text = {
     "\n*** Other things you can do ***\n" +
     "The game play screen also has an undo button, which allows you to undo one (and only one) move.\n" +
     "The reset button resets the graph to its original state.\n" +
-    "If you are playing in \"Uncertain Solvability\" mode, then there will be a button marked \"Prime Graph\".\n" +
-    "Clicking this button means you are guessing that the graph is unsolvable. The game will tell you if you \n" +
-    "are correct or not."
+    "If you are playing in \"Adventure\" mode, then there will be a button marked \"Unknown Graph\".\n" +
+    "Clicking this button means you are guessing that the graph is unsolvable. If you are correct that the game is \n" +
+    "unsolvable, then you will get a point for that graph. If you are incorrect, you lose the game and have to start\n" +
+    "a new one."
 }
 const credits_text = {
     title: "CREDITS",
     text: "Copyright 2021 by Joshua John, Liora Wachsstock, Jeremy Dobrzanski, and Rami Hanin\n" +
-        "Music:\n" +
+        "\nThe idea is based on this video: https://www.youtube.com/watch?v=U33dsEcKgeQ\n" +
+        "\nMusic:\n" +
         'GiSt_Adrift by Jeremy Dobrzanski\n' +
         'Insomnia by BVG x mondberg\n' +
         'Jiro Dreams by Dontcry x Glimlip x Sleepermane\n' +
@@ -40,16 +42,21 @@ const credits_text = {
         'The Exchange by Surendra Rajawat\n' +
         'Ghibli by Surendra Rajawat \n' +
         'Wowa by Surendra Rajawat \n' +
-        'River Spirit by Surendra Rajawat \n' +
-        "The idea is based on this video: https://www.youtube.com/watch?v=U33dsEcKgeQ"
+        'River Spirit by Surendra Rajawat \n',
+        text_size: 26,
 }
 const math_background_text = {
     title: "The Math Behind the Game",
-    text: "\n- If all nodes' values add up to zero or more, the graph is solvable. If the graph has a net negative value, \n" +
+    text:
+        "\n- If all nodes' values add up to zero or more, the graph is solvable. If the graph has a net negative value, \n" +
         "  the graph is unsolvable.\n" +
-        "\n- Graphs are an important data structure to understand in both theoretical mathematics and computer science.\n" +
-        "   The type of graph the Dollar game users is called an undirected graph - ie edges connect the nodes from both\n" +
+        "  For example, the graph on the left is unsolvable because total value of the nodes is negative (-8 + 7 = -1). \n" +
+        "  However, the graph on the right is solvable because the total value is non-negative (-8 + 8 = 0).\n" +
+        "\n\n- Graphs are an important data structure to understand in both theoretical mathematics and computer science.\n" +
+        "   The type of graph the Dollar Game uses is called an undirected graph - i.e., edges connect the nodes from both\n" +
         "   directions (if node A points to node B, then node B points to node A).\n" +
-        "   Another type of graph is called a directed graph. In a directed graph, the edges only go one way (ie node A \n" +
-        "   could point to node B while node B does not point to node A)."
+        "   Another type of graph is called a directed graph. In a directed graph, the edges only go one way (i.e., node A \n" +
+        "   could point to node B while node B does not point to node A).\n" +
+        "\nSee this video for a more in-depth discussion: https://www.youtube.com/watch?v=U33dsEcKgeQ\n",
+    graphs: ['example_graph_1', 'example_graph_2']
 }

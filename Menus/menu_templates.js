@@ -14,14 +14,20 @@ const main_menu_template = {
             onHover: () => { }
         },
         {
-            title: "OPTIONS",
+            title: "MATH BACKGROUND",
             x: 0, y: 240, w: 500, h: 60,
+            onClick: () => { scene = scenes.MATH },
+            onHover: () => { }
+        },
+        {
+            title: "OPTIONS",
+            x: 0, y: 320, w: 500, h: 60,
             onClick: () => { scene = scenes.OPTIONS },
             onHover: () => { }
         },
         {
             title: "CREDITS",
-            x: 0, y: 320, w: 500, h: 60,
+            x: 0, y: 400, w: 500, h: 60,
             onClick: () => { scene = scenes.CREDITS },
             onHover: () => { }
         },
@@ -43,14 +49,8 @@ const help_menu_template = {
             onHover: () => { }
         },
         {
-            title: "MATH BACKGROUND",
-            x: 0, y: 240, w: 500, h: 60,
-            onClick: () => { scene = scenes.MATH },
-            onHover: () => { }
-        },
-        {
             title: "BACK",
-            x: 0, y: 320, w: 500, h: 60,
+            x: 0, y: 240, w: 500, h: 60,
             onClick: () => { scene = scenes.MAIN_MENU },
             onHover: () => { }
         },
