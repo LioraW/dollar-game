@@ -52,5 +52,4 @@ const tutorial_template = {
         w:700,
         h:210,
     }
-
 }
