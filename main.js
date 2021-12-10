@@ -89,7 +89,7 @@ function draw()
     scene();
 
     // reset score everytime the scene is not on the game scene
-    if(scene != scenes.GAME){
+    if(scene !== scenes.GAME){
         game.set_score(0);
     }
 

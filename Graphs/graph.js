@@ -114,7 +114,7 @@ class Graph
         if(!sets.length){
             return 0
         }
-        for(var i = 0; i < sets.length; i++)
+        for(let i = 0; i < sets.length; i++)
         {
             if (sets[i].has(node1) || sets[i].has(node2))
             {
@@ -126,8 +126,8 @@ class Graph
     // returns true if all the nodes' dollar values are positive (or zero) or all negative
     same_sign()
     {
-        var sign = Math.sign(this.nodes[0].get_value());
-        for(var i = 0; i < this.nodes.length; i++)
+        let sign = Math.sign(this.nodes[0].get_value());
+        for(let i = 0; i < this.nodes.length; i++)
         {
             if(sign * this.nodes[i].get_value() < 0)
             {
@@ -141,8 +141,7 @@ class Graph
     {
         if(this.same_sign())
         {
-            print('rebalancing');
-            for(var i = 0; i < this.nodes.length; i+=2)
+            for(let i = 0; i < this.nodes.length; i+=2)
             {
                 if(Math.abs(this.nodes[i].get_value()) > 0){
                     this.nodes[i].flip_value();
@@ -157,11 +156,10 @@ class Graph
     // makes the graph 100% solvable
     make_solvable()
     {
-        var debt = (-1 * (this.get_balance() - this.get_genus())) + (int)(random(5));
-        print(debt)
-        for(var i = 0; i < debt; i++)
+        let debt = (-1 * (this.get_balance() - this.get_genus())) + (int)(random(5));
+        for(let i = 0; i < debt; i++)
         {
-            var random_index = (int)(random(this.nodes.length))
+            let random_index = (int)(random(this.nodes.length))
             this.nodes[random_index].add_value(1);
             this.balance++;
         }
@@ -171,10 +169,10 @@ class Graph
     {
         if(mouse_downed && fullscreen())
         {
-            for (var i = 0; i < this.nodes.length; i++)
+            for (let i = 0; i < this.nodes.length; i++)
             {
                 this.nodes[i].unMarkAsLastMove(); //unmark everyone as last move
-                var clicked = this.nodes[i].mouse_listener(); //call mouse listener for everyone
+                let clicked = this.nodes[i].mouse_listener(); //call mouse listener for everyone
                 this.counter += clicked; //call mouse listener for everyone
               
                 if (this.nodes[i].isLastMove)
@@ -193,26 +191,17 @@ class Graph
             
         }
     }
-    // the draw function. literally just loops through the edges and activates there draw functions
+    // the draw function. literally just loops through the edges and activates their draw functions
     // same for the nodes
     draw()
     {
-        for(let i = 0; i < this.edges.length; i++)
-        {
-            this.edges[i].draw();
-        }
-        for(let i = 0; i < this.nodes.length; i++)
-        {
-            this.nodes[i].highlight();
-        }
-        for(let i = 0; i < this.nodes.length; i++)
-        {   
-            this.nodes[i].draw();
-        }
+        this.edges.forEach(edge => edge.draw());
+        this.nodes.forEach(node => node.highlight());
+        this.nodes.forEach(node => node.draw());
+
         //this function now loops through the nodes internally
         if(!this.solved && this.listening){
             this.mouse_listener();
         }
     }
-
 }
