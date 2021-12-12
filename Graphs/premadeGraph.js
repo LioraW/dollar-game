@@ -37,7 +37,7 @@ class PreGraph extends Graph
             });
         });
 
-        this.nodes.forEach(node => { this.balance += node.get_value(); });
+        this.nodes.forEach(node => this.balance += node.get_value() );
         this.solved = this.is_solved();
     }
 }

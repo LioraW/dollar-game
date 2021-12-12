@@ -63,7 +63,7 @@ class Node{
     give(amount)
     {
         // Looping through each connection
-        for(var i = 0; i < this.connections.length; i++)
+        for(let i = 0; i < this.connections.length; i++)
         {
             // adding 1 to the connected nodes dollar amount
             this.connections[i].add_value(amount);
@@ -158,7 +158,7 @@ class Node{
     // sets up animation for the dollar being sent to the other nodes
     load_dollars()
     {
-        for(var i = 0; i < this.connections.length; i++)
+        for(let i = 0; i < this.connections.length; i++)
         {
             this.sent_dollar.push(new Dollar(20,this.x, this.y, this.edges[i].get_rise(this.id), this.edges[i].get_run(this.id), this.connections[i]))
         }
@@ -171,12 +171,12 @@ class Node{
             this.sent_dollar.splice(0,1);
         }
     }
-    // actaully runs the dollar animation
+    // actually runs the dollar animation
     send_dollars()
     {
-        var dead_count = 0;
-        var all_dead = false;
-        for(var i = 0; i < this.sent_dollar.length; i++)
+        let dead_count = 0;
+        let all_dead = false;
+        for(let i = 0; i < this.sent_dollar.length; i++)
         {
             if(!this.sent_dollar[i].check_goal())
             {

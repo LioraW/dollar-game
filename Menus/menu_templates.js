@@ -249,12 +249,6 @@ const options_menu_template = {
     title: "Options",
     buttons: [
         {
-            title: "TOGGLE THEME",
-            x: 0, y: 80, w: 500, h: 60,
-            onClick: () => { console.log("Changing theme"); },
-            onHover: () => { }
-        },
-        {
             title: "BACK",
             x: 0, y: 240, w: 500, h: 60,
             onClick: () => { scene = scenes.MAIN_MENU },
