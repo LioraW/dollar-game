@@ -201,6 +201,7 @@ class Game
         noStroke();
         textSize(res_font(50));
         fill(255,255,255);
+        textAlign(CENTER, CENTER)
         text('GAME OVER', displayWidth/2, displayHeight/3 + H(20));
         this.win_main_menu.draw();
     }
@@ -224,6 +225,7 @@ class Game
         noStroke();
         textSize(res_font(50));
         fill(255,255,255);
+        textAlign(CENTER, CENTER)
         text('Graph Passed', displayWidth/2, displayHeight/3 + H(20));
         this.new_graph.draw();
         this.win_main_menu.draw();
