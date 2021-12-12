@@ -2,14 +2,12 @@ class Game
 {
     userHasWon = false;
     constructor(type) {
-        this.paused = false;
         this.tutor_mode = false;
         this.win_state = false;
         this.make_solvable = true;
         this.tutorial_game = new Tutorial();
         this.show_menu = false;
         this.menu = new Menu(game_menu_template);
-        this.win_menu = new Menu(solved_graph_template);
         this.type = type;
         this.score = 0;
         this.add_score = false;

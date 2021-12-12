@@ -9,6 +9,7 @@ function get_highscore(difficulty, normal){
         return highscore.adventure[difficulty];
     }
 }
+
 function update_highscore(current_score, difficulty, normal){
     print(current_score,highscore.normal[difficulty])
     if(normal && current_score > highscore.normal[difficulty]){
