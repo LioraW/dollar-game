@@ -1,6 +1,5 @@
 class Game
 {
-    userHasWon = false;
     constructor(type) {
         this.tutor_mode = false;
         this.win_state = false;
